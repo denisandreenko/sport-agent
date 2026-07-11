@@ -55,7 +55,6 @@ Diet style: ketogenic, 3 meals/day. Stats: 164 cm, 52 kg, 24 yo, ~23% body fat. 
 * **Caffeine:** 200 mg
 * **Citrulline malate:** 6 g
 * **Beta-alanine:** 6 g
-* **Magnesium malate:** 200 mg
 * **Beef collagen:** 8,700 mg + vitamin C
 
 ## Daily supplements

@@ -50,8 +50,8 @@ Diet style: ketogenic — very low carbohydrate, high fat, adequate protein. 3 m
 * **Omega 3:** 2100 mg EPA/DHA
 * **Creatine:** 10 g
 * **Daily salt (low-sodium blend):** NaCl 70% + KCl 30%, iodized
-* **Magnesium glycinate stack:** 480 mg magnesium + 45 mg zinc + 4 mg copper + 6.3 mg B6
-* **Magnesium malate:** 200 mg
+* **Magnesium glycinate stack:** 320 mg magnesium + 30 mg zinc + 2 mg copper + 4.2 mg B6
+* **Ashwagandha root extract:** 750 mg (withanolides 11.25 mg)
 * **Citrulline malate:** 6 g
 * **Beta-alanine:** 6 g
 * **Caffeine:** 200 mg
@@ -61,10 +61,10 @@ Diet style: ketogenic — very low carbohydrate, high fat, adequate protein. 3 m
 ## Supplement timing
 
 * **Pre-gym / pre-endurance:** caffeine + citrulline malate; creatine partial here or with a meal.
-* **Pre-gym / pre-calisthenics (30–45 min before):** beef collagen + vitamin C; magnesium malate 200 mg.
+* **Pre-gym / pre-calisthenics (30–45 min before):** beef collagen + vitamin C.
 * **Pre-gym (optional carbs):** 15–20 g maltodextrin in water 15–30 min before gym — only if energy feels low.
 * **TKD (hard endurance only):** 15–25 g maltodextrin 15–30 min before VO2max or threshold work.
 * **Saturday long ride (race-prep only):** 60–80 g/hr maltodextrin:fructose 2:1 when deliberately fueling high.
-* **With largest meal / evening:** magnesium glycinate + zinc + copper + B6; omega-3; D3 + K2; beta-alanine if not taken pre-workout.
+* **With largest meal / evening:** magnesium glycinate + zinc + copper + B6; omega-3; D3 + K2; ashwagandha; beta-alanine if not taken pre-workout.
 
 Per-100 g food reference, TKD doses, electrolyte targets, and body-composition rules: see `shared/keto_nutrition_reference.md`.
