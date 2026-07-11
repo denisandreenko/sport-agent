@@ -44,27 +44,14 @@ Diet style: ketogenic — very low carbohydrate, high fat, adequate protein. 3 m
 | Pumpkin seeds | 10 | 2.5 | 1.3 | 4.6 | 0.5 | 57.7 |
 | **Meal total** |  | **61** | **16.1** | **43.6** | **14.8** | **738** |
 
-## Daily supplements
+## Supplements
 
-* **D3 + K2:** 8000 IU D3 + 200 µg K2
-* **Omega 3:** 2100 mg EPA/DHA
-* **Creatine:** 10 g
-* **Daily salt (low-sodium blend):** NaCl 70% + KCl 30%, iodized
-* **Magnesium glycinate stack:** 480 mg magnesium + 45 mg zinc + 4 mg copper + 6.3 mg B6
-* **Magnesium malate:** 200 mg
-* **Citrulline malate:** 6 g
-* **Beta-alanine:** 6 g
-* **Caffeine:** 200 mg
-* **Beef collagen:** 8,700 mg + vitamin C
-* **Brazil nuts:** 2
+Full stack, doses, and per-supplement timing live in `people/denis/supplements.md` (single source of truth).
 
-## Supplement timing
+## Carb fueling
 
-* **Pre-gym / pre-endurance:** caffeine + citrulline malate; creatine partial here or with a meal.
-* **Pre-gym / pre-calisthenics (30–45 min before):** beef collagen + vitamin C; magnesium malate 200 mg.
 * **Pre-gym (optional carbs):** 15–20 g maltodextrin in water 15–30 min before gym — only if energy feels low.
 * **TKD (hard endurance only):** 15–25 g maltodextrin 15–30 min before VO2max or threshold work.
 * **Saturday long ride (race-prep only):** 60–80 g/hr maltodextrin:fructose 2:1 when deliberately fueling high.
-* **With largest meal / evening:** magnesium glycinate + zinc + copper + B6; omega-3; D3 + K2; beta-alanine if not taken pre-workout.
 
 Per-100 g food reference, TKD doses, electrolyte targets, and body-composition rules: see `shared/keto_nutrition_reference.md`.

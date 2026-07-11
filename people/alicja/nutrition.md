@@ -50,21 +50,8 @@ Diet style: ketogenic, 3 meals/day. Stats: 164 cm, 52 kg, 24 yo, ~23% body fat. 
 
 ---
 
-## Pre-workout supplements
+## Supplements
 
-* **Caffeine:** 200 mg
-* **Citrulline malate:** 6 g
-* **Beta-alanine:** 6 g
-* **Magnesium malate:** 200 mg
-* **Beef collagen:** 8,700 mg + vitamin C
+Full stack, doses, and per-supplement timing live in `people/alicja/supplements.md` (single source of truth).
 
-## Daily supplements
-
-* **D3 + K2:** 8000 IU D3 + 200 µg K2
-* **Omega 3:** ~1200 mg EPA/DHA
-* **Creatine:** 10 g
-* **Daily salt (low-sodium blend):** NaCl 70% + KCl 30%, iodized
-* **Magnesium glycinate stack:** 320 mg magnesium + 30 mg zinc + 2 mg copper + 4.2 mg B6
-* **Brazil nuts:** 2
-
-Confirm with bloodwork before sustained high-dose vitamin D. Fueling: mostly easy running and novice gym work run fine fat-adapted — targeted carbs are rarely needed (see `shared/keto_nutrition_reference.md`).
+Fueling: mostly easy running and novice gym work run fine fat-adapted — targeted carbs are rarely needed (see `shared/keto_nutrition_reference.md`).

@@ -198,10 +198,8 @@
     <div class="card c-nut"><h2>Meal 3</h2><div id="meal-2"></div></div>
     <div class="card c-nut">
       <h2>Supplements</h2>
-      <h3 style="color:var(--nut)">Pre-workout</h3>
-      <div id="supp-pre"></div>
-      <h3 style="color:var(--nut)">Daily</h3>
-      <div id="supp-daily"></div>
+      <div id="supp-table"><div class="supp-ro" style="color:var(--mut)">Loading stack…</div></div>
+      <div class="note" id="supp-src"></div>
     </div>
   </section>
 
@@ -348,12 +346,58 @@
       {name:'Meal 1',items:[{n:'Eggs (3 large)',r:'Egg',a:165},{n:'Frozen veggies',r:'Frozen veggies',a:250},{n:'Cheese (3 slices)',r:'Cheese (Gouda)',a:48},{n:'Olive oil',r:'Olive oil',a:10},{n:'Butter',r:'Butter',a:20}]},
       {name:'Meal 2',items:[{n:'Meat (cooked)',r:'Meat (cooked)',a:200},{n:'Frozen veggies',r:'Frozen veggies',a:200},{n:'Sardines',r:'Sardines',a:30},{n:'Sauerkraut / kimchi',r:'Sauerkraut / kimchi',a:40}]},
       {name:'Meal 3',items:[{n:'Cottage cheese 9%',r:'Cottage cheese 9%',a:200},{n:'L-reuteri yogurt',r:'L-reuteri yogurt',a:100},{n:'Cocoa powder',r:'Cocoa powder',a:12},{n:'Chia seeds',r:'Chia seeds',a:5},{n:'Pumpkin seeds',r:'Pumpkin seeds',a:5}]}
-    ],
-    s:{
-      pre:['Caffeine: 200 mg','Citrulline malate: 6 g','Beta-alanine: 6 g','Magnesium malate: 200 mg','Beef collagen: 8,700 mg + vitamin C'],
-      daily:['D3 + K2: 8000 IU D3 + 200 µg K2','Omega 3: ~1200 mg EPA/DHA','Creatine: 10 g','Daily salt (low-sodium blend): NaCl 70% + KCl 30%, iodized','Magnesium glycinate stack: 320 mg magnesium + 30 mg zinc + 2 mg copper + 4.2 mg B6','Brazil nuts: 2']
-    }
+    ]
   };
+
+  // Supplements — single source of truth: people/alicja/supplements.md
+  const REPO='denisandreenko/athlete-training';
+  const SUPP_FILE='people/alicja/supplements.md';
+
+  // Parse a markdown table into [{name,dose,timing}]
+  function parseSuppTable(md){
+    const rows=[];
+    for(const line of md.split('\n')){
+      const t=line.trim();
+      if(!t.startsWith('|')) continue;
+      const c=t.split('|').slice(1,-1).map(s=>s.trim());
+      if(c.length<3) continue;
+      if(c[0]==='Supplement') continue;
+      if(/^:?-+:?$/.test(c[0].replace(/\s/g,''))) continue;
+      rows.push({name:c[0],dose:c[1],timing:c[2]});
+    }
+    return rows;
+  }
+
+  async function fetchSupp(){
+    const token=localStorage.getItem('gh_token')||'';
+    // Prefer authenticated contents API (works for private repos); fall back to raw (public repos)
+    if(token){
+      const res=await fetch(`https://api.github.com/repos/${REPO}/contents/${SUPP_FILE}`,
+        {headers:{Authorization:`token ${token}`,Accept:'application/vnd.github.v3+json'}});
+      if(res.ok){const d=await res.json();return decodeURIComponent(escape(atob(d.content.replace(/\n/g,''))));}
+    }
+    const raw=await fetch(`https://raw.githubusercontent.com/${REPO}/main/${SUPP_FILE}`);
+    if(raw.ok) return await raw.text();
+    throw new Error('Could not load supplements.md');
+  }
+
+  async function loadSupps(){
+    const box=document.getElementById('supp-table');
+    const src=document.getElementById('supp-src');
+    if(!box) return;
+    try{
+      const supps=parseSuppTable(await fetchSupp());
+      if(!supps.length) throw new Error('No supplement rows found');
+      let h=`<table class="ntab"><thead><tr><th>Supplement</th><th>Dose</th><th>Timing</th></tr></thead><tbody>`;
+      supps.forEach(s=>{h+=`<tr><td>${esc(s.name)}</td><td>${esc(s.dose)}</td><td>${esc(s.timing)}</td></tr>`;});
+      h+=`</tbody></table>`;
+      box.innerHTML=h;
+      if(src) src.textContent='Source: people/alicja/supplements.md';
+    }catch(e){
+      box.innerHTML=`<div class="supp-ro" style="color:var(--mut)">Couldn't load the live stack. See people/alicja/supplements.md.</div>`;
+      if(src) src.textContent='';
+    }
+  }
   function calcItem(it){const r=REFS[it.r]||{p:0,c:0,f:0,fb:0,k:0};const m=(it.a||0)/100;return{p:r.p*m,c:r.c*m,f:r.f*m,fb:r.fb*m,k:r.k*m};}
   function mealTotal(meal){return meal.items.reduce((a,it)=>{const x=calcItem(it);return{p:a.p+x.p,c:a.c+x.c,f:a.f+x.f,fb:a.fb+x.fb,k:a.k+x.k};},{p:0,c:0,f:0,fb:0,k:0});}
   function dayTotal(){return PLAN.m.reduce((a,meal)=>{const t=mealTotal(meal);return{p:a.p+t.p,c:a.c+t.c,f:a.f+t.f,fb:a.fb+t.fb,k:a.k+t.k};},{p:0,c:0,f:0,fb:0,k:0});}
@@ -369,13 +413,10 @@
     h+=`</tbody><tfoot><tr class="ttl"><td>Total</td><td></td><td class="r">${r1(t.p)}</td><td class="r">${r1(t.c)}</td><td class="r">${r1(t.f)}</td><td class="r">${Math.round(t.k)}</td></tr></tfoot></table>`;
     box.innerHTML=h;
   }
-  function renderSupps(){
-    ['pre','daily'].forEach(g=>{const el=document.getElementById('supp-'+g);if(!el)return;el.innerHTML=PLAN.s[g].map(s=>`<div class="supp-ro">${esc(s)}</div>`).join('');});
-  }
   function renderNut(){
     if(!document.getElementById('macros'))return;
     PLAN.m.forEach((_,mi)=>renderMeal(mi));
-    renderSupps();
+    loadSupps();
     const d=dayTotal();
     const cells=[['Protein','p','macro'],['Carbs','c','macro'],['Fat','f','macro'],['Fiber','fb','fiber'],['Calories','k','cal']];
     document.getElementById('macros').innerHTML=cells.map(([lbl,key,grp])=>{
