@@ -1,0 +1,83 @@
+{
+  "id": "PERSON_ID",
+  "name": "Name",
+  "profile": {
+    "heightCm": 0,
+    "weightKg": 0,
+    "bodyFatPct": 0,
+    "age": 0,
+    "diet": "ketogenic",
+    "stage": "Novice | Intermediate | Experienced — one-line training background"
+  },
+  "goals": [
+    "Goal 1 (highest priority)",
+    "Goal 2",
+    "Goal 3"
+  ],
+  "tracking": {
+    "wearable": false,
+    "stravaSync": false
+  },
+  "files": {
+    "workoutLog": "people/PERSON_ID/workout_log.md"
+  },
+  "dashboard": {
+    "accent": "#4f8ef7",
+    "tabs": ["today", "log", "nutrition"]
+  },
+  "week": {
+    "0": "REST",
+    "1": "GYM_A",
+    "2": "REST",
+    "3": "REST",
+    "4": "GYM_B",
+    "5": "REST",
+    "6": "REST"
+  },
+  "logSessionTypes": ["GYM_A", "GYM_B", "MOBILITY", "REST"],
+  "sessions": {
+    "GYM_A": {
+      "kind": "gym",
+      "label": "Gym A — Full body",
+      "note": "Session-level guidance shown above the exercise list.",
+      "exercises": [
+        { "name": "Exercise name", "target": "3×8–12", "stub": "starting load or BW" }
+      ],
+      "addon": "Optional: skill work / extras shown under the exercise table.",
+      "mobility": "Optional: post-session mobility text."
+    },
+    "GYM_B": {
+      "kind": "gym",
+      "label": "Gym B — Full body",
+      "exercises": [
+        { "name": "Exercise name", "target": "3×8–12", "stub": "BW" }
+      ]
+    },
+    "REST": {
+      "kind": "rest",
+      "label": "Rest day",
+      "note": "Recovery guidance."
+    }
+  },
+  "skills": {
+    "enabled": false
+  },
+  "nutrition": {
+    "style": "One-line description of the diet approach.",
+    "totals": { "protein": 0, "carbs": 0, "fat": 0, "fiber": 0, "kcal": 0 },
+    "meals": [
+      {
+        "name": "Meal 1",
+        "items": [
+          { "item": "Food", "qty": "100 g", "p": 0, "c": 0, "f": 0, "fiber": 0, "kcal": 0 }
+        ],
+        "totals": { "p": 0, "c": 0, "f": 0, "fiber": 0, "kcal": 0 }
+      }
+    ],
+    "fueling": ["Fueling rule 1."],
+    "supplements": [
+      { "name": "Supplement", "dose": "dose", "timing": "when" }
+    ],
+    "notes": "Anything else worth remembering."
+  }
+}

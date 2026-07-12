@@ -1,49 +1,64 @@
 # Athlete Training
 
-Training, nutrition, and progress tracking for two athletes: **Denis** and **Alicja**.
+Expandable training + nutrition framework. Currently two athletes (**Denis**, **Alicja**);
+adding another is copying a folder — see `people/_template/README.md`.
 
 ## Structure
 
 ```
 athlete-training/
 ├── README.md                       ← this file
-├── shared/                         ← general guidelines & reference (apply to both people)
-│   ├── assistant_instructions.md   ← how the AI assistant should work for either athlete
-│   ├── training_principles.md      ← general methodology: readiness, deload, session types, recovery
-│   ├── calisthenics_ladders.md     ← skill-progression ladder definitions (reference)
-│   └── keto_nutrition_reference.md ← per-100 g food table, TKD fueling, electrolytes, supplements
+├── shared/                         ← methodology & reference (applies to everyone)
+│   ├── assistant_instructions.md   ← how the AI assistant works with this repo
+│   ├── recommendation_protocol.md  ← the recommendation engine spec (inputs → outputs → guardrails)
+│   ├── training_principles.md      ← readiness, deload, session types, removal hierarchy, mobility
+│   ├── calisthenics_ladders.md     ← skill-progression ladder definitions
+│   └── keto_nutrition_reference.md ← per-100 g food table, TKD fueling, electrolytes
 │
 ├── people/
-│   ├── denis/                      ← Denis's personal data
-│   │   ├── profile.md
-│   │   ├── training_plan.md        ← his weekly structure & priorities
-│   │   ├── gym_training_plan.md
-│   │   ├── calisthenics_status.md  ← current skill levels + focus (reads ladders from shared/)
-│   │   ├── nutrition.md
-│   │   └── workout_log.md          ← auto-synced from Strava
-│   │
-│   └── alicja/                     ← Alicja's personal data
+│   ├── index.json                  ← list of person ids (dashboard person switcher)
+│   ├── _template/                  ← copy this folder to add a person
+│   ├── denis/
+│   │   ├── data.json               ← ALL structured data: profile, goals, week, sessions, nutrition
+│   │   ├── profile.md              ← prose background (history, capacity, equipment)
+│   │   ├── training_plan.md        ← reasoning: priorities, guardrails, weekly logic
+│   │   ├── gym_training_plan.md    ← gym split detail & progression rules
+│   │   ├── calisthenics_status.md  ← SKILL_STATE (current levels) + focus
+│   │   └── workout_log.md          ← history; auto-synced from Strava
+│   └── alicja/
+│       ├── data.json
 │       ├── profile.md
-│       ├── training_plan.md        ← flexible weekly template
-│       ├── gym_training_plan.md    ← novice hypertrophy progressions
-│       ├── mobility_splits.md      ← flexibility / splits routine
-│       ├── running_plan.md         ← beginner VO2max / threshold build
-│       ├── nutrition.md
-│       └── workout_log.md          ← manual (no wearable)
+│       ├── training_plan.md
+│       ├── gym_training_plan.md
+│       ├── mobility_splits.md
+│       ├── running_plan.md
+│       └── workout_log.md          ← manual log
 │
-├── tools/                          ← web dashboards / editors
-│   ├── denis_dashboard.html        ← full dashboard (Strava + Garmin readiness + skills)
-│   ├── denis_nutrition_editor.html
-│   └── alicja_dashboard.html       ← simplified (manual log, no wearable)
+├── tools/
+│   └── dashboard.html              ← ONE dashboard for everyone: ?person=<id>
 │
-└── .github/                        ← Strava → Denis workout-log auto-sync (Denis only)
+└── .github/                        ← Strava → workout-log auto-sync (Denis only)
 ```
 
-## How to use this with the assistant
+## Design rules
 
-When asking the assistant for help, say **whose** plan you mean ("Denis's threshold session", "Alicja's gym day"). The assistant reads:
+- **`data.json` = data, markdown = reasoning.** Anything a tool renders (schedule, exercises,
+  targets, macros, supplements) lives in `data.json`. The *why* lives in markdown.
+- **One dashboard, config-driven.** `tools/dashboard.html?person=denis` — tabs, sessions, and
+  colors come from that person's `data.json`. Nutrition tab is read-only by design.
+- **Readiness is subjective and identical for everyone:** morning 1–5 ratings for sleep,
+  soreness, energy, motivation → green/amber/red (rule in `shared/training_principles.md`).
+  No wearable required.
+- **The engine is the assistant.** `shared/recommendation_protocol.md` defines how plans,
+  daily briefs, and weekly reviews are generated from `data.json` + logs + readiness.
 
-1. `shared/` for the general rules and reference, then
-2. that person's folder under `people/<name>/` for their profile, plan, and logs.
+## Dashboard
 
-Both athletes follow ketogenic nutrition. Person-specific priorities, capacities, and current levels always live in the person's own folder.
+Open `tools/dashboard.html?person=<id>` (GitHub Pages or locally via any static server).
+Reading works without credentials on Pages; **saving log entries needs a GitHub fine-grained
+token** (repo contents read/write) entered via ⚙︎ — stored only in that browser.
+
+## Using the assistant
+
+Say **whose** plan you mean. The assistant follows `shared/assistant_instructions.md` and
+generates recommendations per `shared/recommendation_protocol.md`.

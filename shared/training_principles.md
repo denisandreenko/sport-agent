@@ -1,22 +1,18 @@
 # Training Principles (shared)
 
-General methodology that applies to **both athletes**. Person-specific weekly structure, priorities, and loads live in each person's `training_plan.md` and `gym_training_plan.md`.
+General methodology that applies to **every athlete** in `people/`. Person-specific weekly structure, priorities, and loads live in each person's `data.json` and markdown files.
 
 ## Readiness & fatigue management
 
-If a wearable is available (Denis — Garmin), use objective morning readiness. If not (Alicja), use the subjective fallback.
-
-**Objective readiness (wearable):**
+**Subjective morning check-in (standard for everyone, no wearable required):** rate **sleep, soreness, energy, motivation** 1–5 (5 = best; soreness 5 = no soreness) — in the dashboard or directly in the workout log. A rating ≤ 2 counts as "poor".
 
 | Readiness | Trigger | Action |
 |---|---|---|
-| 🟢 Green | HRV Balanced **and** Body Battery ≥ 60 **and** sleep score ≥ 70 | Train as planned |
-| 🟡 Amber | HRV Unbalanced **or** Body Battery 40–59 **or** sleep 50–69 | Keep session, cut top-end volume ~20%, hold loads |
-| 🔴 Red | HRV Low/Poor **or** Body Battery < 40 **or** sleep < 50, **or** 2+ amber days running | Easy/recovery only; apply removal hierarchy |
+| 🟢 Green | 0 poor | Train as planned |
+| 🟡 Amber | 1 poor | Keep session, cut top-end volume ~20%, hold loads |
+| 🔴 Red | 2+ poor, a clearly bad night, **or** 2+ amber days running | Easy/recovery only; apply removal hierarchy |
 
-Objective markers override how you *feel* when they conflict — especially before hard intervals or heavy compound days.
-
-**Subjective fallback (no wearable):** each morning rate sleep quality, soreness, energy, and motivation. If two or more are poor, treat the day as amber; if most are poor or sleep was clearly bad, treat it as red and apply the removal hierarchy.
+If wearable data happens to be available (HRV, sleep score), it can inform the ratings but is not required and is not parsed by any tool.
 
 **Physical warning signs:** poor sleep · elevated resting HR · persistent soreness · loss of motivation · declining performance · heavy legs for multiple days · irritability · reduced grip strength.
 
@@ -53,7 +49,7 @@ Examples: 3 × 12–15 min sweet spot · 4 × 8 min threshold · 2 × 20 min con
 ### Long / steady (Z1–Z2)
 Aerobic durability and fat oxidation. Mostly easy, conversational. Fuel and hydrate per `keto_nutrition_reference.md`.
 
-> **Beginner note (Alicja):** build an easy aerobic base with run/walk before adding any VO2max or threshold work. Keep most running easy; introduce structured intervals gradually and never more than ~1 hard run early on.
+> **Beginner note:** build an easy aerobic base before adding any VO2max or threshold work. Keep most endurance easy; introduce structured intervals gradually and never more than ~1 hard session/week early on.
 
 ## Gym principles
 

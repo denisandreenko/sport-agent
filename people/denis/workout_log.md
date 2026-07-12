@@ -1,31 +1,28 @@
 # Workout Log
 
-<!-- FORMAT SPEC (for Claude scheduler)
-Each entry uses the block below. Keep one blank line between entries.
-Fields marked (required) must be present. All others are optional — omit rather than leave blank.
+<!-- FORMAT SPEC (the recommendation engine parses this)
+Each entry uses the block below. Keep one blank line between entries. Omit unknown fields.
 
-SESSION_TYPE options: GYM_A | GYM_B | GYM_C | CYCLING_THRESHOLD | CYCLING_VO2MAX | CYCLING_LONG | RUN_THRESHOLD | RUN_VO2MAX | RUN_LONG | SWIM | CALISTHENICS | REST
-FATIGUE_SCORE: 1 (fresh) – 5 (very tired)  — subjective
-RPE: 1–10 (Rate of Perceived Exertion for the session overall)
+SESSION_TYPE: any ID from data.json logSessionTypes
+Subjective readiness (morning, 1–5 each; 5 = best — for soreness 5 = no soreness):
+  sleep, soreness, energy, motivation
+RPE: 1–10 (session overall)
 
-MORNING RECOVERY (from Garmin watch — log on gym days, ideally daily):
-- hrv_status: Balanced | Unbalanced | Low | Poor  (Garmin 7-day HRV Status)
-- body_battery: 0–100  (morning value on waking)
-- sleep_score: 0–100  (Garmin sleep score)  — optional subjective sleep: X/5 as fallback
+READINESS RULE: a rating ≤ 2 is "poor".
+  0 poor → GREEN: train as planned
+  1 poor → AMBER: keep the session, cut top-end volume ~20%, hold loads
+  2+ poor (or clearly bad night) → RED: easy/recovery only; apply removal hierarchy from shared/training_principles.md
 
-READINESS RULE (assistant applies this):
-- Green  → HRV Balanced AND body_battery ≥ 60 AND sleep_score ≥ 70  → train as planned
-- Amber  → HRV Unbalanced OR body_battery 40–59 OR sleep_score 50–69 → keep session, cut top-end volume ~20%, hold loads
-- Red    → HRV Low/Poor OR body_battery < 40 OR sleep_score < 50, or 2+ amber days running → easy/recovery only; apply fatigue removal hierarchy
+(Older entries may contain Garmin fields — hrv_status, body_battery, sleep_score. These are legacy; ignore for new entries.)
 -->
 
-<!-- ENTRY TEMPLATE — copy and fill in on phone:
+<!-- ENTRY TEMPLATE — copy and fill in on phone (or use the dashboard):
 
 ## YYYY-MM-DD | SESSION_TYPE
-- hrv_status: Balanced
-- body_battery: 72
-- sleep_score: 81
-- fatigue_before: X/5
+- sleep: X/5
+- soreness: X/5
+- energy: X/5
+- motivation: X/5
 - rpe: X/10
 - notes: [free text — what felt hard, what moved well, any pain/discomfort]
 

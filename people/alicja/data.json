@@ -1,0 +1,179 @@
+{
+  "id": "alicja",
+  "name": "Alicja",
+  "profile": {
+    "heightCm": 164,
+    "weightKg": 52,
+    "bodyFatPct": 23,
+    "age": 24,
+    "diet": "ketogenic",
+    "stage": "Novice in strength; existing aerobic running base"
+  },
+  "goals": [
+    "Build a strength / muscle base",
+    "Mobility & flexibility (front and middle splits)",
+    "Running for heart health",
+    "Recovery and consistency",
+    "Keto-compatible nutrition"
+  ],
+  "tracking": {
+    "wearable": false,
+    "stravaSync": false
+  },
+  "files": {
+    "workoutLog": "people/alicja/workout_log.md"
+  },
+  "dashboard": {
+    "accent": "#e05fa0",
+    "tabs": ["today", "log", "nutrition"]
+  },
+  "week": {
+    "0": "MOBILITY_FULL",
+    "1": "GYM_A",
+    "2": "RUN_EASY",
+    "3": "REST",
+    "4": "GYM_B",
+    "5": "RUN_QUALITY",
+    "6": "REST"
+  },
+  "logSessionTypes": [
+    "GYM_A", "GYM_B", "RUN_EASY", "RUN_QUALITY", "MOBILITY_FULL", "MOBILITY", "REST"
+  ],
+  "sessions": {
+    "GYM_A": {
+      "kind": "gym",
+      "label": "Gym A — Full body",
+      "note": "Keep 2–3 reps in reserve on every set — never to failure. Warm-up ~5 min: easy cardio + leg swings, arm circles, bodyweight squats ×10, scapular pulls ×10, glute bridge ×10.",
+      "exercises": [
+        { "name": "Goblet squat", "target": "3×8–12", "stub": "8" },
+        { "name": "Knee push-up", "target": "3×6–10", "stub": "BW" },
+        { "name": "Assisted pull-up", "target": "3×5–8", "stub": "band" },
+        { "name": "Glute bridge / hip thrust", "target": "3×10–15", "stub": "BW" },
+        { "name": "Sit-ups", "target": "2×12–15", "stub": "BW" },
+        { "name": "Plank", "target": "2×20–40 s", "stub": "BW" }
+      ],
+      "mobility": "Daily mobility minimum (~8–10 min) still applies."
+    },
+    "GYM_B": {
+      "kind": "gym",
+      "label": "Gym B — Full body",
+      "note": "Keep 2–3 reps in reserve. Same warm-up as Gym A.",
+      "exercises": [
+        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "BW" },
+        { "name": "Dumbbell row", "target": "3×8–12", "stub": "6" },
+        { "name": "Incline / knee push-up", "target": "3×6–10", "stub": "BW" },
+        { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "4" },
+        { "name": "Dead bug", "target": "2×8/side", "stub": "BW" },
+        { "name": "Side plank", "target": "2×15–30 s/side", "stub": "BW" }
+      ],
+      "mobility": "Daily mobility minimum (~8–10 min) still applies."
+    },
+    "RUN_EASY": {
+      "kind": "endurance",
+      "label": "Easy run — Zone 2",
+      "purpose": "Aerobic base and heart health. Conversational pace, never hard the day after legs.",
+      "options": [
+        "4–7 km Zone 2, conversational",
+        "Optional: 4–6 × 15–20 s relaxed strides at the end, full walk recovery"
+      ],
+      "fueling": "Fully fat-adapted is fine — no special fueling needed.",
+      "prep": "Leg swings 10/side + 5 min walking warm-up."
+    },
+    "RUN_QUALITY": {
+      "kind": "endurance",
+      "label": "Quality run (easy in base phase)",
+      "purpose": "Structured intensity once the base is consolidated. If legs are heavy from Thursday's gym, keep it easy.",
+      "options": [
+        "Base phase (wks 1–3): easy Z2 run, 4–7 km",
+        "Threshold (wks 4–7): 10 min easy → 3–5 × 4–5 min comfortably hard / 2 min jog → cooldown",
+        "VO2max (wks 8+): warm-up + strides → 5–6 × 1 min hard / 2 min easy, or 8–10 × 60–90 s uphill"
+      ],
+      "fueling": "Optional small pre-run carb dose only for genuinely hard interval days if energy feels low.",
+      "prep": "Leg swings 10/side + 5–10 min easy jog warm-up."
+    },
+    "MOBILITY_FULL": {
+      "kind": "mobility",
+      "label": "Full mobility & splits session (~25–30 min)",
+      "note": "Stretch warm. Hold 45–90 s, 2–3 rounds, both sides evenly. Never force into sharp pain.",
+      "exercises": [
+        { "name": "Joint circles + cat-cow", "target": "~3 min" },
+        { "name": "Half-kneeling hip-flexor stretch", "target": "60 s/side" },
+        { "name": "Couch stretch", "target": "60 s/side" },
+        { "name": "Hamstring stretch", "target": "60 s/side" },
+        { "name": "90/90 hip switches + hold", "target": "8 reps + 45 s/side" },
+        { "name": "Frog stretch", "target": "60–90 s" },
+        { "name": "Cossack squats", "target": "8/side" },
+        { "name": "Wide straddle forward fold", "target": "60–90 s" },
+        { "name": "Supported front split (blocks)", "target": "60–90 s/side" },
+        { "name": "Supported middle split", "target": "60–90 s" },
+        { "name": "Pigeon pose", "target": "60 s/side" },
+        { "name": "Thoracic open book", "target": "10/side" },
+        { "name": "Wrist & shoulder prep", "target": "~1 min" },
+        { "name": "PNF finisher (contract–relax in deepest split)", "target": "3 reps/side" }
+      ]
+    },
+    "REST": {
+      "kind": "rest",
+      "label": "Rest day",
+      "note": "Full recovery. Wednesday: add light mobility (~8–10 min daily minimum)."
+    }
+  },
+  "skills": {
+    "enabled": false
+  },
+  "nutrition": {
+    "style": "Ketogenic, 3 meals/day. Working draft ~1,798 kcal — slightly below ~1,850 maintenance; add a protein/fat source to reach a small muscle-building surplus (~1,900 kcal).",
+    "totals": { "protein": 137, "carbs": 25.4, "fat": 116.3, "fiber": 18, "kcal": 1798 },
+    "meals": [
+      {
+        "name": "Meal 1",
+        "items": [
+          { "item": "Eggs (3 large)", "qty": "165 g", "p": 20.8, "c": 1.2, "f": 15.7, "fiber": 0, "kcal": 236 },
+          { "item": "Frozen veggies", "qty": "250 g", "p": 0, "c": 7.3, "f": 1.8, "fiber": 5, "kcal": 90 },
+          { "item": "Cheese (3 slices)", "qty": "48 g", "p": 12, "c": 0, "f": 12.5, "fiber": 0, "kcal": 160 },
+          { "item": "Olive oil", "qty": "10 g", "p": 0, "c": 0, "f": 10, "fiber": 0, "kcal": 90 },
+          { "item": "Butter", "qty": "20 g", "p": 0.2, "c": 0.2, "f": 16.4, "fiber": 0, "kcal": 149 }
+        ],
+        "totals": { "p": 33, "c": 8.7, "f": 56.4, "fiber": 5, "kcal": 725 }
+      },
+      {
+        "name": "Meal 2",
+        "items": [
+          { "item": "Meat (cooked)", "qty": "200 g", "p": 54, "c": 0, "f": 30, "fiber": 0, "kcal": 486 },
+          { "item": "Frozen veggies", "qty": "200 g", "p": 0, "c": 5.8, "f": 1.4, "fiber": 4, "kcal": 72 },
+          { "item": "Sardines", "qty": "30 g", "p": 7.8, "c": 0, "f": 2.2, "fiber": 0, "kcal": 50 },
+          { "item": "Sauerkraut / kimchi", "qty": "40 g", "p": 0.4, "c": 0.6, "f": 0, "fiber": 1.2, "kcal": 8 }
+        ],
+        "totals": { "p": 62.2, "c": 6.4, "f": 33.6, "fiber": 5.2, "kcal": 616 }
+      },
+      {
+        "name": "Meal 3",
+        "items": [
+          { "item": "Cottage cheese 9%", "qty": "200 g", "p": 34, "c": 6.8, "f": 18, "fiber": 0, "kcal": 326 },
+          { "item": "L-reuteri yogurt", "qty": "100 g", "p": 3.2, "c": 0.5, "f": 3.2, "fiber": 2, "kcal": 43 },
+          { "item": "Cocoa powder", "qty": "12 g", "p": 2.5, "c": 1.9, "f": 1.3, "fiber": 3.8, "kcal": 37 },
+          { "item": "Chia seeds", "qty": "5 g", "p": 0.8, "c": 0.4, "f": 1.5, "fiber": 1.7, "kcal": 22 },
+          { "item": "Pumpkin seeds", "qty": "5 g", "p": 1.3, "c": 0.7, "f": 2.3, "fiber": 0.3, "kcal": 29 }
+        ],
+        "totals": { "p": 41.8, "c": 10.3, "f": 26.3, "fiber": 7.8, "kcal": 457 }
+      }
+    ],
+    "fueling": [
+      "Mostly easy running and novice gym work run fine fat-adapted — targeted carbs are rarely needed.",
+      "Optional small pre-run carb dose only for genuinely hard interval sessions if energy feels low."
+    ],
+    "supplements": [
+      { "name": "D3 + K2", "dose": "8000 IU D3 + 200 µg K2", "timing": "Daily, with a meal" },
+      { "name": "Omega-3", "dose": "~1200 mg EPA/DHA", "timing": "Daily, with a meal" },
+      { "name": "Creatine", "dose": "10 g", "timing": "Daily" },
+      { "name": "Salt (low-sodium blend)", "dose": "NaCl 70% + KCl 30%, iodized", "timing": "Through the day" },
+      { "name": "Magnesium glycinate stack", "dose": "320 mg Mg + 30 mg Zn + 2 mg Cu + 4.2 mg B6", "timing": "Daily, with a meal" },
+      { "name": "Caffeine", "dose": "200 mg", "timing": "Pre-workout" },
+      { "name": "Citrulline malate", "dose": "6 g", "timing": "Pre-workout" },
+      { "name": "Beta-alanine", "dose": "6 g", "timing": "Pre-workout" },
+      { "name": "Beef collagen + vitamin C", "dose": "8,700 mg + vit C", "timing": "Pre-workout" },
+      { "name": "Brazil nuts", "dose": "2", "timing": "Daily (selenium)" }
+    ],
+    "notes": "Macros computed from her stats (164 cm / 52 kg / 24 yo / ~23% bf), not scaled from anyone else's plan."
+  }
+}

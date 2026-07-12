@@ -1,6 +1,6 @@
 # Keto Nutrition Reference (shared)
 
-General ketogenic framework, food data, fueling, and supplement timing for **both athletes**. Each person's daily macros, meals, and exact supplement doses live in `people/<name>/nutrition.md`.
+General ketogenic framework, food data, fueling, and supplement timing for **every athlete**. Each person's daily macros, meals, and exact supplement doses live in `people/<id>/data.json` (`nutrition` section — rendered read-only by the dashboard).
 
 Baseline: ketogenic — very low carbohydrate, high fat, adequate protein.
 
@@ -36,7 +36,7 @@ Baseline: ketogenic — very low carbohydrate, high fat, adequate protein.
 
 ## Supplement framework
 
-Both athletes take the same supplements; **doses are listed per person** in their `nutrition.md` (scale dose-dependent items like creatine and electrolytes to bodyweight; keep micronutrients similar).
+Athletes take a similar stack; **doses are listed per person** in their `data.json` (scale dose-dependent items like creatine and electrolytes to bodyweight; keep micronutrients similar).
 
 Core stack: D3 + K2 · Omega-3 (EPA/DHA) · creatine · low-sodium salt blend (NaCl + KCl, iodized) · magnesium glycinate stack (+ zinc, copper, B6) · magnesium malate (pre-training, hard days) · citrulline malate · beta-alanine · caffeine · beef collagen + vitamin C (pre-training) · Brazil nuts (selenium).
 

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Dashboard</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #171a21; --card2: #1d2129; --border: #2a2f3a;
+    --text: #e8eaf0; --muted: #8b93a3; --accent: #4f8ef7;
+    --green: #3ecf8e; --amber: #f5b14c; --red: #ef6461;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 15px; line-height: 1.45; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 16px 14px 60px; }
+
+  /* header */
+  header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  header h1 { font-size: 19px; font-weight: 700; flex: 1; }
+  header h1 span { color: var(--accent); }
+  .icon-btn { background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 13px; }
+  select.person-switch { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; font-size: 13px; }
+
+  /* nav */
+  nav { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .nav-link { background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .nav-link.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* cards */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+  .card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); margin-bottom: 10px; }
+  .card h3 { font-size: 15px; margin-bottom: 6px; }
+  .muted { color: var(--muted); font-size: 13px; }
+  .note { color: var(--muted); font-size: 13px; margin: 6px 0; }
+
+  /* week strip */
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .week .day { background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 10.5px; color: var(--muted); }
+  .week .day b { display: block; font-size: 11px; color: var(--text); margin-bottom: 2px; }
+  .week .day.today { border-color: var(--accent); background: rgba(79,142,247,0.12); }
+
+  /* readiness */
+  .ready-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
+  .ready-item label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .ready-item select { width: 100%; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 7px 6px; font-size: 14px; }
+  .badge { display: inline-block; border-radius: 999px; padding: 4px 12px; font-size: 12.5px; font-weight: 700; }
+  .badge.green { background: rgba(62,207,142,0.15); color: var(--green); }
+  .badge.amber { background: rgba(245,177,76,0.15); color: var(--amber); }
+  .badge.red   { background: rgba(239,100,97,0.15);  color: var(--red); }
+  .ready-advice { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; padding: 0 6px 7px 0; border-bottom: 1px solid var(--border); }
+  td { padding: 7px 6px 7px 0; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  td.num, th.num { text-align: right; }
+  .exname { font-weight: 600; }
+  .target { color: var(--muted); font-size: 12px; }
+  .load-input { width: 74px; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; text-align: center; font-size: 13.5px; }
+  .totals td { font-weight: 700; border-top: 1px solid var(--border); }
+
+  ul.opts { margin: 6px 0 6px 18px; }
+  ul.opts li { margin-bottom: 4px; font-size: 13.5px; }
+
+  /* buttons / inputs */
+  .btn { background: var(--accent); border: none; color: #fff; border-radius: 10px; padding: 11px 16px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  textarea, input[type=text], input[type=password] { width: 100%; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; }
+  .field { margin-top: 10px; }
+  .field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .status-msg { font-size: 13px; margin-top: 8px; }
+
+  /* skills */
+  .skill { margin-bottom: 12px; }
+  .skill .head { display: flex; justify-content: space-between; font-size: 13.5px; margin-bottom: 4px; }
+  .skill .stage { color: var(--muted); font-size: 12px; }
+  .bar { height: 6px; background: var(--card2); border-radius: 999px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+  .cat-title { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin: 14px 0 8px; }
+
+  /* log entries */
+  .entry { border-bottom: 1px solid var(--border); padding: 10px 0; font-size: 13.5px; }
+  .entry:last-child { border-bottom: none; }
+  .entry .ehead { font-weight: 700; margin-bottom: 3px; }
+  .entry .ehead span { color: var(--accent); font-weight: 600; }
+  .entry pre { white-space: pre-wrap; color: var(--muted); font-family: inherit; font-size: 12.5px; }
+
+  /* modal */
+  .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+  .modal-bg.show { display: flex; }
+  .modal { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; max-width: 420px; width: 100%; }
+  .modal h3 { margin-bottom: 8px; }
+  .modal p { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="title">Training — <span id="person-name">…</span></h1>
+    <select class="person-switch" id="person-switch" onchange="switchPerson(this.value)"></select>
+    <button class="icon-btn" onclick="showTokenModal()">⚙︎</button>
+  </header>
+
+  <nav id="nav"></nav>
+
+  <div id="views"></div>
+  <div class="muted" id="boot-msg">Loading…</div>
+</div>
+
+<div class="modal-bg" id="token-modal">
+  <div class="modal">
+    <h3>GitHub token</h3>
+    <p>A fine-grained personal access token with read/write access to this repo's contents. Needed to save log entries (and for fresh reads). Stored only in this browser.</p>
+    <input type="password" id="token-input" placeholder="github_pat_…">
+    <button class="btn" onclick="saveToken()">Save</button>
+    <button class="btn" style="background:var(--card2);margin-top:8px" onclick="hideTokenModal()">Close</button>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// CONFIG-DRIVEN DASHBOARD
+// One template for every person. Person config lives in
+// people/<id>/data.json — see people/_template/README.md.
+// ─────────────────────────────────────────────────────────────
+const REPO = 'denisandreenko/athlete-training';
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const READY_FIELDS = [
+  { key: 'sleep',      label: 'Sleep' },
+  { key: 'soreness',   label: 'Soreness' },   // 5 = no soreness
+  { key: 'energy',     label: 'Energy' },
+  { key: 'motivation', label: 'Motivation' }
+];
+
+let P = null;            // person config (data.json)
+let personId = '';
+let logContent = '', logSha = '';
+let skillState = {};
+let lastLoads = {};
+let currentType = '';
+
+// ── helpers ──────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function todayISO() { const d = new Date(); return d.toISOString().slice(0,10); }
+function getToken() { return localStorage.getItem('gh_token') || ''; }
+function saveToken() {
+  const v = $('token-input').value.trim();
+  if (v) localStorage.setItem('gh_token', v); else localStorage.removeItem('gh_token');
+  hideTokenModal(); init();
+}
+function showTokenModal() { $('token-input').value = getToken(); $('token-modal').classList.add('show'); }
+function hideTokenModal() { $('token-modal').classList.remove('show'); }
+
+// ── data access: GitHub API when token present, else static fetch ──
+async function ghFetch(path, opts = {}) {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/${path}`, {
+    ...opts,
+    headers: { 'Authorization': `Bearer ${getToken()}`, 'Accept': 'application/vnd.github+json', ...(opts.headers || {}) }
+  });
+  if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.message || `GitHub API ${res.status}`); }
+  return res.json();
+}
+const b64decode = s => decodeURIComponent(escape(atob(s.replace(/\n/g, ''))));
+const b64encode = s => btoa(unescape(encodeURIComponent(s)));
+
+async function readRepoFile(path) {
+  if (getToken()) {
+    const d = await ghFetch(`contents/${path}?t=${Date.now()}`);
+    return { text: b64decode(d.content), sha: d.sha };
+  }
+  const res = await fetch(`../${path}?t=${Date.now()}`);
+  if (!res.ok) throw new Error(`fetch ${path}: ${res.status}`);
+  return { text: await res.text(), sha: '' };
+}
+async function commitFile(path, content, sha, message) {
+  const body = { message, content: b64encode(content) };
+  if (sha) body.sha = sha;
+  return ghFetch(`contents/${path}`, { method: 'PUT', body: JSON.stringify(body) });
+}
+
+// ── boot ─────────────────────────────────────────────────────
+function switchPerson(id) { location.search = `?person=${id}`; }
+
+async function init() {
+  try {
+    const params = new URLSearchParams(location.search);
+    const idx = await readRepoFile('people/index.json').then(r => JSON.parse(r.text));
+    personId = params.get('person') || localStorage.getItem('last_person') || idx.people[0];
+    if (!idx.people.includes(personId)) personId = idx.people[0];
+    localStorage.setItem('last_person', personId);
+
+    $('person-switch').innerHTML = idx.people.map(p =>
+      `<option value="${p}" ${p === personId ? 'selected' : ''}>${p[0].toUpperCase() + p.slice(1)}</option>`).join('');
+
+    P = JSON.parse((await readRepoFile(`people/${personId}/data.json`)).text);
+    document.documentElement.style.setProperty('--accent', P.dashboard.accent || '#4f8ef7');
+    $('person-name').textContent = P.name;
+    document.title = `Training — ${P.name}`;
+    currentType = P.week[String(new Date().getDay())] || 'REST';
+
+    // workout log (non-fatal if missing)
+    try {
+      const log = await readRepoFile(P.files.workoutLog);
+      logContent = log.text; logSha = log.sha;
+    } catch (e) { logContent = ''; logSha = ''; }
+
+    // skill state (only if enabled)
+    if (P.skills?.enabled && P.files.skillState) {
+      try {
+        const s = await readRepoFile(P.files.skillState);
+        skillState = parseSkillState(s.text);
+      } catch (e) { skillState = {}; }
+    }
+
+    $('boot-msg').classList.add('hidden');
+    buildNav();
+    showView(P.dashboard.tabs[0]);
+  } catch (e) {
+    $('boot-msg').textContent = 'Failed to load: ' + e.message +
+      (getToken() ? '' : ' — if the repo is private, set a token via ⚙︎.');
+  }
+}
+
+// ── navigation ───────────────────────────────────────────────
+const TAB_LABELS = { today: '📅 Today', log: '📓 Log', skills: '🤸 Skills', nutrition: '🥩 Nutrition' };
+function buildNav() {
+  $('nav').innerHTML = P.dashboard.tabs.map(t =>
+    `<button class="nav-link" id="tab-${t}" onclick="showView('${t}')">${TAB_LABELS[t] || t}</button>`).join('');
+}
+function showView(view) {
+  P.dashboard.tabs.forEach(t => $(`tab-${t}`)?.classList.toggle('active', t === view));
+  const render = { today: renderToday, log: renderLog, skills: renderSkills, nutrition: renderNutrition }[view];
+  $('views').innerHTML = render ? render() : '';
+  if (view === 'today') afterRenderToday();
+}
+
+// ── readiness (subjective, unified for everyone) ─────────────
+function readinessKey() { return `ready_${personId}_${todayISO()}`; }
+function getReadiness() {
+  try { return JSON.parse(localStorage.getItem(readinessKey())) || {}; } catch { return {}; }
+}
+function setReadiness(k, v) {
+  const r = getReadiness(); r[k] = Number(v);
+  localStorage.setItem(readinessKey(), JSON.stringify(r));
+  updateReadinessBadge();
+}
+function readinessStatus(r) {
+  const vals = READY_FIELDS.map(f => r[f.key]).filter(v => v >= 1);
+  if (vals.length < READY_FIELDS.length) return null;
+  const poor = vals.filter(v => v <= 2).length;
+  if (poor >= 2) return 'red';
+  if (poor === 1) return 'amber';
+  return 'green';
+}
+const READY_ADVICE = {
+  green: 'Train as planned.',
+  amber: 'Keep the session, cut top-end volume ~20%, hold loads.',
+  red:   'Easy/recovery only — apply the removal hierarchy (see shared/training_principles.md).'
+};
+function updateReadinessBadge() {
+  const el = $('ready-badge'); if (!el) return;
+  const s = readinessStatus(getReadiness());
+  if (!s) { el.innerHTML = '<span class="muted">Rate all four to get today\'s call.</span>'; return; }
+  el.innerHTML = `<span class="badge ${s}">${s.toUpperCase()}</span><div class="ready-advice">${READY_ADVICE[s]}</div>`;
+}
+
+// ── log parsing ──────────────────────────────────────────────
+function splitEntries(content) {
+  return content.split(/\n(?=## \d{4}-\d{2}-\d{2})/).filter(x => /^## \d{4}/.test(x.trim()));
+}
+function parseLastLoads(sessionType) {
+  const loads = {}; let found = null;
+  for (const entry of splitEntries(logContent)) {
+    const h = entry.match(/^## (\d{4}-\d{2}-\d{2})\s*\|\s*(\w+)/);
+    if (h && h[2] === sessionType) found = entry;   // last (most recent at bottom)
+  }
+  if (!found) return loads;
+  const table = found.match(/### (Key lifts|Strength)[\s\S]*?(?=\n###|\n---|\n## |$)/);
+  if (!table) return loads;
+  for (const line of table[0].split('\n')) {
+    const cols = line.split('|').map(s => s.trim()).filter(Boolean);
+    if (cols.length >= 3 && !/^[-—:\s]+$/.test(cols[1]) && cols[0] !== 'Exercise')
+      loads[cols[0].toLowerCase()] = cols[2];
+  }
+  return loads;
+}
+function getLoad(name) {
+  const key = name.toLowerCase();
+  for (const k of Object.keys(lastLoads)) if (k === key || key.startsWith(k) || k.startsWith(key)) return lastLoads[k];
+  return '';
+}
+
+// ── TODAY view ───────────────────────────────────────────────
+function renderToday() {
+  const day = new Date().getDay();
+  const weekHtml = Object.keys(P.week).map(d => {
+    const s = P.sessions[P.week[d]];
+    return `<div class="day ${Number(d) === day ? 'today' : ''}"><b>${DAY_NAMES[d]}</b>${esc(s ? (s.label.split('—')[0].trim()) : P.week[d])}</div>`;
+  }).join('');
+
+  const typeOptions = P.logSessionTypes.map(t =>
+    `<option value="${t}" ${t === currentType ? 'selected' : ''}>${t}</option>`).join('');
+
+  const readyHtml = READY_FIELDS.map(f => {
+    const v = getReadiness()[f.key] || '';
+    return `<div class="ready-item"><label>${f.label}</label>
+      <select onchange="setReadiness('${f.key}', this.value)">
+        <option value="">–</option>${[1,2,3,4,5].map(n => `<option ${n == v ? 'selected' : ''}>${n}</option>`).join('')}
+      </select></div>`;
+  }).join('');
+
+  return `
+  <div class="card"><h2>Week</h2><div class="week">${weekHtml}</div></div>
+
+  <div class="card">
+    <h2>Morning readiness (1–5, 5 = best)</h2>
+    <div class="ready-grid">${readyHtml}</div>
+    <div id="ready-badge"></div>
+  </div>
+
+  <div class="card">
+    <h2>Session</h2>
+    <div class="field"><label>Session type</label>
+      <select class="ready-item" id="session-type" style="width:100%;background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px" onchange="changeType(this.value)">${typeOptions}</select>
+    </div>
+    <div id="session-body" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card">
+    <h2>Save today's entry</h2>
+    <div class="row2">
+      <div class="field"><label>RPE (1–10)</label><input type="text" id="entry-rpe" placeholder="7"></div>
+      <div class="field"><label>Date</label><input type="text" id="entry-date" value="${todayISO()}"></div>
+    </div>
+    <div class="field"><label>Notes</label><textarea id="entry-notes" rows="2" placeholder="what felt hard, what moved well, any pain"></textarea></div>
+    <button class="btn" id="save-btn" onclick="saveEntry()" ${getToken() ? '' : 'disabled'}>Save to workout log</button>
+    ${getToken() ? '' : '<div class="status-msg muted">Set a GitHub token (⚙︎) to enable saving.</div>'}
+    <div class="status-msg" id="save-msg"></div>
+  </div>`;
+}
+function afterRenderToday() { updateReadinessBadge(); renderSessionBody(); }
+function changeType(t) { currentType = t; renderSessionBody(); }
+
+function renderSessionBody() {
+  const s = P.sessions[currentType];
+  const el = $('session-body'); if (!el) return;
+  if (!s) { el.innerHTML = `<div class="muted">No plan defined for ${esc(currentType)} — log it free-form below.</div>`; return; }
+  let html = `<h3>${esc(s.label)}</h3>`;
+  if (s.note) html += `<div class="note">${esc(s.note)}</div>`;
+
+  if (s.kind === 'gym') {
+    lastLoads = parseLastLoads(currentType);
+    html += `<table><tr><th>Exercise</th><th>Target</th><th class="num">Load</th></tr>` +
+      s.exercises.map((ex, i) => `<tr>
+        <td><span class="exname">${esc(ex.name)}</span></td>
+        <td><span class="target">${esc(ex.target)}</span></td>
+        <td class="num"><input class="load-input" id="load-${i}" value="${esc(getLoad(ex.name) || '')}" placeholder="${esc(ex.stub || '')}"></td>
+      </tr>`).join('') + `</table>`;
+    if (s.addon) html += `<div class="note">➕ ${esc(s.addon)}</div>`;
+    if (s.mobility) html += `<div class="note">🧘 ${esc(s.mobility)}</div>`;
+  } else if (s.kind === 'endurance') {
+    if (s.purpose) html += `<div class="note"><b>Purpose:</b> ${esc(s.purpose)}</div>`;
+    if (s.options) html += `<ul class="opts">${s.options.map(o => `<li>${esc(o)}</li>`).join('')}</ul>`;
+    if (s.prep) html += `<div class="note">🔧 Prep: ${esc(s.prep)}</div>`;
+    if (s.fueling) html += `<div class="note">⛽ ${esc(s.fueling)}</div>`;
+    html += `<div class="row2" style="margin-top:8px">
+      <div class="field"><label>Duration (min)</label><input type="text" id="end-duration"></div>
+      <div class="field"><label>Detail (power/pace/intervals)</label><input type="text" id="end-detail"></div>
+    </div>`;
+  } else if (s.kind === 'mobility') {
+    html += `<table><tr><th>Exercise</th><th class="num">Duration</th></tr>` +
+      (s.exercises || []).map(ex => `<tr><td>${esc(ex.name)}</td><td class="num target">${esc(ex.target)}</td></tr>`).join('') + `</table>`;
+  }
+  el.innerHTML = html;
+}
+
+// ── save entry ───────────────────────────────────────────────
+function buildEntry() {
+  const s = P.sessions[currentType] || {};
+  const r = getReadiness();
+  const date = $('entry-date').value.trim() || todayISO();
+  let md = `## ${date} | ${currentType}\n`;
+  READY_FIELDS.forEach(f => { if (r[f.key]) md += `- ${f.key}: ${r[f.key]}/5\n`; });
+  const rpe = $('entry-rpe').value.trim();
+  if (rpe) md += `- rpe: ${rpe}/10\n`;
+  const notes = $('entry-notes').value.trim();
+  if (notes) md += `- notes: ${notes}\n`;
+
+  if (s.kind === 'gym') {
+    const rows = s.exercises.map((ex, i) => {
+      const load = $(`load-${i}`)?.value.trim();
+      return load ? `| ${ex.name} | ${ex.target.split('@')[0].trim()} | ${load} | |` : null;
+    }).filter(Boolean);
+    if (rows.length) md += `\n### Key lifts\n| Exercise | Sets×Reps | Load | Notes |\n|---|---|---|---|\n${rows.join('\n')}\n`;
+  } else if (s.kind === 'endurance') {
+    const dur = $('end-duration')?.value.trim(), det = $('end-detail')?.value.trim();
+    if (dur || det) {
+      md += `\n### Endurance\n`;
+      if (dur) md += `- duration: ${dur}min\n`;
+      if (det) md += `- notes: ${det}\n`;
+    }
+  }
+  return md;
+}
+async function saveEntry() {
+  const msg = $('save-msg');
+  try {
+    $('save-btn').disabled = true;
+    msg.textContent = 'Saving…';
+    const fresh = await readRepoFile(P.files.workoutLog);   // re-read to get current sha
+    let content = fresh.text.replace(/\s*$/, '\n');
+    content += `\n${buildEntry()}\n---\n`;
+    await commitFile(P.files.workoutLog, content, fresh.sha, `Log ${currentType} — ${P.name} (dashboard)`);
+    logContent = content;
+    msg.textContent = '✓ Saved.';
+  } catch (e) {
+    msg.textContent = '✗ ' + e.message;
+  } finally { $('save-btn').disabled = false; }
+}
+
+// ── LOG view ─────────────────────────────────────────────────
+function renderLog() {
+  const entries = splitEntries(logContent).reverse().slice(0, 30);
+  if (!entries.length) return `<div class="card"><h2>Workout log</h2><div class="muted">No entries yet.</div></div>`;
+  const html = entries.map(e => {
+    const h = e.match(/^## (\d{4}-\d{2}-\d{2})\s*\|\s*(\w+)/);
+    const body = e.replace(/^## .*$/m, '').replace(/^---\s*$/gm, '').trim();
+    return `<div class="entry"><div class="ehead">${h ? h[1] : ''} <span>${h ? h[2] : ''}</span></div><pre>${esc(body)}</pre></div>`;
+  }).join('');
+  return `<div class="card"><h2>Workout log — latest ${entries.length}</h2>${html}</div>`;
+}
+
+// ── SKILLS view ──────────────────────────────────────────────
+function parseSkillState(text) {
+  const state = {};
+  const block = text.match(/SKILL_STATE[\s\S]*?-->/);
+  if (!block) return state;
+  for (const line of block[0].split('\n')) {
+    const m = line.match(/^\s*(\w+):\s*(\d+)\s*\/\s*(\d+)/);
+    if (m) state[m[1]] = { level: +m[2], max: +m[3] };
+  }
+  return state;
+}
+function renderSkills() {
+  const ladders = P.skills?.ladders || {};
+  const cats = [...new Set(Object.values(ladders).map(l => l.cat))];
+  let html = '';
+  for (const cat of cats) {
+    html += `<div class="cat-title">${esc(cat)}</div>`;
+    for (const [key, l] of Object.entries(ladders)) {
+      if (l.cat !== cat) continue;
+      const st = skillState[key] || { level: 0, max: l.levels.length };
+      const stage = l.levels[Math.max(0, st.level - 1)] || '—';
+      const done = st.level >= st.max;
+      html += `<div class="skill">
+        <div class="head"><span class="exname">${esc(l.name)} ${done ? '✓' : ''}</span><span class="stage">${st.level}/${st.max} — ${esc(stage)}</span></div>
+        <div class="bar"><i style="width:${(st.level / st.max) * 100}%"></i></div>
+      </div>`;
+    }
+  }
+  return `<div class="card"><h2>Calisthenics skills</h2>
+    <div class="note">Current level comes from the SKILL_STATE block in ${esc(P.files.skillState || '')} — the assistant updates it on level-up.</div>
+    ${html || '<div class="muted">No ladders configured.</div>'}</div>`;
+}
+
+// ── NUTRITION view (immutable) ───────────────────────────────
+function renderNutrition() {
+  const n = P.nutrition;
+  const t = n.totals;
+  const mealHtml = n.meals.map(m => `
+    <div class="card"><h2>${esc(m.name)}</h2>
+      <table>
+        <tr><th>Item</th><th class="num">Qty</th><th class="num">P</th><th class="num">C</th><th class="num">F</th><th class="num">kcal</th></tr>
+        ${m.items.map(i => `<tr><td>${esc(i.item)}</td><td class="num target">${esc(i.qty)}</td><td class="num">${i.p}</td><td class="num">${i.c}</td><td class="num">${i.f}</td><td class="num">${i.kcal}</td></tr>`).join('')}
+        <tr class="totals"><td>Total</td><td></td><td class="num">${m.totals.p}</td><td class="num">${m.totals.c}</td><td class="num">${m.totals.f}</td><td class="num">${m.totals.kcal}</td></tr>
+      </table>
+    </div>`).join('');
+
+  return `
+  <div class="card">
+    <h2>Daily targets</h2>
+    <div class="note">${esc(n.style)}</div>
+    <table>
+      <tr><th>Protein</th><th>Carbs</th><th>Fat</th><th>Fiber</th><th>Calories</th></tr>
+      <tr><td>${t.protein} g</td><td>${t.carbs} g</td><td>${t.fat} g</td><td>${t.fiber} g</td><td>${t.kcal} kcal</td></tr>
+    </table>
+  </div>
+  ${mealHtml}
+  <div class="card"><h2>Fueling</h2><ul class="opts">${n.fueling.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>
+  <div class="card"><h2>Supplements</h2>
+    <table><tr><th>Supplement</th><th>Dose</th><th>Timing</th></tr>
+      ${n.supplements.map(s => `<tr><td class="exname">${esc(s.name)}</td><td class="target">${esc(s.dose)}</td><td class="target">${esc(s.timing)}</td></tr>`).join('')}
+    </table>
+    ${n.notes ? `<div class="note">${esc(n.notes)}</div>` : ''}
+  </div>
+  <div class="note">This tab is read-only — edit people/${personId}/data.json to change nutrition.</div>`;
+}
+
+init();
+</script>
+</body>
+</html>

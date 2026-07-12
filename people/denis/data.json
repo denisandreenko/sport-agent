@@ -1,0 +1,219 @@
+{
+  "id": "denis",
+  "name": "Denis",
+  "profile": {
+    "heightCm": 191,
+    "weightKg": 87,
+    "bodyFatPct": 11,
+    "diet": "ketogenic",
+    "stage": "Experienced hybrid athlete"
+  },
+  "goals": [
+    "Gravel cycling performance",
+    "Strength and hypertrophy",
+    "Calisthenics skill acquisition",
+    "Mobility and durability",
+    "Recovery and fatigue management",
+    "Keto-compatible performance nutrition"
+  ],
+  "tracking": {
+    "wearable": false,
+    "stravaSync": true
+  },
+  "files": {
+    "workoutLog": "people/denis/workout_log.md",
+    "skillState": "people/denis/calisthenics_status.md"
+  },
+  "dashboard": {
+    "accent": "#4f8ef7",
+    "tabs": ["today", "log", "skills", "nutrition"]
+  },
+  "week": {
+    "0": "REST",
+    "1": "GYM_A",
+    "2": "CYCLING_VO2MAX",
+    "3": "GYM_B",
+    "4": "CYCLING_THRESHOLD",
+    "5": "GYM_C",
+    "6": "CYCLING_LONG"
+  },
+  "logSessionTypes": [
+    "GYM_A", "GYM_B", "GYM_C",
+    "CYCLING_VO2MAX", "CYCLING_THRESHOLD", "CYCLING_LONG",
+    "RUN_EASY", "SWIM", "CALISTHENICS", "MOBILITY", "REST"
+  ],
+  "sessions": {
+    "GYM_A": {
+      "kind": "gym",
+      "label": "Gym A — Squat / Horizontal Push / Vertical Pull",
+      "note": "Keep lower body at RPE ≤ 8 — Tuesday is VO2max. Activation first: single-leg glute bridge 10/side + Copenhagen side plank 20–30 s/side.",
+      "exercises": [
+        { "name": "Hack squat", "target": "3×6–8 @ RPE 7–8", "stub": "75" },
+        { "name": "Bench press", "target": "3×5–6", "stub": "77.5" },
+        { "name": "Single-leg hip thrust", "target": "3×10–12/leg", "stub": "BW" },
+        { "name": "Chin-ups", "target": "3×6–8", "stub": "BW" },
+        { "name": "Seated leg curl", "target": "2×12–15", "stub": "40" },
+        { "name": "Cable lateral raises", "target": "2×12–15", "stub": "—" },
+        { "name": "Pallof press", "target": "2×10/side", "stub": "—" }
+      ],
+      "addon": "Skills (fresh, before lifting): One Arm Handstand (adv. wall → freestanding) + Wall HSPU. Few shrimp-squat sets in warm-up, low volume.",
+      "mobility": "10 min post-session: hip flexor 60 s/side · pigeon or 90/90 60 s/side · couch stretch 60 s/side · open book 10/side · cat-cow ×10."
+    },
+    "GYM_B": {
+      "kind": "gym",
+      "label": "Gym B — Pull / Overhead Press / Arms / Core",
+      "note": "No heavy axial loading.",
+      "exercises": [
+        { "name": "Weighted pull-ups", "target": "3×5–6", "stub": "+20" },
+        { "name": "Chest-supported row", "target": "3×8–10", "stub": "60" },
+        { "name": "Seated DB OHP", "target": "2×8–10", "stub": "20" },
+        { "name": "Cable hip abduction", "target": "2×12–15/side", "stub": "—" },
+        { "name": "Face pulls", "target": "2×12–15", "stub": "—" },
+        { "name": "Cable lateral raises", "target": "2×12–15", "stub": "—" },
+        { "name": "Incline DB curl", "target": "2×10–12", "stub": "—" },
+        { "name": "Overhead tricep ext.", "target": "2×10–12", "stub": "—" },
+        { "name": "Ab wheel rollout", "target": "2×8–10", "stub": "BW" }
+      ],
+      "addon": "Skills (before fatigue): Muscle Up (kip → strict transition) + Front Lever (adv. tuck → one leg).",
+      "mobility": "Same 10 min routine as Gym A."
+    },
+    "GYM_C": {
+      "kind": "gym",
+      "label": "Gym C — Hinge / Incline Push / Single-leg",
+      "note": "Saturday is the long ride — trap-bar reps stay quality, not grinders; on amber/red readiness drop to 2 sets. Activation same as Gym A.",
+      "exercises": [
+        { "name": "Trap bar deadlift", "target": "3×4–5 @ RPE 7–8", "stub": "100" },
+        { "name": "Incline DB press", "target": "3×8–10", "stub": "28" },
+        { "name": "Bulgarian split squats", "target": "3×8–10/leg", "stub": "20" },
+        { "name": "Nordic hamstring curl", "target": "2×5–8", "stub": "BW" },
+        { "name": "Dips", "target": "2×8–12", "stub": "BW" },
+        { "name": "Leg extension", "target": "2×12–15", "stub": "45" },
+        { "name": "DB lateral raises", "target": "2×12–15", "stub": "—" },
+        { "name": "Seated calf raise", "target": "2×12–15", "stub": "—" },
+        { "name": "Cable crunch", "target": "2×15–20", "stub": "—" }
+      ],
+      "addon": "Skills (low fatigue, technical): Dragon Flag (one leg → straddle) + V-Sit (tuck L-sit → straddle).",
+      "mobility": "Same 10 min routine as Gym A."
+    },
+    "CYCLING_VO2MAX": {
+      "kind": "endurance",
+      "label": "Cycling — VO2max / hill repeats",
+      "purpose": "Handle steep climbs, surges, and repeated hard gravel efforts.",
+      "options": [
+        "5 × 3 min hard / 3 min easy",
+        "6 × 4 min hard / 4 min easy",
+        "8–10 × 60–90 s uphill hard",
+        "3 × 10 min: 30 s hard / 90 s moderate"
+      ],
+      "fueling": "TKD: 15–25 g maltodextrin in water 15–30 min before the hard block.",
+      "prep": "Hip flexor stretch 30 s/side + leg swings 10/side (~2 min)."
+    },
+    "CYCLING_THRESHOLD": {
+      "kind": "endurance",
+      "label": "Cycling — Threshold / sweet spot",
+      "purpose": "Improve sustained gravel pace and climbing power.",
+      "options": [
+        "3 × 12–15 min sweet spot",
+        "4 × 8 min threshold",
+        "2 × 20 min controlled threshold",
+        "4 × 8 min low-cadence strength endurance @ 60–70 rpm"
+      ],
+      "fueling": "TKD: 15–25 g maltodextrin in water 15–30 min before.",
+      "prep": "Hip flexor stretch 30 s/side + leg swings 10/side (~2 min)."
+    },
+    "CYCLING_LONG": {
+      "kind": "endurance",
+      "label": "Long gravel ride",
+      "purpose": "Aerobic durability, fat oxidation, technical handling, fueling practice.",
+      "options": [
+        "3–5 h mostly Z1–Z2",
+        "Optional: tempo finish or climb blocks in the final hour",
+        "Optional: rough terrain / gravel handling drills",
+        "Electrolytes: 500–700 mg sodium/hr on top of baseline"
+      ],
+      "fueling": "No TKD for Z2. Maltodextrin:fructose 2:1 @ 60–80 g/hr only if deliberately pushing intensity > 90 min.",
+      "prep": "Hip flexor 30 s/side · leg swings front/back + lateral 10/side · deep squat hold 60 s · single-leg glute bridge 10/side (~4 min)."
+    },
+    "REST": {
+      "kind": "rest",
+      "label": "Recovery day",
+      "note": "Mobility, easy spin/swim/walk, optional easy run 20–45 min Z1–Z2. Nothing hard."
+    }
+  },
+  "skills": {
+    "enabled": true,
+    "ladders": {
+      "planche": { "name": "Planche", "cat": "Push", "goal": "Full planche", "levels": ["Pseudo Push Ups", "Frog Stand", "Tuck Planche", "Advanced Tuck Planche", "Straddle Planche", "Planche"] },
+      "handstand_push_up": { "name": "Handstand Push Up", "cat": "Push", "goal": "Freestanding HSPU", "levels": ["Pike Push Up", "Adv. Pike Push Up", "Wall Handstand Push Up", "Negative Handstand Push Up", "Handstand Push Up"] },
+      "one_arm_push_up": { "name": "One Arm Push Up", "cat": "Push", "goal": "One arm push up", "levels": ["Push Up", "Diamond Push Up", "Alligator Push Up", "Archer Push Up", "Incline One Arm Push Up", "Negative One Arm Push Up", "Rocky Push Up", "One Arm Push Up"] },
+      "one_arm_handstand": { "name": "One Arm Handstand", "cat": "Push", "goal": "One arm handstand (near-term: freestanding)", "levels": ["Downward Dog", "Pike Hold", "Wall Handstand", "Adv. Wall Handstand", "Handstand", "Diamond Handstand", "Bend Straddle Handstand", "Fingertip Straddle Handstand", "Straddle One Arm Handstand", "Diamond One Arm Handstand", "One Arm Handstand"] },
+      "muscle_up": { "name": "Muscle Up", "cat": "Pull", "goal": "Clean muscle up", "levels": ["Pull Up", "High Pull Up", "Jumping Muscle Up", "Kipping Muscle Up", "Muscle Up"] },
+      "front_lever": { "name": "Front Lever", "cat": "Pull", "goal": "Full front lever", "levels": ["Tuck Front Lever", "Advanced Tuck Front Lever", "One Leg Front Lever", "Half Front Lever", "Straddle Front Lever", "Front Lever"] },
+      "back_lever": { "name": "Back Lever", "cat": "Pull", "goal": "Full back lever", "levels": ["Skin the Cat", "Tuck Back Lever", "Adv. Tuck Back Lever", "Straddle Back Lever", "Back Lever"] },
+      "one_arm_pull_up": { "name": "One Arm Pull Up", "cat": "Pull", "goal": "One arm pull up", "levels": ["Pull Up", "Archer Pull Up", "Assisted One Arm Pull Up", "Negative One Arm Pull Up", "Little Assisted OAP", "One Arm Pull Up"] },
+      "hefesto": { "name": "Hefesto", "cat": "Pull", "goal": "Hefesto", "levels": ["Korean Dip", "Hefesto Dip", "Negative Hefesto", "Hefesto Pull", "Assisted Hefesto", "Hefesto"] },
+      "v_sit": { "name": "V-Sit", "cat": "Core", "goal": "V-sit", "levels": ["Straddle Leg Raise Hold", "Leg Raise Hold", "Tuck L-sit", "Straddle L-Sit", "L-sit", "Tuck V-Sit", "Straddle V-Sit", "V-Sit"] },
+      "dragon_flag": { "name": "Dragon Flag", "cat": "Core", "goal": "Dragon flag", "levels": ["Tuck Reverse Crunch", "Reverse Crunch", "Tuck Dragon Flag", "Half Dragon Flag", "One Leg Dragon Flag", "Straddle Dragon Flag", "Dragon Flag"] },
+      "human_flag": { "name": "Human Flag", "cat": "Core", "goal": "Human flag", "levels": ["Hanging Side Bend", "Angle Flag", "Low Flag", "Vertical Tuck Flag", "Vertical Flag", "Negative Flag", "Straddle Flag", "Human Flag"] },
+      "pistol_squat": { "name": "Pistol Squat", "cat": "Legs", "goal": "Pistol squat", "levels": ["Deep Squat", "Bulgarian Squat", "Archer Squat", "Bench Pistol Squat", "Assisted Pistol Squat", "Rolling Pistol Squat", "Elevated Pistol Squat", "Pistol Squat"] },
+      "shrimp_squat": { "name": "Shrimp Squat", "cat": "Legs", "goal": "Shrimp squat", "levels": ["Reverse Lunge", "Supported Shrimp Squat", "No Arm Shrimp Squat", "One Arm Shrimp Squat", "Shrimp Squat"] }
+    }
+  },
+  "nutrition": {
+    "style": "Ketogenic — very low carbohydrate, high fat, adequate protein. 3 meals/day.",
+    "totals": { "protein": 209.6, "carbs": 37, "fat": 247.8, "fiber": 27.6, "kcal": 3380 },
+    "meals": [
+      {
+        "name": "Meal 1",
+        "items": [
+          { "item": "Egg (5 large)", "qty": "275 g", "p": 34.7, "c": 1.9, "f": 26.1, "fiber": 0, "kcal": 393.3 },
+          { "item": "Frozen veggies", "qty": "400 g", "p": 0, "c": 11.6, "f": 2.8, "fiber": 8, "kcal": 144 },
+          { "item": "Cheese (4 slices)", "qty": "64 g", "p": 16, "c": 0, "f": 16.6, "fiber": 0, "kcal": 214 },
+          { "item": "Olive oil", "qty": "10 g", "p": 0, "c": 0, "f": 10, "fiber": 0, "kcal": 90 },
+          { "item": "Butter", "qty": "120 g", "p": 1, "c": 1, "f": 98, "fiber": 0, "kcal": 895 }
+        ],
+        "totals": { "p": 51.7, "c": 14.5, "f": 153.5, "fiber": 8, "kcal": 1736 }
+      },
+      {
+        "name": "Meal 2",
+        "items": [
+          { "item": "Meat (cooked)", "qty": "300 g", "p": 81, "c": 0, "f": 45, "fiber": 0, "kcal": 729 },
+          { "item": "Frozen veggies", "qty": "200 g", "p": 0, "c": 5.8, "f": 1.4, "fiber": 4, "kcal": 72 },
+          { "item": "Sauerkraut / kimchi", "qty": "40 g", "p": 0.4, "c": 0.6, "f": 0, "fiber": 0.8, "kcal": 4.4 },
+          { "item": "Sardines", "qty": "60 g", "p": 15.5, "c": 0, "f": 4.3, "fiber": 0, "kcal": 100.8 }
+        ],
+        "totals": { "p": 96.9, "c": 6.4, "f": 50.7, "fiber": 4.8, "kcal": 906 }
+      },
+      {
+        "name": "Meal 3",
+        "items": [
+          { "item": "L-reuteri yogurt", "qty": "130 g", "p": 4.2, "c": 0.7, "f": 4.2, "fiber": 2.6, "kcal": 56 },
+          { "item": "Cottage cheese 9%", "qty": "300 g", "p": 51, "c": 10.2, "f": 27, "fiber": 0, "kcal": 489 },
+          { "item": "Cocoa powder", "qty": "15 g", "p": 0, "c": 2.4, "f": 1.7, "fiber": 4.8, "kcal": 46 },
+          { "item": "Chia", "qty": "20 g", "p": 3.3, "c": 1.5, "f": 6.1, "fiber": 6.9, "kcal": 89 },
+          { "item": "Pumpkin seeds", "qty": "10 g", "p": 2.5, "c": 1.3, "f": 4.6, "fiber": 0.5, "kcal": 57.7 }
+        ],
+        "totals": { "p": 61, "c": 16.1, "f": 43.6, "fiber": 14.8, "kcal": 738 }
+      }
+    ],
+    "fueling": [
+      "Pre-gym (optional): 15–20 g maltodextrin in water 15–30 min before — only if energy feels low.",
+      "TKD (hard endurance only): 15–25 g maltodextrin 15–30 min before VO2max or threshold work.",
+      "Saturday long ride (race-prep only): 60–80 g/hr maltodextrin:fructose 2:1 when deliberately fueling high."
+    ],
+    "supplements": [
+      { "name": "D3 + K2", "dose": "8000 IU D3 + 200 µg K2", "timing": "Evening, with largest meal" },
+      { "name": "Omega-3", "dose": "2100 mg EPA/DHA", "timing": "Evening, with largest meal" },
+      { "name": "Creatine", "dose": "10 g", "timing": "Daily — pre-workout or with a meal" },
+      { "name": "Salt (low-sodium blend)", "dose": "NaCl 70% + KCl 30%, iodized", "timing": "Through the day" },
+      { "name": "Magnesium glycinate stack", "dose": "320 mg Mg + 30 mg Zn + 2 mg Cu + 4.2 mg B6", "timing": "Evening, with largest meal" },
+      { "name": "Ashwagandha root extract", "dose": "750 mg (withanolides 11.25 mg)", "timing": "Evening" },
+      { "name": "Citrulline malate", "dose": "6 g", "timing": "Pre-gym / pre-endurance" },
+      { "name": "Beta-alanine", "dose": "6 g", "timing": "Pre-workout, or evening with meal" },
+      { "name": "Caffeine", "dose": "200 mg", "timing": "Pre-gym / pre-endurance" },
+      { "name": "Beef collagen + vitamin C", "dose": "8,700 mg + vit C", "timing": "30–45 min pre-calisthenics" },
+      { "name": "Brazil nuts", "dose": "2", "timing": "Daily (selenium)" }
+    ],
+    "notes": "25-OH-D bloodwork before sustained high-dose D3. Ashwagandha: cycle 6–8 weeks on, then a break."
+  }
+}
