@@ -38,3 +38,22 @@ Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set
 ---
 
 <!-- First entries go here -->
+
+## 2026-07-13 | GYM_A
+- sleep: 3/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 5/5
+- rpe: 6/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 8/8/8 | 7,5 | |
+| Knee push-up | 6/6/6 | BW | |
+| Assisted pull-up | 8/5/5 | 2 bands (G+R) | |
+| Glute bridge / hip thrust | 15/15/15 | — | |
+| Sit-ups | 15/15 | — | |
+| Plank | 40/30 | — | |
+
+---
