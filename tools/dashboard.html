@@ -71,6 +71,12 @@
   .field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .status-msg { font-size: 13px; margin-top: 8px; }
+  .select-full { width: 100%; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px; font-size: 14px; }
+
+  @media (max-width: 430px) {
+    .ready-grid { grid-template-columns: repeat(2, 1fr); }
+    .week .day { font-size: 9.5px; padding: 5px 2px; }
+  }
 
   /* skills */
   .skill { margin-bottom: 12px; }
@@ -326,7 +332,7 @@ function renderToday() {
   <div class="card">
     <h2>Session</h2>
     <div class="field"><label>Session type</label>
-      <select class="ready-item" id="session-type" style="width:100%;background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px" onchange="changeType(this.value)">${typeOptions}</select>
+      <select class="select-full" id="session-type" onchange="changeType(this.value)">${typeOptions}</select>
     </div>
     <div id="session-body" style="margin-top:12px"></div>
   </div>
@@ -417,6 +423,8 @@ async function saveEntry() {
     content += `\n${buildEntry()}\n---\n`;
     await commitFile(P.files.workoutLog, content, fresh.sha, `Log ${currentType} — ${P.name} (dashboard)`);
     logContent = content;
+    $('entry-rpe').value = ''; $('entry-notes').value = '';
+    renderSessionBody();               // refresh "last load" values from the new entry
     msg.textContent = '✓ Saved.';
   } catch (e) {
     msg.textContent = '✗ ' + e.message;
@@ -424,13 +432,37 @@ async function saveEntry() {
 }
 
 // ── LOG view ─────────────────────────────────────────────────
+function formatEntryBody(body) {
+  const lines = body.split('\n');
+  let html = '', table = [];
+  const flushTable = () => {
+    if (!table.length) return;
+    const rows = table.filter(r => !/^[\s|:-]+$/.test(r));           // drop separator row
+    html += '<table style="margin:4px 0">' + rows.map((r, i) => {
+      const cells = r.split('|').map(c => c.trim()).filter(Boolean);
+      const tag = i === 0 ? 'th' : 'td';
+      return `<tr>${cells.map(c => `<${tag}>${esc(c)}</${tag}>`).join('')}</tr>`;
+    }).join('') + '</table>';
+    table = [];
+  };
+  for (const line of lines) {
+    const t = line.trim();
+    if (t.startsWith('|')) { table.push(t); continue; }
+    flushTable();
+    if (!t) continue;
+    if (t.startsWith('###')) html += `<div class="cat-title" style="margin:8px 0 4px">${esc(t.replace(/^#+\s*/, ''))}</div>`;
+    else html += `<div class="muted" style="font-size:12.5px">${esc(t.replace(/^-\s*/, ''))}</div>`;
+  }
+  flushTable();
+  return html;
+}
 function renderLog() {
   const entries = splitEntries(logContent).reverse().slice(0, 30);
   if (!entries.length) return `<div class="card"><h2>Workout log</h2><div class="muted">No entries yet.</div></div>`;
   const html = entries.map(e => {
     const h = e.match(/^## (\d{4}-\d{2}-\d{2})\s*\|\s*(\w+)/);
     const body = e.replace(/^## .*$/m, '').replace(/^---\s*$/gm, '').trim();
-    return `<div class="entry"><div class="ehead">${h ? h[1] : ''} <span>${h ? h[2] : ''}</span></div><pre>${esc(body)}</pre></div>`;
+    return `<div class="entry"><div class="ehead">${h ? h[1] : ''} <span>${h ? h[2] : ''}</span></div>${formatEntryBody(body)}</div>`;
   }).join('');
   return `<div class="card"><h2>Workout log — latest ${entries.length}</h2>${html}</div>`;
 }
@@ -464,7 +496,6 @@ function renderSkills() {
     }
   }
   return `<div class="card"><h2>Calisthenics skills</h2>
-    <div class="note">Current level comes from the SKILL_STATE block in ${esc(P.files.skillState || '')} — the assistant updates it on level-up.</div>
     ${html || '<div class="muted">No ladders configured.</div>'}</div>`;
 }
 
@@ -497,8 +528,7 @@ function renderNutrition() {
       ${n.supplements.map(s => `<tr><td class="exname">${esc(s.name)}</td><td class="target">${esc(s.dose)}</td><td class="target">${esc(s.timing)}</td></tr>`).join('')}
     </table>
     ${n.notes ? `<div class="note">${esc(n.notes)}</div>` : ''}
-  </div>
-  <div class="note">This tab is read-only — edit people/${personId}/data.json to change nutrition.</div>`;
+  </div>`;
 }
 
 init();

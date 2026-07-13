@@ -38,11 +38,11 @@ Baseline: ketogenic — very low carbohydrate, high fat, adequate protein.
 
 Athletes take a similar stack; **doses are listed per person** in their `data.json` (scale dose-dependent items like creatine and electrolytes to bodyweight; keep micronutrients similar).
 
-Core stack: D3 + K2 · Omega-3 (EPA/DHA) · creatine · low-sodium salt blend (NaCl + KCl, iodized) · magnesium glycinate stack (+ zinc, copper, B6) · magnesium malate (pre-training, hard days) · citrulline malate · beta-alanine · caffeine · beef collagen + vitamin C (pre-training) · Brazil nuts (selenium).
+Core stack: D3 + K2 · Omega-3 (EPA/DHA) · creatine · low-sodium salt blend (NaCl + KCl, iodized) · magnesium glycinate stack (+ zinc, copper, B6) · citrulline malate · beta-alanine · caffeine · beef collagen + vitamin C (pre-training) · Brazil nuts (selenium).
 
 **Timing:**
 - **Pre-gym / pre-endurance:** caffeine + citrulline malate; creatine partial here or with a meal.
-- **Pre-gym / pre-calisthenics (30–45 min before):** beef collagen + vitamin C; magnesium malate.
+- **Pre-gym / pre-calisthenics (30–45 min before):** beef collagen + vitamin C.
 - **With largest/evening meal:** magnesium glycinate + zinc + copper + B6; omega-3; D3 + K2; beta-alanine if not taken pre-workout.
 - **Brazil nuts:** with any meal.
 
