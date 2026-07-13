@@ -58,7 +58,7 @@ Progressions to focus on:
 - **Pedals:** Shimano SPD (2-bolt) on both gravel and road bikes
 - **Indoor:** full metrics — power (smart trainer / ERG), heart rate, GPS
 - **Outdoor (Saturday long rides):** heart rate + GPS only, no power meter
-- Training data syncs to Garmin and Strava (no API connector currently available)
+- Training data lives in Garmin Connect (no API connector currently — rides are logged via the dashboard)
 
 # Training Block Status
 

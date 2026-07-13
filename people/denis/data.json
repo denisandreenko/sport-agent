@@ -17,8 +17,7 @@
     "Keto-compatible performance nutrition"
   ],
   "tracking": {
-    "wearable": false,
-    "stravaSync": true
+    "wearable": false
   },
   "files": {
     "workoutLog": "people/denis/workout_log.md",

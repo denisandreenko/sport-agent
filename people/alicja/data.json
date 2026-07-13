@@ -17,8 +17,7 @@
     "Keto-compatible nutrition"
   ],
   "tracking": {
-    "wearable": false,
-    "stravaSync": false
+    "wearable": false
   },
   "files": {
     "workoutLog": "people/alicja/workout_log.md"

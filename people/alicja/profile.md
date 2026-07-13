@@ -27,7 +27,7 @@ No disliked or excluded foods.
 ## Training capacity
 
 - **Fixed weekly schedule** (see `training_plan.md`): Mon Gym A · Tue easy run · Wed rest · Thu Gym B · Fri run · Sat rest · Sun full mobility/splits, with a short daily mobility minimum.
-- No wearable (no Garmin/Strava) — readiness is subjective, logging is manual in `workout_log.md`.
+- No wearable — readiness is subjective, logging is manual in `workout_log.md`.
 
 ## Notes
 

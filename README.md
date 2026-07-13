@@ -24,7 +24,7 @@ athlete-training/
 │   │   ├── training_plan.md        ← reasoning: priorities, guardrails, weekly logic
 │   │   ├── gym_training_plan.md    ← gym split detail & progression rules
 │   │   ├── calisthenics_status.md  ← SKILL_STATE (current levels) + focus
-│   │   └── workout_log.md          ← history; auto-synced from Strava
+│   │   └── workout_log.md          ← history; logged via dashboard
 │   └── alicja/
 │       ├── data.json
 │       ├── profile.md
@@ -36,8 +36,6 @@ athlete-training/
 │
 ├── tools/
 │   └── dashboard.html              ← ONE dashboard for everyone: ?person=<id>
-│
-└── .github/                        ← Strava → workout-log auto-sync (Denis only)
 ```
 
 ## Design rules

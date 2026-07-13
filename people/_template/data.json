@@ -15,8 +15,7 @@
     "Goal 3"
   ],
   "tracking": {
-    "wearable": false,
-    "stravaSync": false
+    "wearable": false
   },
   "files": {
     "workoutLog": "people/PERSON_ID/workout_log.md"
