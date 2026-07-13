@@ -19,9 +19,10 @@ READINESS RULE (assistant applies): if 2+ are poor → easy day (keep mobility, 
 - notes: [what felt hard, what moved well, any pain]
 
 ### Strength (GYM sessions)
-| Exercise | Sets×Reps | Load | Notes |
+Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set3 8).
+| Exercise | Reps | Load | Notes |
 |---|---|---|---|
-| Goblet squat | 3×10 | 8 kg | controlled |
+| Goblet squat | 10/9/8 | 8 kg | controlled |
 
 ### Running
 - type: run/walk | easy | intervals

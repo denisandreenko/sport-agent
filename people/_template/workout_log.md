@@ -23,9 +23,10 @@ READINESS RULE: a rating ≤ 2 is "poor".
 - notes: [what felt hard, what moved well, any pain]
 
 ### Key lifts (GYM sessions)
-| Exercise | Sets×Reps | Load | Notes |
+Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set3 8).
+| Exercise | Reps | Load | Notes |
 |---|---|---|---|
-| Example | 3×10 | 8 kg | controlled |
+| Example | 10/9/8 | 8 kg | controlled |
 
 ### Endurance (run/ride sessions)
 - duration: Xmin

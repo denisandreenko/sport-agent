@@ -27,9 +27,10 @@ READINESS RULE: a rating ≤ 2 is "poor".
 - notes: [free text — what felt hard, what moved well, any pain/discomfort]
 
 ### Key lifts (GYM sessions only)
-| Exercise | Sets×Reps | Load (kg) | Notes |
+Reps = actual reps per set, separated by "/" (e.g. 8/7/6 = set1 8, set2 7, set3 6).
+| Exercise | Reps | Load (kg) | Notes |
 |---|---|---|---|
-| Hack squat | 3×8 | 80 | smooth |
+| Hack squat | 8/7/6 | 80 | smooth |
 
 ### Endurance (cycling/run sessions only)
 - duration: Xmin

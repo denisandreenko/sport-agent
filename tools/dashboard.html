@@ -60,6 +60,18 @@
   .load-input { width: 74px; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; text-align: center; font-size: 13.5px; }
   .totals td { font-weight: 700; border-top: 1px solid var(--border); }
 
+  /* per-exercise row with per-set reps */
+  .ex-row { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .ex-row:last-of-type { border-bottom: none; }
+  .ex-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+  .ex-head .target { font-size: 12px; }
+  .hint-up { font-size: 11px; font-weight: 700; color: var(--green); background: rgba(62,207,142,0.12); border-radius: 999px; padding: 2px 8px; }
+  .ex-inputs { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+  .ex-x { color: var(--muted); font-size: 13px; }
+  .rep-input { width: 44px; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 13.5px; }
+  .ex-reps-label { color: var(--muted); font-size: 11px; }
+  .ex-last { color: var(--muted); font-size: 11.5px; margin-top: 4px; }
+
   ul.opts { margin: 6px 0 6px 18px; }
   ul.opts li { margin-bottom: 4px; font-size: 13.5px; }
 
@@ -290,15 +302,25 @@ function parseLastLoads(sessionType) {
   if (!table) return loads;
   for (const line of table[0].split('\n')) {
     const cols = line.split('|').map(s => s.trim()).filter(Boolean);
-    if (cols.length >= 3 && !/^[-—:\s]+$/.test(cols[1]) && cols[0] !== 'Exercise')
-      loads[cols[0].toLowerCase()] = cols[2];
+    if (cols.length >= 3 && !/^[-—:\s]+$/.test(cols[1]) && cols[0] !== 'Exercise') {
+      // col 1 is per-set reps ("8/7/6") in new entries, or a target ("3×8") in old ones
+      const reps = /^\d+([\/,]\d+)*$/.test(cols[1]) ? cols[1].split(/[\/,]/).map(Number) : null;
+      loads[cols[0].toLowerCase()] = { load: cols[2], reps };
+    }
   }
   return loads;
 }
 function getLoad(name) {
   const key = name.toLowerCase();
   for (const k of Object.keys(lastLoads)) if (k === key || key.startsWith(k) || k.startsWith(key)) return lastLoads[k];
-  return '';
+  return null;
+}
+// "3×6–8 @ RPE 7–8" → {sets:3, top:8};  "2×20–40 s" → {sets:2, top:40};  "3×8/leg" → {sets:3, top:8}
+function parseTarget(target) {
+  const sets = Number((target.match(/^(\d+)\s*×/) || [])[1]) || 3;
+  const m = target.match(/×\s*(\d+)(?:\s*[–-]\s*(\d+))?/);
+  const top = m ? Number(m[2] || m[1]) : null;
+  return { sets, top };
 }
 
 // ── TODAY view ───────────────────────────────────────────────
@@ -361,12 +383,26 @@ function renderSessionBody() {
 
   if (s.kind === 'gym') {
     lastLoads = parseLastLoads(currentType);
-    html += `<table><tr><th>Exercise</th><th>Target</th><th class="num">Load</th></tr>` +
-      s.exercises.map((ex, i) => `<tr>
-        <td><span class="exname">${esc(ex.name)}</span></td>
-        <td><span class="target">${esc(ex.target)}</span></td>
-        <td class="num"><input class="load-input" id="load-${i}" value="${esc(getLoad(ex.name) || '')}" placeholder="${esc(ex.stub || '')}"></td>
-      </tr>`).join('') + `</table>`;
+    html += s.exercises.map((ex, i) => {
+      const last = getLoad(ex.name);
+      const t = parseTarget(ex.target);
+      const hitTop = last?.reps && t.top && last.reps.length >= t.sets && last.reps.every(r => r >= t.top);
+      const repInputs = Array.from({ length: t.sets }, (_, j) =>
+        `<input class="rep-input" id="rep-${i}-${j}" inputmode="numeric" placeholder="${esc(last?.reps?.[j] ?? (t.top || ''))}">`
+      ).join('');
+      return `<div class="ex-row">
+        <div class="ex-head">
+          <span class="exname">${esc(ex.name)}</span>
+          <span class="target">${esc(ex.target)}</span>
+          ${hitTop ? '<span class="hint-up">↑ add load</span>' : ''}
+        </div>
+        <div class="ex-inputs">
+          <input class="load-input" id="load-${i}" value="${esc(last?.load || '')}" placeholder="${esc(ex.stub || '')}">
+          <span class="ex-x">×</span>${repInputs}<span class="ex-reps-label">reps</span>
+        </div>
+        ${last ? `<div class="ex-last">Last: ${esc(last.load)}${last.reps ? ' · ' + last.reps.join('/') : ''}</div>` : ''}
+      </div>`;
+    }).join('');
     if (s.addon) html += `<div class="note">➕ ${esc(s.addon)}</div>`;
     if (s.mobility) html += `<div class="note">🧘 ${esc(s.mobility)}</div>`;
   } else if (s.kind === 'endurance') {
@@ -399,10 +435,15 @@ function buildEntry() {
 
   if (s.kind === 'gym') {
     const rows = s.exercises.map((ex, i) => {
-      const load = $(`load-${i}`)?.value.trim();
-      return load ? `| ${ex.name} | ${ex.target.split('@')[0].trim()} | ${load} | |` : null;
+      const input = $(`load-${i}`);
+      const load = input?.value.trim();
+      const t = parseTarget(ex.target);
+      const reps = Array.from({ length: t.sets }, (_, j) => $(`rep-${i}-${j}`)?.value.trim()).filter(Boolean);
+      const touched = reps.length || (load && load !== input.defaultValue);
+      if (!touched) return null;   // untouched exercise → not logged
+      return `| ${ex.name} | ${reps.length ? reps.join('/') : ex.target.split('@')[0].trim()} | ${load || '—'} | |`;
     }).filter(Boolean);
-    if (rows.length) md += `\n### Key lifts\n| Exercise | Sets×Reps | Load | Notes |\n|---|---|---|---|\n${rows.join('\n')}\n`;
+    if (rows.length) md += `\n### Key lifts\n| Exercise | Reps | Load | Notes |\n|---|---|---|---|\n${rows.join('\n')}\n`;
   } else if (s.kind === 'endurance') {
     const dur = $('end-duration')?.value.trim(), det = $('end-detail')?.value.trim();
     if (dur || det) {
