@@ -75,6 +75,12 @@ def get_recent_activities(token):
         params={"after": after, "per_page": 15},
         timeout=15,
     )
+    if resp.status_code == 403:
+        print(f"::error::Strava returned 403 for /athlete/activities: {resp.text}")
+        print("::error::The token refreshed OK but lacks the activity:read_all scope. "
+              "Re-authorize with scope=read,activity:read_all and update the "
+              "STRAVA_REFRESH_TOKEN secret.")
+        sys.exit(1)
     resp.raise_for_status()
     return resp.json()
 
@@ -209,7 +215,7 @@ def main():
     print("Fetching Strava access token...")
     token = get_access_token()
 
-    print("Fetching recent activities (last 36 h)...")
+    print(f"Fetching recent activities (last {os.environ.get('SYNC_HOURS', '36')} h)...")
     activities = get_recent_activities(token)
     print(f"  → {len(activities)} activit{'y' if len(activities) == 1 else 'ies'} found")
 
