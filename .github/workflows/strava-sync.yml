@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 21 * * *'   # 21:00 UTC = midnight EEST (UTC+3)
   workflow_dispatch:         # Manual trigger from GitHub UI → Actions tab
+    inputs:
+      sync_hours:
+        description: 'Lookback window in hours (default 36; e.g. 400 to backfill ~2 weeks)'
+        required: false
+        default: '36'
 
 permissions:
   contents: write
@@ -28,6 +33,7 @@ jobs:
           STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
           STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
           STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+          SYNC_HOURS: ${{ github.event.inputs.sync_hours || '36' }}
         run: python .github/scripts/strava_sync.py
 
       - name: Commit if workout log changed

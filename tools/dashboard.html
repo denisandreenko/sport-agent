@@ -326,9 +326,10 @@ function parseTarget(target) {
 // ── TODAY view ───────────────────────────────────────────────
 function renderToday() {
   const day = new Date().getDay();
-  const weekHtml = Object.keys(P.week).map(d => {
+  const WEEK_ORDER = [1, 2, 3, 4, 5, 6, 0];   // display Monday-first
+  const weekHtml = WEEK_ORDER.map(d => {
     const s = P.sessions[P.week[d]];
-    return `<div class="day ${Number(d) === day ? 'today' : ''}"><b>${DAY_NAMES[d]}</b>${esc(s ? (s.label.split('—')[0].trim()) : P.week[d])}</div>`;
+    return `<div class="day ${d === day ? 'today' : ''}"><b>${DAY_NAMES[d]}</b>${esc(s ? (s.label.split('—')[0].trim()) : P.week[d])}</div>`;
   }).join('');
 
   const typeOptions = P.logSessionTypes.map(t =>

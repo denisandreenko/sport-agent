@@ -50,12 +50,25 @@ def get_access_token():
         "refresh_token": REFRESH_TOKEN,
         "grant_type":    "refresh_token",
     }, timeout=15)
-    resp.raise_for_status()
-    return resp.json()["access_token"]
+    if resp.status_code != 200:
+        print(f"::error::Strava token refresh failed ({resp.status_code}): {resp.text}")
+        print("::error::The STRAVA_REFRESH_TOKEN secret is likely stale (Strava rotates "
+              "refresh tokens). Re-authorize and update the repo secret — see README.")
+        sys.exit(1)
+    data = resp.json()
+    # Strava rotates refresh tokens. If a new one is issued, surface it in the job log
+    # (masked secrets aren't echoed; the token itself is safe to print only in a private repo,
+    # so we just warn — update the secret from https://www.strava.com/settings/api flow).
+    if data.get("refresh_token") and data["refresh_token"] != REFRESH_TOKEN:
+        print("::warning::Strava issued a NEW refresh token. Update the STRAVA_REFRESH_TOKEN "
+              "secret soon or future runs will fail.")
+    return data["access_token"]
 
 
 def get_recent_activities(token):
-    after = int((datetime.now(timezone.utc) - timedelta(hours=36)).timestamp())
+    # Default window 36 h; set SYNC_HOURS when dispatching manually to backfill a gap.
+    hours = int(os.environ.get("SYNC_HOURS", "36"))
+    after = int((datetime.now(timezone.utc) - timedelta(hours=hours)).timestamp())
     resp = requests.get(
         "https://www.strava.com/api/v3/athlete/activities",
         headers={"Authorization": f"Bearer {token}"},
@@ -159,11 +172,10 @@ def build_entry(activity, date_str, session_type):
     if max_hr:
         parts.append(f"max HR {int(max_hr)}")
 
+    # Subjective readiness/RPE are unknown for auto-synced entries — omit rather than
+    # write placeholders (per the workout_log FORMAT SPEC). Denis adds them via dashboard.
     lines = [
         f"## {date_str} | {session_type}",
-        f"- fatigue_before: ?",
-        f"- sleep: ?",
-        f"- rpe: ?",
         f"- notes: {' · '.join(parts)}",
         f"",
         f"### Endurance",
@@ -186,12 +198,10 @@ def entry_exists(content, date_str, session_type):
     return f"## {date_str} | {session_type}" in content
 
 
-def prepend_entry(content, entry):
-    """Insert after the first --- separator (after the format spec block)."""
-    idx = content.find("\n---\n")
-    if idx != -1:
-        return content[: idx + 5] + "\n" + entry + "\n\n---\n\n" + content[idx + 5 :]
-    return content + "\n---\n\n" + entry + "\n---\n"
+def append_entry(content, entry):
+    """Append at the end — the log is chronological, newest at the bottom
+    (same convention as the dashboard and the weekly review)."""
+    return content.rstrip() + "\n\n" + entry + "\n\n---\n"
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────
@@ -232,7 +242,7 @@ def main():
             continue
 
         print(f"  Add: {date_str} | {session_type} — {act['name']}")
-        content = prepend_entry(content, build_entry(act, date_str, session_type))
+        content = append_entry(content, build_entry(act, date_str, session_type))
         added += 1
 
     if added > 0:
