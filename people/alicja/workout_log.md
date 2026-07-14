@@ -57,3 +57,16 @@ Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set
 | Plank | 40/30 | — | |
 
 ---
+
+## 2026-07-14 | RUN_EASY
+- sleep: 4/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 5/5
+- rpe: 5/10
+
+### Endurance
+- duration: 30min
+- notes: 6 min (Stairs) 10 min (Treadmill) 14 min (Elliptical) Zone 2
+
+---
