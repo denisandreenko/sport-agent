@@ -90,3 +90,11 @@ Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set
 | Side plank | 30/30 | — | |
 
 ---
+
+## 2026-07-16 | GYM_B
+- sleep: 4/5
+- soreness: 4/5
+- energy: 4/5
+- motivation: 5/5
+
+---
