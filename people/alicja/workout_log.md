@@ -70,3 +70,23 @@ Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set
 - notes: 6 min (Stairs) 10 min (Treadmill) 14 min (Elliptical) Zone 2
 
 ---
+
+## 2026-07-16 | GYM_B
+- sleep: 4/5
+- soreness: 4/5
+- energy: 4/5
+- motivation: 5/5
+- rpe: 5/10
+- notes: I felt pain in my left knee (which is weaker) during reverse lunge
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 8/8/8 | 2,5kg | |
+| Dumbbell row | 12/12/12 | 5kg | |
+| Incline / knee push-up | 6/6/6 | — | |
+| DB shoulder press (seated) | 12/12 | 2,5 kg | |
+| Dead bug | 8/8 | 1 kg | |
+| Side plank | 30/30 | — | |
+
+---
