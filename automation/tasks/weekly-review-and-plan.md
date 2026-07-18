@@ -20,7 +20,7 @@ Extract each person's log entries from the past 7 days.
 The ONLY files this task may edit: people/denis/calisthenics_status.md (skill level-ups) and either person's data.json — updating exercise `stub` starting loads or targets when progression is decided; the `mesocycle` object (advance/reset `week`, freeze on skips); and for Denis the `cycling` section: `cycling.levels` (ladder progression), `cycling.ftp` (only when he reports a new test result — move the old value to `history`), and `cycling.phase.current` (base/build rotation when due). Stage and commit ONLY the files you actually changed, by name — NEVER `git add -A` or `git add .`. Before committing, `git pull --rebase`. The written week-ahead plan is output in the conversation, not committed.
 
 ## Gap / return rule (check first, per person)
-- 0 entries this week AND 0 the week before → output only a short return-week plan: resume at ~10–20% reduced loads/volume, reset mesocycle week to 1. Skip the detailed review for that person.
+- 0 entries this week AND 0 the week before → output only a short return-week plan: resume at ~10–20% reduced loads/volume, reset mesocycle week to 1. Skip the detailed review for that person. EXCEPTION: if the log contains a LOG RESET comment dated within the past 2 weeks, this is a deliberate clean start, not a training gap — plan a normal week 1 at the data.json `stub` loads instead.
 - 0 entries this week only → note the pause; next week resumes at the same loads (no progression, no punishment). Freeze the mesocycle counter (do not advance it). Never cram missed sessions.
 
 ## Mesocycle counter (per person, after the gap check)
@@ -64,6 +64,9 @@ Table: Day | Session | Key focus | Load/intensity note. Rules:
 - Pain flagged → hold load / regress a stage / check form
 - Denis cycling rows: name the exact ladder rung (e.g. "Threshold L2: 3×15 min sweet spot") and watt targets if FTP is set; include a Ramp Test row if a retest was flagged
 - Preserve the weekly template from data.json unless there's a reason to deviate; explain deviations in one line
+
+## Automation drift check (silent unless drift found)
+Call list_scheduled_tasks to get each task's live SKILL.md path. For every mirror in {REPO_ROOT}/automation/tasks/*.md: compare the prompt body (text after frontmatter; substitute the mirror's {REPO_ROOT} placeholder with the actual repo root; ignore whitespace-only differences) against the live SKILL.md body. All match → output nothing. Any divergence → append ONE line to the end of the review: "⚠️ Automation drift: <taskId(s)> differ from automation/tasks/ mirrors — reconcile (the git mirror is source of truth)." Also flag mirrors without a live task, and live tasks without a mirror. Do NOT auto-edit either side — reconciliation is a human decision.
 
 ## Output
 Markdown, two clearly separated sections (Denis / Alicja), under ~700 words total. Show each person's mesocycle position (e.g. "Week 2 of 3+1 — deload in 2 weeks"). End with one sentence per person: the most important adjustment for next week and why.
