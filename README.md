@@ -8,6 +8,10 @@ adding another is copying a folder — see `people/_template/README.md`.
 ```
 athlete-training/
 ├── README.md                       ← this file
+├── automation/                     ← Claude scheduled-task mirrors + restore guide
+│   ├── README.md                   ← how to restore the workflow on a new machine
+│   └── tasks/                      ← one file per scheduled task (frontmatter + prompt)
+│
 ├── shared/                         ← methodology & reference (applies to everyone)
 │   ├── assistant_instructions.md   ← how the AI assistant works with this repo
 │   ├── recommendation_protocol.md  ← the recommendation engine spec (inputs → outputs → guardrails)
