@@ -19,6 +19,12 @@
   "tracking": {
     "wearable": false
   },
+  "mesocycle": {
+    "pattern": "3+1",
+    "week": 1,
+    "startedOn": "2026-07-20",
+    "note": "Rolling mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions); a skipped week freezes the counter (never advances it). Week 4 = deload: gym volume -30-40%, cycling drops to one maintenance rung below current level, long ride shortened to ~2 h Z1-Z2, extra sleep/mobility. After deload, reset week to 1. Paused while a training_block.md is active (the block has its own week structure). Fatigue markers (2+ amber/red days, RPE creep, pain) can pull the deload EARLIER; nothing pushes it later."
+  },
   "cycling": {
     "ftp": {
       "watts": null,

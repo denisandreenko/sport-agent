@@ -33,6 +33,10 @@ Plus a short **daily mobility minimum** every day (~8–10 min, see `mobility_sp
 
 Use the subjective fallback in `shared/training_principles.md`: each morning check sleep, soreness, energy, motivation. If two or more are poor, make the day easy — keep mobility, drop intensity, or swap a gym day for an easy walk.
 
+## Deload rhythm (light-touch periodization)
+
+State lives in `data.json` → `mesocycle` (**5+1**); the Sunday weekly review maintains it. As a novice, Alicja does NOT need wave loading or block periodization — simple linear progression is optimal at this stage. The only structure added: every **6th completed week** (≥3 logged sessions; skipped weeks freeze the counter) is a deload — one set less per gym exercise at the same loads, both runs easy Z2, **full mobility/splits work kept** (flexibility responds to consistency, not load). Fatigue markers can pull it earlier. The running plan's phases (base → threshold → VO2max) are her endurance mesocycles and progress on their own criteria, independent of the deload counter.
+
 ## Progression focus
 
 - **Strength:** the headline goal — add reps then load on the main movements (see `gym_training_plan.md`).

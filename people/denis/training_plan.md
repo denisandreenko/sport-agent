@@ -43,6 +43,15 @@ Cycling is priority #1, so gym legs must not blunt the two key conflict points:
 - Reduce leg-accessory volume during hard cycling blocks.
 - No races/events currently — training for general performance.
 
+## Periodization (micro / meso / macro)
+
+State lives in `data.json` → `mesocycle`; the Sunday weekly review maintains it.
+
+- **Microcycle** = the 7-day template above. Unchanged — it already handles daily fatigue via readiness (🟢🟡🔴) and the stacking guardrails.
+- **Mesocycle** = rolling **3+1**: three loading weeks, then a deload week. The review counts *completed* weeks (≥3 logged sessions) — skipped weeks freeze the counter, so deload arrives after 3 weeks of actual accumulated work, not calendar time. Deload week: gym volume −30–40% (per `training_principles.md`), cycling drops one rung below current level as a maintenance dose, long ride ~2 h Z1–Z2 only. Fatigue markers can pull the deload earlier; nothing postpones it.
+- **Macrocycle** = the cycling base/build rotation (`cycling.phase`, 4–8 weeks each — i.e. 1–2 mesocycles per phase). Gym runs the same 3+1 wave year-round; what changes across the macro is *which* cycling quality session progresses. No races planned, so no taper/peak structure — if an event appears, add a specialty block toward it.
+- **Interaction with `start-training-block`:** an active block suspends the rolling counter — the block brings its own 4-week structure (baseline → accumulation → intensification → deload). The rolling mesocycle is the default state *between* blocks, so deloads now happen with or without a block.
+
 ## Cycling progression & FTP (TrainerRoad-style)
 
 Cycling now progresses like the gym lifts — structured, from logged data. State lives in `data.json` → `cycling`.

@@ -19,6 +19,12 @@
   "tracking": {
     "wearable": false
   },
+  "mesocycle": {
+    "pattern": "5+1",
+    "week": 1,
+    "startedOn": "2026-07-20",
+    "note": "Light-touch novice mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions incl. both gym days); skipped weeks freeze the counter. Week 6 = deload: gym -1 set per exercise at same loads, both runs easy Z2, keep full mobility/splits (deload does NOT reduce mobility work). After deload, reset to 1. Everything else stays simple linear progression - no wave loading for a novice. Fatigue markers can pull the deload earlier."
+  },
   "files": {
     "workoutLog": "people/alicja/workout_log.md"
   },
