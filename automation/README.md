@@ -40,5 +40,6 @@ The files in `tasks/` are mirrors of the live scheduled-task prompts. **Whenever
 ## Not covered by this folder
 
 - Dashboard saving requires a GitHub token per device (⚙︎ in `tools/dashboard.html`).
-- Strava auto-sync for Denis lives in `.github/` workflows — already portable with the repo.
 - Claude's personal memory (athlete profile summaries) is machine-local convenience only; everything needed is in this repo.
+
+There is **no automatic ride sync** (Strava integration was removed) — all sessions are logged manually via the dashboard. Older log entries marked "Auto-synced from Strava" are historical.

@@ -37,32 +37,20 @@ Current gym frequency:
 - Wednesday
 - Friday
 
-# Calisthenics Skill Level (as of 2026-05)
+# Calisthenics Skill Level
 
-| Skill | Current level |
-|-------|--------------|
-| Handstand | Wall holds comfortable; working toward kick-up/balance |
-| Muscle-up | Explosive pull-ups; attempting bar muscle-up transition |
-| L-sit | Tuck L-sit; progressing to single-leg extension |
-| Front lever | Not yet started |
-| Planche | Not yet started |
-
-Progressions to focus on:
-- **Handstand:** kick-up consistency → freestanding balance drills → wall-facing holds
-- **Muscle-up:** high pull-up + transition drill → bar MU negatives → clean reps
-- **L-sit:** tuck hold duration → single-leg → full extension
-- **Planche lean:** intro after L-sit progresses
+Current levels live in `calisthenics_status.md` (SKILL_STATE block = source of truth, updated on level-ups by the weekly review). Ladder definitions: `data.json` → `skills.ladders`. This profile intentionally does NOT duplicate skill levels — they change too often.
 
 # Cycling Setup
 
 - **Pedals:** Shimano SPD (2-bolt) on both gravel and road bikes
 - **Indoor:** full metrics — power (smart trainer / ERG), heart rate, GPS
 - **Outdoor (Saturday long rides):** heart rate + GPS only, no power meter
-- Training data lives in Garmin Connect (no API connector currently — rides are logged via the dashboard)
+- No auto-sync (Strava integration removed) — all rides are logged manually via the dashboard
 
 # Training Block Status
 
-- Structured program not yet started (will notify when ready to begin)
+- No structured block active. Rolling 3+1 mesocycle running since 2026-07-20 (state: `data.json` → `mesocycle`); the Sunday review flags "📦 Block-ready" when criteria pass.
 - No races or events planned — training for general performance
 - Post-recovery reintroductions (plyos, bilateral hip thrust, back squat) available — no active injuries
 
