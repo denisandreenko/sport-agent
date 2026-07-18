@@ -43,6 +43,16 @@ Cycling is priority #1, so gym legs must not blunt the two key conflict points:
 - Reduce leg-accessory volume during hard cycling blocks.
 - No races/events currently — training for general performance.
 
+## Cycling progression & FTP (TrainerRoad-style)
+
+Cycling now progresses like the gym lifts — structured, from logged data. State lives in `data.json` → `cycling`.
+
+- **FTP anchor:** Zwift Ramp Test every 6–8 weeks (min 28 days apart, fresh day — not after Mon gym). Result + date go to `cycling.ftp`, previous values to `history`. All interval targets are %FTP; until first test, ride by RPE with HR as sanity check.
+- **Progression levels:** each quality session (Tue VO2max, Thu threshold) has an ordered ladder in its session definition. Current rung = `cycling.levels`. Weekly review moves it: all intervals completed at target power/RPE ≤ 8 → +1; partial → hold; failed or 2+ week cycling gap → −1. Never jump rungs.
+- **Phases (base/build):** `cycling.phase` rotates emphasis every 4–8 weeks. Base: Thu sweet-spot/threshold ladder progresses, Tue held as maintenance. Build: Tue VO2max progresses, Thu holds. Only ONE quality session progresses at a time — the other is a maintenance dose. Long ride stays Z1–Z2 in both.
+- **Retest triggers (between scheduled tests):** interval power up at same RPE/HR two weeks running, or threshold rung feels ≤ RPE 6 — weekly review flags a retest instead of silently inflating levels.
+- **Outdoor rides:** no power meter — Saturday is judged by HR/feel only; never by power.
+
 ## Do not do by default
 
 - Don't add endurance volume just because capacity exists.

@@ -19,6 +19,32 @@
   "tracking": {
     "wearable": false
   },
+  "cycling": {
+    "ftp": {
+      "watts": null,
+      "testedOn": null,
+      "method": "Zwift Ramp Test (FTP = 75% of best 1-min power). Retest every 6-8 weeks, min 28 days apart, on a fresh day (not after Mon gym).",
+      "history": []
+    },
+    "zones": {
+      "note": "Percent of FTP. Until FTP is tested, ride hard intervals by RPE and use HR as sanity check (indoor sessions log avg HR).",
+      "Z2_endurance": "56-75%",
+      "tempo": "76-87%",
+      "sweet_spot": "88-94%",
+      "threshold": "95-105%",
+      "vo2max": "106-120%"
+    },
+    "levels": {
+      "note": "TrainerRoad-style progression levels: index into each session's ordered ladder (1 = first rung). Weekly review moves them: completed all intervals at target power/RPE <= 8 -> +1 next time; partial -> hold; failed or 2+ week cycling gap -> -1.",
+      "vo2max": 1,
+      "threshold": 1
+    },
+    "phase": {
+      "current": "base",
+      "note": "Rotate emphasis every 4-8 weeks (no races planned). base: Thu sweet-spot/threshold progresses, Tue VO2max stays at current level (maintenance dose). build: Tue VO2max progresses, Thu holds at threshold. Long ride stays Z1-Z2 year-round.",
+      "outdoor": "No power meter outdoors: Saturday long ride is HR + feel (conversational = Z2). Don't judge outdoor rides by power."
+    }
+  },
   "files": {
     "workoutLog": "people/denis/workout_log.md",
     "skillState": "people/denis/calisthenics_status.md"
@@ -98,11 +124,14 @@
       "kind": "endurance",
       "label": "Cycling — VO2max / hill repeats",
       "purpose": "Handle steep climbs, surges, and repeated hard gravel efforts.",
-      "options": [
-        "5 × 3 min hard / 3 min easy",
-        "6 × 4 min hard / 4 min easy",
-        "8–10 × 60–90 s uphill hard",
-        "3 × 10 min: 30 s hard / 90 s moderate"
+      "progression": "Ordered ladder — do the rung at cycling.levels.vo2max (total hard minutes: 15 → 18 → 20 → 24 → 27 → ~25 high-density). Power @ 106–120% FTP; by RPE 9 on the last interval until FTP is set.",
+      "ladder": [
+        "L1: 5 × 3 min @ 110–115% / 3 min easy",
+        "L2: 6 × 3 min @ 110–115% / 3 min easy",
+        "L3: 5 × 4 min @ 108–112% / 4 min easy",
+        "L4: 6 × 4 min @ 108–112% / 4 min easy",
+        "L5: 3 × 10 min: 30 s @ 120%+ / 90 s moderate",
+        "L6: 8–10 × 90 s uphill @ 115–120% / 2.5 min easy"
       ],
       "fueling": "TKD: 15–25 g maltodextrin in water 15–30 min before the hard block.",
       "prep": "Hip flexor stretch 30 s/side + leg swings 10/side (~2 min)."
@@ -111,11 +140,13 @@
       "kind": "endurance",
       "label": "Cycling — Threshold / sweet spot",
       "purpose": "Improve sustained gravel pace and climbing power.",
-      "options": [
-        "3 × 12–15 min sweet spot",
-        "4 × 8 min threshold",
-        "2 × 20 min controlled threshold",
-        "4 × 8 min low-cadence strength endurance @ 60–70 rpm"
+      "progression": "Ordered ladder — do the rung at cycling.levels.threshold (work minutes: 36 → 45 → 32@higher → 40 → 45). Sweet spot 88–94% FTP, threshold 95–100%; by RPE 7–8 sustained until FTP is set. Low-cadence variant (60–70 rpm) can replace any rung 1:1 for gravel-specific strength endurance.",
+      "ladder": [
+        "L1: 3 × 12 min sweet spot / 3 min easy",
+        "L2: 3 × 15 min sweet spot / 3 min easy",
+        "L3: 4 × 8 min threshold / 4 min easy",
+        "L4: 2 × 20 min threshold / 5 min easy",
+        "L5: 3 × 15 min threshold / 5 min easy"
       ],
       "fueling": "TKD: 15–25 g maltodextrin in water 15–30 min before.",
       "prep": "Hip flexor stretch 30 s/side + leg swings 10/side (~2 min)."

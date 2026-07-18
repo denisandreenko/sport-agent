@@ -409,6 +409,16 @@ function renderSessionBody() {
   } else if (s.kind === 'endurance') {
     if (s.purpose) html += `<div class="note"><b>Purpose:</b> ${esc(s.purpose)}</div>`;
     if (s.options) html += `<ul class="opts">${s.options.map(o => `<li>${esc(o)}</li>`).join('')}</ul>`;
+    if (s.ladder) {
+      const lvlKey = currentType === 'CYCLING_VO2MAX' ? 'vo2max' : (currentType === 'CYCLING_THRESHOLD' ? 'threshold' : null);
+      const lvl = lvlKey ? (P.cycling?.levels?.[lvlKey] || 1) : null;
+      const ftp = P.cycling?.ftp?.watts;
+      html += `<ul class="opts">${s.ladder.map((o, i) => {
+        const cur = lvl !== null && i === lvl - 1;
+        return `<li${cur ? ' style="font-weight:600"' : ' style="opacity:.55"'}>${cur ? '▶ ' : ''}${esc(o)}</li>`;
+      }).join('')}</ul>`;
+      if (lvl !== null) html += `<div class="note">📈 Current level: L${lvl}${ftp ? ` · FTP ${ftp} W` : ' · FTP not tested yet — ride by RPE (Zwift Ramp Test pending)'}</div>`;
+    }
     if (s.prep) html += `<div class="note">🔧 Prep: ${esc(s.prep)}</div>`;
     if (s.fueling) html += `<div class="note">⛽ ${esc(s.fueling)}</div>`;
     html += `<div class="row2" style="margin-top:8px">
