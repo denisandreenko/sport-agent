@@ -90,3 +90,22 @@ Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set
 | Side plank | 30/30 | — | |
 
 ---
+
+## 2026-07-20 | GYM_A
+- sleep: 4/5
+- soreness: 3/5
+- energy: 3/5
+- motivation: 3/5
+- rpe: 5/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 8/8/8 | 8kg | |
+| Knee push-up | 6/6/6 | BW | |
+| Assisted pull-up | 8/5/5 | 2 bands (G+R) | |
+| Glute bridge / hip thrust | 15/15/15 | 10kg | |
+| Sit-ups | 15/15 | 2kg/hand | |
+| Plank | 40/30 | — | |
+
+---
