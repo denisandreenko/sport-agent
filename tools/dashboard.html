@@ -472,8 +472,22 @@ async function saveEntry() {
     msg.textContent = 'Saving…';
     const fresh = await readRepoFile(P.files.workoutLog);   // re-read to get current sha
     let content = fresh.text.replace(/\s*$/, '\n');
-    content += `\n${buildEntry()}\n---\n`;
-    await commitFile(P.files.workoutLog, content, fresh.sha, `Log ${currentType} — ${P.name} (dashboard)`);
+    const entry = buildEntry();
+    const date = $('entry-date').value.trim() || todayISO();
+    const header = `## ${date} | ${currentType}`;
+    const idx = content.indexOf(`\n${header}\n`);            // real entries only (template header in comments has no real date)
+    let action = 'Log';
+    if (idx !== -1) {
+      // upsert: same date + session type already logged → replace that block instead of appending
+      const start = idx + 1;                                  // start of the header line
+      const endMarker = content.indexOf('\n---', start);      // entry terminator
+      const end = endMarker !== -1 ? endMarker + 4 : content.length;
+      content = content.slice(0, start) + entry + '\n---' + content.slice(end);
+      action = 'Update';
+    } else {
+      content += `\n${entry}\n---\n`;
+    }
+    await commitFile(P.files.workoutLog, content, fresh.sha, `${action} ${currentType} — ${P.name} (dashboard)`);
     logContent = content;
     $('entry-rpe').value = ''; $('entry-notes').value = '';
     renderSessionBody();               // refresh "last load" values from the new entry
