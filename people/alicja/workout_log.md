@@ -119,6 +119,6 @@ Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set
 
 ### Endurance
 - duration: 17 minmin
-- notes: 10 min run and 6 x 40 m sprint
+- notes: 10 min run and 8 x 40 m sprint
 
 ---
