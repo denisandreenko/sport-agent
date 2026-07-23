@@ -122,3 +122,24 @@ Reps = actual reps per set, separated by "/" (e.g. 10/9/8 = set1 10, set2 9, set
 - notes: 10 min run and 8 x 40 m uphill sprint
 
 ---
+
+## 2026-07-23 | GYM_B
+- sleep: 4/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 4/5
+- rpe: 5/10
+- notes: I felt pain in my weeker knee (left) during reverse lunge (when my left leg was in back).
+I did a bit different exercise instead of dumbbell row because I had different machine.
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 8/8/8 | 4kg | |
+| Dumbbell row | 12/12/12 | 5kg | |
+| Incline / knee push-up | 6/6/6 | — | |
+| DB shoulder press (seated) | 12/12 | 2,5 kg | |
+| Dead bug | 8/8 | 2 kg | |
+| Side plank | 30/30 | — | |
+
+---
