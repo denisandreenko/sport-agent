@@ -10,7 +10,7 @@
 
 1. **Activation (~3 min):** single-leg glute bridge (3 s hold at top) **10/side**; Copenhagen side plank (bent knee) **1 × 20–30 s/side**.
 2. **Hack squat:** 3 × 6–8 @ RPE 7–8 (2–3 min rest) — *keep RPE ≤ 8: Tuesday is VO2max. Machine load ≠ barbell squat.*
-3. **Bench press:** 3 × 5–6 (2–3 min rest) — *start ~10% below prior flat bench (e.g. ~75 kg if 82.5 was grind).*
+3. **Bench press:** 3 × 5–6 (2–3 min rest) — *re-entry logic: start ~10% below a prior grinding flat bench. Current working load is the `stub` in `data.json` — don't restate it here.*
 4. **Single-leg hip thrust:** 3 × 10–12/leg (90 s) — *weeks 1–2: bodyweight; from week 3 add bar 20–40 kg as tolerated.*
 5. **Chin-ups:** 3 × 6–8 (2 min rest) — *bodyweight or light load to start.*
 6. **Seated leg curl:** 2 × 12–15 (60 s) — *start ~40–45 kg if prior ~50 kg.*

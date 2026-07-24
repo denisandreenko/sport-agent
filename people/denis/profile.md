@@ -6,17 +6,17 @@ Body fat: ~11%
 Inseam (inner leg): 91 cm  
 Foot size: 305 mm (~EU 48)  
 Diet: ketogenic  
-Primary goal: balanced hypertrophy, strength, mobility, gravel cycling performance, and calisthenics skills.
+Primary goal: see `data.json` `goals` (priority-ordered).
 
 # Current Transition
 
 *Previously a triathlete (3× gym, VO2max/threshold run+cycle, long ride Saturdays, 2–3× swim/week). Now transitioning away from triathlon.*
 
-I am moving away from triathlon and toward:
-1. Gravel cycling as the main endurance sport
-2. Calisthenics skill development
-3. Maintaining or improving strength and hypertrophy
-4. Maintaining mobility and general athleticism
+I am moving away from triathlon and toward gravel cycling as the main endurance sport, calisthenics
+skill development, and maintaining strength, hypertrophy and mobility.
+
+**Priority order lives in `data.json` `goals` — not here.** It governs what a plan protects and what
+gets cut first under fatigue, so there is exactly one copy of it.
 
 # Training Capacity
 

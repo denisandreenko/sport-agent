@@ -17,6 +17,8 @@ after a missed schedule. Note it in one line at the top of the output, and ancho
 the "next week" plan to the intended Sunday, not to the current date.
 
 ## Files to read
+First: STATUS.md — short-lived open items (pending FTP test, paused athletes, device issues). Anything relevant there must be reflected in the review, and resolved items should be called out so the file can be pruned.
+
 Shared: shared/recommendation_protocol.md, shared/training_principles.md
 Per person (people/denis/ and people/alicja/): data.json (goals in priority order, weekly template, session targets, `mesocycle` state), workout_log.md (newest at bottom), training_plan.md. Denis extra: calisthenics_status.md (SKILL_STATE), gym_training_plan.md, the `cycling` section of data.json (FTP, zones, progression levels, phase), and training_block.md if an active block exists. Alicja extra: gym_training_plan.md (progression ladders), running_plan.md (phases), mobility_splits.md.
 

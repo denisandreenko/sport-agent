@@ -52,9 +52,9 @@
       "exercises": [
         { "name": "Goblet squat", "target": "3×8–12", "stub": "8" },
         { "name": "Knee push-up", "target": "3×6–10", "stub": "BW" },
-        { "name": "Assisted pull-up", "target": "3×5–8", "stub": "band" },
-        { "name": "Glute bridge / hip thrust", "target": "3×10–15", "stub": "BW" },
-        { "name": "Sit-ups", "target": "2×12–15", "stub": "BW" },
+        { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (G+R)" },
+        { "name": "Glute bridge / hip thrust", "target": "3×10–15", "stub": "10" },
+        { "name": "Sit-ups", "target": "2×12–15", "stub": "2 kg/hand" },
         { "name": "Plank", "target": "2×20–40 s", "stub": "BW" }
       ],
       "mobility": "Daily mobility minimum (~8–10 min) still applies."
@@ -64,11 +64,11 @@
       "label": "Gym B — Full body",
       "note": "Keep 2–3 reps in reserve. Same warm-up as Gym A.",
       "exercises": [
-        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "BW" },
-        { "name": "Dumbbell row", "target": "3×8–12", "stub": "6" },
+        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "4" },
+        { "name": "Dumbbell row", "target": "3×8–12", "stub": "5" },
         { "name": "Incline / knee push-up", "target": "3×6–10", "stub": "BW" },
-        { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "4" },
-        { "name": "Dead bug", "target": "2×8/side", "stub": "BW" },
+        { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "2.5" },
+        { "name": "Dead bug", "target": "2×8/side", "stub": "2" },
         { "name": "Side plank", "target": "2×15–30 s/side", "stub": "BW" }
       ],
       "mobility": "Daily mobility minimum (~8–10 min) still applies."

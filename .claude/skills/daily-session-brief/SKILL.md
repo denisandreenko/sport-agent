@@ -18,6 +18,7 @@ missed schedule. Say so in one line at the top of the output, and brief for the 
 actually built for rather than silently briefing a different day.
 
 ## Files to read (in this order — per shared/recommendation_protocol.md)
+0. STATUS.md — open items that change today's brief (pending FTP test, paused training)
 1. people/denis/data.json — weekly template (`week`, keyed 0=Sun..6=Sat), session definitions with exercises/targets, `cycling` section (FTP, zones, progression levels, phase), nutrition fueling rules, supplements
 2. shared/training_principles.md — readiness rule, removal hierarchy, deload
 3. people/denis/workout_log.md — newest entries at the bottom

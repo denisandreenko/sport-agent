@@ -60,5 +60,7 @@ Progress sit-ups and planks by adding reps/time first, then harder variations (d
 
 - **Double progression:** add reps within the range on all sets, then add a little load (or move to a harder ladder stage for bodyweight moves).
 - Increase load in small jumps (1–2 kg on DBs).
-- **Deload / easy week** every ~4–6 weeks or when run-down: cut a set per exercise, keep technique.
+- **Deload / easy week:** cadence is the `mesocycle` object in `data.json` (5+1 — every 6th completed
+  week), or earlier when run-down. Cut a set per exercise at the same loads, keep technique, keep
+  mobility in full.
 - If a movement causes joint pain (not muscle effort), regress a stage and check form.

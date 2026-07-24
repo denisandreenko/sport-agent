@@ -1,11 +1,15 @@
 # Alicja — Workout Log
 
-Manual log (no wearable). Copy the template below for each session. Keep one blank line between entries.
+No wearable — readiness is subjective. Entries are normally written by `tools/dashboard.html`; the
+template below is for logging by hand. Keep one blank line between entries.
 
 <!-- FORMAT SPEC
-SESSION_TYPE: GYM_A | GYM_B | RUN_EASY | RUN_WALK | RUN_INTERVALS | MOBILITY | SPLITS | REST
-Subjective readiness (morning): rate sleep, soreness, energy, motivation each 1–5.
-READINESS RULE (assistant applies): if 2+ are poor → easy day (keep mobility, drop intensity). If sleep was clearly bad → rest or easy walk.
+SESSION_TYPE: any ID from data.json logSessionTypes
+Subjective readiness (morning): rate sleep, soreness, energy, motivation each 1–5 (5 = best; ≤2 = poor).
+READINESS RULE (assistant applies — full rule in shared/training_principles.md):
+  0 poor  → 🟢 train as planned
+  1 poor  → 🟡 keep the session, cut top-end volume ~20%, hold loads
+  2+ poor → 🔴 easy/recovery only (keep mobility), apply the removal hierarchy
 -->
 
 <!-- ENTRY TEMPLATE — copy and fill in:

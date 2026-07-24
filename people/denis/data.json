@@ -197,7 +197,7 @@
   },
   "nutrition": {
     "style": "Ketogenic — very low carbohydrate, high fat, adequate protein. 3 meals/day.",
-    "totals": { "protein": 209.6, "carbs": 37, "fat": 247.8, "fiber": 27.6, "kcal": 3380 },
+    "totals": { "protein": 212.8, "carbs": 37, "fat": 247.8, "fiber": 27.6, "kcal": 3380 },
     "meals": [
       {
         "name": "Meal 1",
@@ -225,7 +225,7 @@
         "items": [
           { "item": "L-reuteri yogurt", "qty": "130 g", "p": 4.2, "c": 0.7, "f": 4.2, "fiber": 2.6, "kcal": 56 },
           { "item": "Cottage cheese 9%", "qty": "300 g", "p": 51, "c": 10.2, "f": 27, "fiber": 0, "kcal": 489 },
-          { "item": "Cocoa powder", "qty": "15 g", "p": 0, "c": 2.4, "f": 1.7, "fiber": 4.8, "kcal": 46 },
+          { "item": "Cocoa powder", "qty": "15 g", "p": 3.2, "c": 2.4, "f": 1.7, "fiber": 4.8, "kcal": 46 },
           { "item": "Chia", "qty": "20 g", "p": 3.3, "c": 1.5, "f": 6.1, "fiber": 6.9, "kcal": 89 },
           { "item": "Pumpkin seeds", "qty": "10 g", "p": 2.5, "c": 1.3, "f": 4.6, "fiber": 0.5, "kcal": 57.7 }
         ],

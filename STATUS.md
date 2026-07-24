@@ -3,7 +3,21 @@
 Short-lived state that doesn't belong in `data.json`. Keep this pruned — if something here is stale,
 delete it. The Sunday review may reference it; nothing reads it automatically.
 
-_Last updated: 2026-07-24_
+## Flagged for review — not changed
+
+Found in a consistency audit. Each is a health or judgement decision, so the files were left as they
+are. Resolve at the next monthly nutrition review or with a clinician, then delete these entries.
+
+- **Zn:Cu ratio in the magnesium stack is 15:1, not the ~10:1 target.** Both athletes take
+  `320 mg Mg + 30 mg Zn + 2 mg Cu + 4.2 mg B6` (`data.json` `nutrition.supplements`), while
+  `shared/keto_nutrition_reference.md` sets ~10:1 and `monthly-nutrition-review` audits against it.
+  Either the copper is low for that zinc dose, or the 10:1 target is the thing to revise. Note 30 mg
+  zinc is also close to the 40 mg UL, and this dose is **shared despite a 35 kg bodyweight
+  difference** — the more pressing question is Alicja's 52 kg.
+- **Denis's protein now reads 212.8 g/day**, above the 209 g top of the 1.8–2.4 g/kg band the monthly
+  review checks (2.45 g/kg at 87 kg). This is a *correction*, not a diet change: the cocoa powder entry
+  had `"p": 0` where the shared food table gives 21 g/100 g, so the total was understated by ~3 g and
+  had been sitting just inside the band. Decide whether to accept 2.45 g/kg or trim elsewhere.
 
 ## Denis
 

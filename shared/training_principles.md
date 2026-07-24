@@ -57,7 +57,8 @@ Aerobic durability and fat oxidation. Mostly easy, conversational. Fuel and hydr
 - Accessories use double progression: add reps within range on all sets, then increase load.
 - Keep most working sets at RPE 7–8 (novices: leave 2–3 reps in reserve and prioritize technique).
 - Don't let leg fatigue from the gym blunt key endurance sessions — separate heavy leg days from hard cardio.
-- Deload every 4th week.
+- Deload cadence is **per person** — read `mesocycle.pattern` in that person's `data.json` (Denis 3+1,
+  Alicja 5+1). Don't assume a 4-week cycle for everyone.
 
 ## Calisthenics / skill work
 
