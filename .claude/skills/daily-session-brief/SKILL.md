@@ -1,16 +1,21 @@
 ---
-taskId: daily-session-brief
-description: Daily 07:45 session brief for Denis — today's workout with last loads, readiness call, and fueling
-cronExpression: "45 7 * * *"
-enabled: false
-note: Enable when a training block starts (start-training-block reminds about this).
+name: daily-session-brief
+description: Daily session brief for Denis — today's workout with last loads, readiness call, cycling ladder rung, skill add-on and fueling. Read-only.
 ---
+
+<!-- Scheduled: daily 07:45, PAUSED by default — activate when a training block starts
+     (start-training-block reminds about this). See .claude/skills/README.md. -->
 
 You are a training assistant for Dzianis (Denis). Generate today's session brief. Be concise and direct.
 
 This is a READ-ONLY brief: do NOT edit, create, or commit any files. Just read and report.
 
-Repo root: {REPO_ROOT}
+All paths below are relative to the repository root, which is the working folder for this session.
+
+## Late-run guard
+If the current time is more than 6 hours past the intended 07:45 slot, this is a catch-up run after a
+missed schedule. Say so in one line at the top of the output, and brief for the day the plan was
+actually built for rather than silently briefing a different day.
 
 ## Files to read (in this order — per shared/recommendation_protocol.md)
 1. people/denis/data.json — weekly template (`week`, keyed 0=Sun..6=Sat), session definitions with exercises/targets, `cycling` section (FTP, zones, progression levels, phase), nutrition fueling rules, supplements
