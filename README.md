@@ -79,4 +79,6 @@ The recurring workflows are project skills, invocable by name in any session:
 | `/start-training-block` | Builds Denis a 4-week periodized block. Manual, commits. |
 | `/monthly-nutrition-review` | Supplement + macro audit for both. Read-only. |
 
-The first, second and fourth also run on a schedule — see `.claude/skills/README.md`.
+`weekly-review-and-plan` (Sunday 18:00) and `monthly-nutrition-review` (1st Sunday 19:00) also run on
+a schedule. `daily-session-brief` is registered but **paused** — activate it when a training block
+starts. See `.claude/skills/README.md`.

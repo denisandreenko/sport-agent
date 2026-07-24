@@ -12,6 +12,9 @@
       "Bash(git add people/denis/calisthenics_status.md)",
       "Bash(git add people/denis/training_block.md)",
       "Bash(git add people/denis/profile.md)",
+      "Bash(git pull --rebase)",
+      "Bash(git diff)",
+      "Bash(git log)",
       "Bash(git commit *)"
     ],
     "deny": [

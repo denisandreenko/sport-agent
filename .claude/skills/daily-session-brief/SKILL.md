@@ -22,7 +22,7 @@ actually built for rather than silently briefing a different day.
 2. shared/training_principles.md — readiness rule, removal hierarchy, deload
 3. people/denis/workout_log.md — newest entries at the bottom
 4. people/denis/training_plan.md — fatigue-stacking guardrails
-5. people/denis/calisthenics_status.md — SKILL_STATE current levels (ladder definitions in data.json skills.ladders)
+5. people/denis/calisthenics_status.md — SKILL_STATE current levels. Ladder level NAMES are in data.json skills.ladders; the per-level LEVEL-UP TARGETS are in shared/calisthenics_ladders.md
 6. If a block is active (people/denis/training_block.md exists and today is within its date range): read it and use this week's targets instead of the defaults in data.json
 
 ## Step 1 — Today's session
@@ -52,7 +52,7 @@ CYCLING: purpose + the exact ladder rung for today from data.json — session `l
 REST: short recovery checklist.
 
 ### Skill add-on (gym days only)
-Use the `addon` line from today's session in data.json plus current levels from SKILL_STATE. Name the specific drill at the CURRENT level and the target to hit before leveling up (from data.json skills.ladders). 10–15 min, low-fatigue, technical, never to failure.
+Use the `addon` line from today's session in data.json plus current levels from SKILL_STATE. Name the specific drill at the CURRENT level and the target to hit before leveling up (targets are in shared/calisthenics_ladders.md, keyed by ladder and level). 10–15 min, low-fatigue, technical, never to failure.
 
 ### Pre-session supplements
 From data.json nutrition.supplements: only rows whose timing is pre-gym / pre-endurance / pre-calisthenics. Add TKD carbs line if today is hard cycling.

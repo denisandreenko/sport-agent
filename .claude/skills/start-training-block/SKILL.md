@@ -37,7 +37,7 @@ Per week output:
 - Table: Day | Session | Key focus | Intensity target | Notes (base it on data.json `week`; respect Mon→Tue and Fri→Sat guardrails)
 - Gym load tables: Exercise | Wk1 | Wk2 | Wk3 | Wk4 — Wk1 from last logged loads (else data.json `stub`)
 - Cycling: interval targets per week from the current ladder rung in data.json `cycling` (progressing volume along the ladder, watt targets from FTP × zones; RPE if FTP is null)
-- Calisthenics: per primary skill, drill + weekly progression using CURRENT SKILL_STATE levels and the ladder targets in data.json skills.ladders
+- Calisthenics: per primary skill, drill + weekly progression using CURRENT SKILL_STATE levels and the per-level targets in shared/calisthenics_ladders.md
 - Fueling: which sessions need TKD carbs (data.json nutrition.fueling); calorie note for Wk2–3. Reference only — do NOT edit nutrition data.
 
 ## Step 5 — Save and update status

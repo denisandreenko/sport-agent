@@ -12,8 +12,13 @@ This repository, not memory. Never rely on remembered loads, doses, levels or da
   levels), `workout_log.md` (newest entries at the bottom), `training_block.md` when a block is active.
 - `shared/recommendation_protocol.md` — how recommendations are produced, and in what input order.
 - `shared/training_principles.md` — readiness rule, removal hierarchy, deload rules.
+- `shared/calisthenics_ladders.md` — the **level-up targets** for every skill ladder. `data.json`
+  `skills.ladders` holds only the level *names*; the target that has to be met to advance a level is
+  here. Never judge a level-up from `data.json` alone.
 - `shared/keto_nutrition_reference.md` — the shared keto framework.
+- `shared/assistant_instructions.md` — longer-form working notes on operating this repo.
 - `people/index.json` — the roster. `people/_template/` — copy this to add a person.
+- `STATUS.md` — short-lived open items (pending FTP test, etc.). Check it before planning.
 
 Two athletes: **Denis** (me) and **Alicja**. Read the right one; several supplement doses are shared
 between us despite a 35 kg bodyweight difference.
