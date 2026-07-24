@@ -1,14 +1,20 @@
 ---
-taskId: weekly-review-and-plan
-description: Sunday 18:00 weekly review for Denis + Alicja — assess the week, progress loads/phases, plan next week
-cronExpression: "0 18 * * 0"
-enabled: true
-note: The engine of the workflow — the only task that commits on a schedule. Run once manually after restore to pre-approve tools.
+name: weekly-review-and-plan
+description: Sunday weekly review for Denis and Alicja — assess the week, progress gym loads, calisthenics and cycling levels, maintain mesocycle counters and deloads, plan next week. Commits to data.json and calisthenics_status.md, so run it only when explicitly asked by name or on schedule.
+disable-model-invocation: true
 ---
+
+<!-- Scheduled: Sunday 18:00, Active. The engine of the workflow — the only scheduled task that
+     commits. Run once manually after setup to pre-approve tools. See .claude/skills/README.md. -->
 
 You are a training assistant for two athletes: Dzianis (Denis) and Alicja. Perform the Sunday weekly review for BOTH, per shared/recommendation_protocol.md. Be direct and practical — use tables.
 
-Repo root: {REPO_ROOT}
+All paths below are relative to the repository root, which is the working folder for this session.
+
+## Late-run guard
+If the current time is more than 6 hours past the intended Sunday 18:00 slot, this is a catch-up run
+after a missed schedule. Note it in one line at the top of the output, and anchor the 7-day window and
+the "next week" plan to the intended Sunday, not to the current date.
 
 ## Files to read
 Shared: shared/recommendation_protocol.md, shared/training_principles.md
@@ -40,7 +46,7 @@ Subjective ratings (sleep/soreness/energy/motivation, ≤2 = poor) and RPE acros
 
 ### Progression
 - Denis gym: per session, key compound loads vs prior week (↑/→/↓). Top of rep range hit at target RPE → "+load next session" and update the `stub` in data.json. No load progression into a deload week.
-- Denis calisthenics: for skills worked this week, check exit criteria (data.json skills.ladders targets). If met with clean form → advance SKILL_STATE in calisthenics_status.md (status block + snapshot table) and note the next drill.
+- Denis calisthenics: for skills worked this week, check exit criteria (per-level targets in shared/calisthenics_ladders.md; level names in data.json skills.ladders). If met with clean form → advance SKILL_STATE in calisthenics_status.md (status block + snapshot table) and note the next drill.
 - Denis cycling (TrainerRoad-style, state in data.json `cycling`): per quality session (Tue VO2max, Thu threshold), check the logged session against the current ladder rung (`cycling.levels` → session `ladder`). All intervals completed at target power/RPE ≤ 8 → level +1 (update data.json); partial → hold; failed or 2+ week cycling gap → level −1. Only the phase-emphasized session progresses (`cycling.phase`: base → threshold ladder, build → VO2max ladder); the other holds as a maintenance dose. Rotate `phase.current` after 4–8 weeks in one phase (1–2 mesocycles). FTP retest flag: if FTP is null, is >8 weeks old, or interval power is up at same RPE/HR two weeks running, or the current threshold rung feels ≤ RPE 6 → recommend a Zwift Ramp Test this week (fresh day, not after Mon gym) instead of advancing further. When he reports a result, update `cycling.ftp` (old value to `history`). Guardrails respected (Mon→Tue, Fri→Sat)? Saturday outdoor ride is judged by HR/feel only — no power meter outdoors.
 - Alicja gym: reps within range on all sets → add reps; top of range with 2+ RIR → small load increase or next ladder stage (gym_training_plan.md ladders). Technique first. No progression into a deload week.
 - Alicja running: check phase criteria in running_plan.md (base wks 1–3 → threshold wks 4–7 → VO2max 8+). Recommend phase transition only if the current phase's sessions have felt easy and consistent. Fri stays easy if Thu gym left legs heavy. Running phases progress independently of the deload counter, but a deload week holds both runs at easy Z2.
@@ -52,7 +58,7 @@ Only when NO training_block.md is active and next week is NOT a deload. Recommen
 - No pain notes and no red days in the past 2 weeks
 - Loads/levels progressing or stable (not regressing)
 - FTP tested and current (≤8 weeks old)
-If all criteria pass, add ONE line to his section: "📦 Block-ready: last N weeks were clean and progressing — if the next 4 weeks are clear of travel/disruption, run start-training-block and enable the daily brief." List any single failed criterion in brackets instead (e.g. "[not block-ready: FTP untested]") only if 3 of 4 pass; otherwise say nothing.
+If all criteria pass, add ONE line to his section: "📦 Block-ready: last N weeks were clean and progressing — if the next 4 weeks are clear of travel/disruption, run /start-training-block and activate the daily-session-brief task." List any single failed criterion in brackets instead (e.g. "[not block-ready: FTP untested]") only if 3 of 4 pass; otherwise say nothing.
 
 ## Independent review (subagent, Denis only, skip if his week was routine)
 Spawn a subagent: "You are a sports science reviewer. Athlete: 87 kg male, ketogenic, training gravel cycling (priority 1) + strength/hypertrophy + calisthenics. Week's data: [paste his sessions + readiness/RPE trend]. Answer: (1) load appropriate/too high/too low? (2) adjustments for next week? 3–5 sentences, no questions." Incorporate; note disagreement.
@@ -64,9 +70,6 @@ Table: Day | Session | Key focus | Load/intensity note. Rules:
 - Pain flagged → hold load / regress a stage / check form
 - Denis cycling rows: name the exact ladder rung (e.g. "Threshold L2: 3×15 min sweet spot") and watt targets if FTP is set; include a Ramp Test row if a retest was flagged
 - Preserve the weekly template from data.json unless there's a reason to deviate; explain deviations in one line
-
-## Automation drift check (silent unless drift found)
-Call list_scheduled_tasks to get each task's live SKILL.md path. For every mirror in {REPO_ROOT}/automation/tasks/*.md: compare the prompt body (text after frontmatter; substitute the mirror's {REPO_ROOT} placeholder with the actual repo root; ignore whitespace-only differences) against the live SKILL.md body. All match → output nothing. Any divergence → append ONE line to the end of the review: "⚠️ Automation drift: <taskId(s)> differ from automation/tasks/ mirrors — reconcile (the git mirror is source of truth)." Also flag mirrors without a live task, and live tasks without a mirror. Do NOT auto-edit either side — reconciliation is a human decision.
 
 ## Output
 Markdown, two clearly separated sections (Denis / Alicja), under ~700 words total. Show each person's mesocycle position (e.g. "Week 2 of 3+1 — deload in 2 weeks"). End with one sentence per person: the most important adjustment for next week and why.

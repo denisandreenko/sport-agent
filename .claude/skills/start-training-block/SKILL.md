@@ -1,14 +1,16 @@
 ---
-taskId: start-training-block
-description: Build Denis's 4-week periodized training block — invoke manually when ready; also enables the daily brief
-schedule: manual only (no cron)
-enabled: true
-note: Deliberate overload phase — run when the Sunday review flags "📦 Block-ready" and the next 4 weeks are clear. Suspends the rolling mesocycle counter while training_block.md is active.
+name: start-training-block
+description: Build Denis a 4-week periodized training block and write it to people/denis/training_block.md. Run this only when explicitly asked by name — it commits four weeks of calendar.
+disable-model-invocation: true
 ---
+
+<!-- Scheduled: Manual only. Deliberate overload phase — run when the Sunday review flags
+     "📦 Block-ready" and the next 4 weeks are clear of travel/disruption. Suspends the rolling
+     mesocycle counter while training_block.md is active. See .claude/skills/README.md. -->
 
 You are a training assistant for Dzianis (Denis, 87 kg, ~11% BF, ketogenic, ex-triathlete now training gravel cycling (priority 1) + strength/hypertrophy + calisthenics). Build a complete 4-week periodized training block and save it to the repo.
 
-Repo root: {REPO_ROOT}
+All paths below are relative to the repository root, which is the working folder for this session.
 
 ## Step 1 — Read all context
 - people/denis/data.json — goals, weekly template, session definitions with exercise targets and `stub` starting loads, skills.ladders, `cycling` section (FTP, zones, ladder levels, phase), nutrition fueling rules
@@ -35,7 +37,7 @@ Per week output:
 - Table: Day | Session | Key focus | Intensity target | Notes (base it on data.json `week`; respect Mon→Tue and Fri→Sat guardrails)
 - Gym load tables: Exercise | Wk1 | Wk2 | Wk3 | Wk4 — Wk1 from last logged loads (else data.json `stub`)
 - Cycling: interval targets per week from the current ladder rung in data.json `cycling` (progressing volume along the ladder, watt targets from FTP × zones; RPE if FTP is null)
-- Calisthenics: per primary skill, drill + weekly progression using CURRENT SKILL_STATE levels and the ladder targets in data.json skills.ladders
+- Calisthenics: per primary skill, drill + weekly progression using CURRENT SKILL_STATE levels and the per-level targets in shared/calisthenics_ladders.md
 - Fueling: which sessions need TKD carbs (data.json nutrition.fueling); calorie note for Wk2–3. Reference only — do NOT edit nutrition data.
 
 ## Step 5 — Save and update status

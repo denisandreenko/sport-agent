@@ -8,9 +8,13 @@ adding another is copying a folder — see `people/_template/README.md`.
 ```
 athlete-training/
 ├── README.md                       ← this file
-├── automation/                     ← Claude scheduled-task mirrors + restore guide
-│   ├── README.md                   ← how to restore the workflow on a new machine
-│   └── tasks/                      ← one file per scheduled task (frontmatter + prompt)
+├── CLAUDE.md                       ← standing instructions loaded every session
+├── STATUS.md                       ← short-lived open items (FTP test pending, etc.)
+├── MIGRATION.md                    ← Cowork → Claude Code migration runbook
+├── .claude/
+│   ├── settings.json               ← tool permissions (which git commands are pre-approved)
+│   └── skills/                     ← the four recurring workflows; each SKILL.md is the live prompt
+│       └── README.md               ← how they fit together + restore steps for a new machine
 │
 ├── shared/                         ← methodology & reference (applies to everyone)
 │   ├── assistant_instructions.md   ← how the AI assistant works with this repo
@@ -62,5 +66,19 @@ token** (repo contents read/write) entered via ⚙︎ — stored only in that br
 
 ## Using the assistant
 
-Say **whose** plan you mean. The assistant follows `shared/assistant_instructions.md` and
-generates recommendations per `shared/recommendation_protocol.md`.
+Say **whose** plan you mean. The assistant follows `CLAUDE.md` plus
+`shared/assistant_instructions.md`, and generates recommendations per
+`shared/recommendation_protocol.md`.
+
+The recurring workflows are project skills, invocable by name in any session:
+
+| Command | What it does |
+|---|---|
+| `/daily-session-brief` | Today's session for Denis with last loads, readiness, fueling. Read-only. |
+| `/weekly-review-and-plan` | Sunday review for both athletes; progresses loads and plans next week. Commits. |
+| `/start-training-block` | Builds Denis a 4-week periodized block. Manual, commits. |
+| `/monthly-nutrition-review` | Supplement + macro audit for both. Read-only. |
+
+`weekly-review-and-plan` (Sunday 18:00) and `monthly-nutrition-review` (1st Sunday 19:00) also run on
+a schedule. `daily-session-brief` is registered but **paused** — activate it when a training block
+starts. See `.claude/skills/README.md`.
