@@ -1,14 +1,18 @@
 # Denis — Training Plan
 
-General methodology (readiness, deload, session-type definitions, removal hierarchy, mobility) lives in `shared/training_principles.md`. This file holds Denis's specific weekly structure and priorities.
+General methodology (readiness, deload, session-type definitions, removal hierarchy, mobility) lives in `shared/training_principles.md`. This file holds Denis's specific weekly structure and the reasoning behind it.
 
-## Priorities
+Priority order is `goals` in `data.json`, in order — one copy, because it decides what a plan protects and what gets cut first under fatigue. Running and swimming are optional support below all of it.
 
-1. Gravel cycling performance
-2. Strength and hypertrophy
-3. Calisthenics skills
-4. Mobility
-5. Optional running/swimming for recovery or maintenance
+## Background & capacity
+
+Previously a triathlete (3× gym, VO2max/threshold run and cycle, long ride Saturdays, 2–3 swims/week), now transitioning away from triathlon toward gravel cycling as the main endurance sport plus calisthenics skill work.
+
+Workdays support one main training block around late morning/midday and sometimes a second session in the evening. Gym sessions are ~1 hour. Long endurance sessions are possible at weekends.
+
+Gym emphasis is roughly **30% strength / 70% hypertrophy** — that ratio is why the compounds sit in the 4–8 rep range while accessories run 10–15.
+
+No races or events planned; training is for general performance. No active injuries — plyos, bilateral hip thrust and back squat are available as reintroductions (see `gym_training_plan.md`).
 
 ## Weekly structure template
 
@@ -22,7 +26,7 @@ General methodology (readiness, deload, session-type definitions, removal hierar
 | Saturday | Long gravel ride |
 | Sunday | Recovery, mobility, easy spin/swim/walk, optional easy run |
 
-Cycling session-type definitions and examples are in `shared/training_principles.md`. Gym split detail is in `gym_training_plan.md`; calisthenics focus is in `calisthenics_status.md`.
+Cycling session-type *definitions* are in `shared/training_principles.md`; the actual interval prescriptions are the ordered ladders in `data.json` (`sessions.<ID>.ladder`, current rung in `cycling.levels`). Gym reasoning is in `gym_training_plan.md` and the sessions themselves in `data.json`; calisthenics focus is in `calisthenics_status.md`.
 
 ### Fatigue-stacking guardrails
 

@@ -20,7 +20,7 @@ All paths below are relative to the repository root, which is the working folder
 - people/denis/workout_log.md — baseline loads for all logged exercises, recent readiness/RPE trend
 
 ## Commit scope (important)
-This task creates people/denis/training_block.md and edits people/denis/profile.md (Training Block Status) — nothing else. `git add` ONLY those two files by name; NEVER `git add -A` or `git add .`. `git pull --rebase` before committing.
+This task creates people/denis/training_block.md and edits STATUS.md (Denis's block line) — nothing else. `git add` ONLY those two files by name; NEVER `git add -A` or `git add .`. `git pull --rebase` before committing.
 
 ## Step 2 — Research (2 targeted searches)
 1. Concurrent strength + endurance periodization for a trained athlete (recent evidence).
@@ -41,7 +41,7 @@ Per week output:
 - Fueling: which sessions need TKD carbs (data.json nutrition.fueling); calorie note for Wk2–3. Reference only — do NOT edit nutrition data.
 
 ## Step 5 — Save and update status
-Write the block to people/denis/training_block.md with block start date (today), end date (+28 days), deload week dates, and the key principles from Steps 2–3 at the top. Edit people/denis/profile.md Training Block Status to "Block started: [date]. Week 1 of 4. Deload week: [date]." Commit both per the commit-scope rule.
+Write the block to people/denis/training_block.md with block start date (today), end date (+28 days), deload week dates, and the key principles from Steps 2–3 at the top. Update the Denis section of STATUS.md: replace the "No structured block started" item with "Block active: started [date], week 1 of 4, deload week [date]" so the daily brief and Sunday review both see it. Commit both per the commit-scope rule.
 
 ## Step 6 — Output in conversation
 Confirm saved. Show: Week 1 seven-day table, top 3 focus points, one nutrition-alignment reminder. Finish by reminding Dzianis to enable the daily-session-brief scheduled task now that the block is live.

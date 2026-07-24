@@ -29,7 +29,9 @@ Trim from the top down (least essential first). Each person's `training_plan.md`
 
 ## Deload
 
-Every 4th week (or when fatigue markers accumulate):
+**Cadence is per person** — read `mesocycle.pattern` in that person's `data.json` (Denis 3+1, Alicja
+5+1), counted in *completed* weeks. Fatigue markers can pull a deload earlier; nothing postpones one.
+When a deload week lands:
 
 - Reduce strength volume ~30–40% (drop a set per exercise or cut load ~20%).
 - Reduce interval volume; keep one short intensity touch only if fresh.
@@ -38,13 +40,17 @@ Every 4th week (or when fatigue markers accumulate):
 
 ## Endurance session types
 
+This section defines what each session *type* is for. The **actual prescriptions** are the ordered
+interval ladders in that person's `data.json` (`sessions.<ID>.ladder`, current rung in
+`cycling.levels`) — don't restate rungs here, a shared file shouldn't carry one athlete's session data.
+
 ### VO2max / hill repeats
-Improves top-end aerobic power and ability to repeat hard efforts.
-Examples: 5 × 3 min hard / 3 min easy · 6 × 4 min hard / 4 min easy · 8–10 × 60–90 s hard uphill · 3 × 10 min of 30 s hard / 90 s moderate.
+Improves top-end aerobic power and the ability to repeat hard efforts. Short hard intervals with near-equal
+recovery, or sustained uphill repeats.
 
 ### Threshold / sweet spot
-Improves sustainable pace and climbing/tempo power.
-Examples: 3 × 12–15 min sweet spot · 4 × 8 min threshold · 2 × 20 min controlled threshold.
+Improves sustainable pace and climbing/tempo power. Longer intervals at or just below threshold with
+short recoveries.
 
 ### Long / steady (Z1–Z2)
 Aerobic durability and fat oxidation. Mostly easy, conversational. Fuel and hydrate per `keto_nutrition_reference.md`.

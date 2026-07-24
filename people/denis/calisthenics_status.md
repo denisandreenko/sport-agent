@@ -21,35 +21,20 @@ shrimp_squat: 4/5
 last_reviewed: 2026-06-14
 -->
 
-## Current snapshot (confirmed 2026-06-14)
-
-| Skill | Level | Current stage |
-|---|---|---|
-| Muscle Up | 4 / 5 | Kipping Muscle Up |
-| Planche | 2 / 6 | Frog Stand |
-| Front Lever | 2 / 6 | Advanced Tuck Front Lever |
-| Back Lever | 2 / 5 | Tuck Back Lever |
-| Pistol Squat | 8 / 8 | **Pistol Squat — mastered ✓** |
-| Handstand Push Up | 3 / 5 | Wall Handstand Push Up |
-| V-Sit | 3 / 8 | Tuck L-sit |
-| One Arm Pull Up | 1 / 6 | Pull Up |
-| Human Flag | 2 / 8 | Angle Flag |
-| One Arm Push Up | 3 / 8 | Alligator Push Up |
-| One Arm Handstand | 4 / 11 | Adv. Wall Handstand |
-| Shrimp Squat | 4 / 5 | One Arm Shrimp Squat |
-| Hefesto | 1 / 6 | Korean Dip |
-| Dragon Flag | 5 / 7 | One Leg Dragon Flag |
+Levels are in the SKILL_STATE block above and nowhere else — it used to be mirrored in a snapshot
+table here, which meant every level-up had to be written twice. Stage names for each level come from
+`shared/calisthenics_ladders.md`.
 
 ## Recommended focus (track all 14, actively train ~5)
 
 Several skills are near completion — push those rather than spreading thin. Avoid stacking three straight-arm holds (planche + front lever + back lever): build **Front Lever** now, park the other two. Pistol Squat is done → maintenance only.
 
 **Primary (train now — all near a milestone):**
-1. **Muscle Up** (4/5) — one rung from strict; clean the kip → strict
-2. **Handstand line:** One Arm Handstand (4/11) + Handstand Push Up (3/5) — freestanding handstand, then full wall HSPU
-3. **Front Lever** (2/6) — chosen straight-arm pull; adv. tuck → one leg
-4. **Dragon Flag** (5/7) — one rung from full; strong core carryover
-5. **Shrimp Squat** (4/5) — finish the single-leg set now that pistol is mastered
+1. **Muscle Up** — one rung from strict; clean the kip → strict
+2. **Handstand line:** One Arm Handstand + Handstand Push Up — freestanding handstand, then full wall HSPU
+3. **Front Lever** — chosen straight-arm pull; adv. tuck → one leg
+4. **Dragon Flag** — one rung from full; strong core carryover
+5. **Shrimp Squat** — finish the single-leg set now that pistol is mastered
 
 **Secondary (light touch when fresh):** V-Sit.
 **Parked (tracked only):** Planche, Back Lever, One Arm Pull Up, One Arm Push Up, Human Flag, Hefesto. Promote one when a primary graduates.
@@ -69,4 +54,5 @@ Weekly allocation by gym day (skills **before** fatigue, technical, never to fai
 
 - The `SKILL_STATE` comment block above is the single source of truth for current levels — the dashboard reads it and the assistant edits it on level-up.
 - Advance a level only when the **target** in `shared/calisthenics_ladders.md` is met with clean form, not by calendar.
-- Reassess at the monthly review; note progress in `workout_log.md` under `CALISTHENICS` entries.
+- Reassess at the **Sunday weekly review**, which is what checks exit criteria and advances levels — the
+  monthly review is nutrition-only. Note progress in `workout_log.md` under `CALISTHENICS` entries.

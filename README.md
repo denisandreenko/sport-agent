@@ -10,14 +10,12 @@ athlete-training/
 ├── README.md                       ← this file
 ├── CLAUDE.md                       ← standing instructions loaded every session
 ├── STATUS.md                       ← short-lived open items (FTP test pending, etc.)
-├── MIGRATION.md                    ← Cowork → Claude Code migration runbook
 ├── .claude/
 │   ├── settings.json               ← tool permissions (which git commands are pre-approved)
 │   └── skills/                     ← the four recurring workflows; each SKILL.md is the live prompt
 │       └── README.md               ← how they fit together + restore steps for a new machine
 │
 ├── shared/                         ← methodology & reference (applies to everyone)
-│   ├── assistant_instructions.md   ← how the AI assistant works with this repo
 │   ├── recommendation_protocol.md  ← the recommendation engine spec (inputs → outputs → guardrails)
 │   ├── training_principles.md      ← readiness, deload, session types, removal hierarchy, mobility
 │   ├── calisthenics_ladders.md     ← skill-progression ladder definitions
@@ -28,19 +26,17 @@ athlete-training/
 │   ├── _template/                  ← copy this folder to add a person
 │   ├── denis/
 │   │   ├── data.json               ← ALL structured data: profile, goals, week, sessions, nutrition
-│   │   ├── profile.md              ← prose background (history, capacity, equipment)
 │   │   ├── training_plan.md        ← reasoning: priorities, guardrails, weekly logic
 │   │   ├── gym_training_plan.md    ← gym split detail & progression rules
 │   │   ├── calisthenics_status.md  ← SKILL_STATE (current levels) + focus
 │   │   └── workout_log.md          ← history; logged via dashboard
 │   └── alicja/
 │       ├── data.json
-│       ├── profile.md
 │       ├── training_plan.md
 │       ├── gym_training_plan.md
 │       ├── mobility_splits.md
 │       ├── running_plan.md
-│       └── workout_log.md          ← manual log
+│       └── workout_log.md          ← history; dashboard needs a token on her device
 │
 ├── tools/
 │   └── dashboard.html              ← ONE dashboard for everyone: ?person=<id>
@@ -66,9 +62,8 @@ token** (repo contents read/write) entered via ⚙︎ — stored only in that br
 
 ## Using the assistant
 
-Say **whose** plan you mean. The assistant follows `CLAUDE.md` plus
-`shared/assistant_instructions.md`, and generates recommendations per
-`shared/recommendation_protocol.md`.
+Say **whose** plan you mean. The assistant follows `CLAUDE.md` (loaded automatically every session)
+and generates recommendations per `shared/recommendation_protocol.md`.
 
 The recurring workflows are project skills, invocable by name in any session:
 

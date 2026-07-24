@@ -3,6 +3,26 @@
 Short-lived state that doesn't belong in `data.json`. Keep this pruned — if something here is stale,
 delete it. The Sunday review may reference it; nothing reads it automatically.
 
+## Finishing the Claude Code migration
+
+The repo side is done. These steps are outside the repo, so they have to be done by hand — restore
+detail is in `.claude/skills/README.md`.
+
+- [ ] Create the four stub files in `~/.claude/scheduled-tasks/`, or ask Claude in a Desktop session
+      to set them up
+- [ ] Set schedule / folder / enabled state per the table in `.claude/skills/README.md`
+      (the monthly review's "first Sunday" has no preset — set it conversationally)
+- [ ] Copy the git allow rules from `.claude/settings.json` into `~/.claude/settings.json` too — the
+      Desktop docs name *that* file specifically for scheduled-task sessions. Unverified which one
+      actually applies; if a scheduled run stalls on a git permission, this is why
+- [ ] **Run now** on each task, choosing "always allow" at each prompt, then check the weekly review
+      staged only the files its commit scope permits
+- [ ] Diff and delete the stale dashboard artifact at
+      `~/Documents/Claude/Artifacts/athlete-coach-dashboard/` (two months behind `tools/dashboard.html`)
+- [ ] Delete the old Cowork memory files once this file is confirmed to cover them
+- [ ] Sit through one real Sunday review before deleting the old Cowork tasks — keep them paused, not
+      deleted, until then
+
 ## Flagged for review — not changed
 
 Found in a consistency audit. Each is a health or judgement decision, so the files were left as they
@@ -28,6 +48,11 @@ are. Resolve at the next monthly nutrition review or with a clinician, then dele
   covering deloads meanwhile. The Sunday review flags "📦 Block-ready" when the criteria pass —
   run `/start-training-block` then, and activate the `daily-session-brief` scheduled task.
 - Mesocycle week 1 began 2026-07-20 after the 2026-07-18 log reset.
+- **Skill levels need revalidating against the current targets.** `calisthenics_status.md` says
+  `last_reviewed: 2026-06-14`, but `shared/calisthenics_ladders.md` was revised *after* that and every
+  level-up target changed with it (dynamic moves became sets × reps; isometrics became one solid hold
+  at a stated duration). No level has been checked against the new criteria, so a "one rung away"
+  judgement may not hold. The next Sunday review should re-test the five primary skills.
 
 ## Alicja
 

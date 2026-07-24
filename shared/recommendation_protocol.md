@@ -6,29 +6,28 @@ It applies identically to every person under `people/`.
 
 ## Inputs (read in this order)
 
-1. `people/<id>/data.json` — profile, **goals in priority order**, weekly template, session
-   definitions, nutrition. Single source of truth for structured data.
-2. `shared/training_principles.md` — readiness rules, removal hierarchy, deload, session-type
+1. `STATUS.md` — short-lived open items that override the plan (a pending FTP test, a paused athlete,
+   a device that can't log). Check this first so the rest is interpreted correctly.
+2. `people/<id>/data.json` — profile, **goals in priority order**, weekly template, session
+   definitions with targets, rest and per-exercise cues, nutrition. Single source of truth for
+   structured data.
+3. `shared/training_principles.md` — readiness rules, removal hierarchy, deload, session-type
    definitions.
-3. `people/<id>/workout_log.md` — history: readiness scores, RPE, loads, notes. Most recent
+4. `people/<id>/workout_log.md` — history: readiness scores, RPE, loads, notes. Most recent
    entries are at the bottom.
-4. Person's prose files (`training_plan.md`, `gym_training_plan.md`, etc.) — the reasoning
-   behind the plan; constraints like fatigue-stacking guardrails live here.
-5. `people/<id>/calisthenics_status.md` SKILL_STATE block — only if `skills.enabled`.
+5. Person's prose files (`training_plan.md`, `gym_training_plan.md`, etc.) — the reasoning
+   behind the plan; constraints like fatigue-stacking guardrails live here. Alicja's bodyweight
+   progression ladders live in her `gym_training_plan.md` and exist nowhere else.
+6. `people/<id>/calisthenics_status.md` SKILL_STATE block — only if `skills.enabled`.
 
 Person-specific data always overrides shared defaults. Goal #1 in `data.json` is what the plan
 must protect when anything conflicts.
 
-## Readiness (unified, subjective — no wearable required)
+## Readiness
 
-Each morning the person rates **sleep, soreness, energy, motivation** 1–5 (5 = best;
-soreness 5 = no soreness), in the dashboard or directly in the log. A rating ≤ 2 is "poor".
-
-| Status | Trigger | Action |
-|---|---|---|
-| 🟢 Green | 0 poor | Train as planned |
-| 🟡 Amber | 1 poor | Keep the session, cut top-end volume ~20%, hold loads |
-| 🔴 Red | 2+ poor, a clearly bad night, or 2+ amber days running | Easy/recovery only; apply removal hierarchy |
+Subjective, unified, no wearable required. **The rule lives in `shared/training_principles.md`** —
+morning 1–5 ratings for sleep/soreness/energy/motivation, ≤ 2 counts as poor, and the green/amber/red
+thresholds and actions are defined there. Read it rather than assuming; do not restate the table here.
 
 ## Outputs
 

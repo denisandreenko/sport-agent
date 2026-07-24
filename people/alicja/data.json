@@ -1,14 +1,7 @@
 {
   "id": "alicja",
   "name": "Alicja",
-  "profile": {
-    "heightCm": 164,
-    "weightKg": 52,
-    "bodyFatPct": 23,
-    "age": 24,
-    "diet": "ketogenic",
-    "stage": "Novice in strength; existing aerobic running base"
-  },
+  "profile": { "heightCm": 164, "weightKg": 52, "bodyFatPct": 23, "age": 24, "diet": "ketogenic", "stage": "Novice in strength; existing aerobic running base" },
   "goals": [
     "Build a strength / muscle base",
     "Mobility & flexibility (front and middle splits)",
@@ -16,46 +9,39 @@
     "Recovery and consistency",
     "Keto-compatible nutrition"
   ],
-  "tracking": {
-    "wearable": false
-  },
-  "mesocycle": {
-    "pattern": "5+1",
-    "week": 1,
-    "startedOn": "2026-07-20",
-    "note": "Light-touch novice mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions incl. both gym days); skipped weeks freeze the counter. Week 6 = deload: gym -1 set per exercise at same loads, both runs easy Z2, keep full mobility/splits (deload does NOT reduce mobility work). After deload, reset to 1. Everything else stays simple linear progression - no wave loading for a novice. Fatigue markers can pull the deload earlier."
-  },
-  "files": {
-    "workoutLog": "people/alicja/workout_log.md"
-  },
+  "tracking": { "wearable": false },
+  "mesocycle": { "pattern": "5+1", "week": 1, "startedOn": "2026-07-20", "note": "Light-touch novice mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions incl. both gym days); skipped weeks freeze the counter. Week 6 = deload: gym -1 set per exercise at same loads, both runs easy Z2, keep full mobility/splits (deload does NOT reduce mobility work). After deload, reset to 1. Everything else stays simple linear progression - no wave loading for a novice. Fatigue markers can pull the deload earlier." },
+  "files": { "workoutLog": "people/alicja/workout_log.md" },
   "dashboard": {
     "accent": "#e05fa0",
-    "tabs": ["today", "log", "nutrition"]
+    "tabs": [
+      "today",
+      "log",
+      "nutrition"
+    ]
   },
-  "week": {
-    "0": "MOBILITY_FULL",
-    "1": "GYM_A",
-    "2": "RUN_EASY",
-    "3": "REST",
-    "4": "GYM_B",
-    "5": "RUN_QUALITY",
-    "6": "REST"
-  },
+  "week": { "0": "MOBILITY_FULL", "1": "GYM_A", "2": "RUN_EASY", "3": "REST", "4": "GYM_B", "5": "RUN_QUALITY", "6": "REST" },
   "logSessionTypes": [
-    "GYM_A", "GYM_B", "RUN_EASY", "RUN_QUALITY", "MOBILITY_FULL", "MOBILITY", "REST"
+    "GYM_A",
+    "GYM_B",
+    "RUN_EASY",
+    "RUN_QUALITY",
+    "MOBILITY_FULL",
+    "MOBILITY",
+    "REST"
   ],
   "sessions": {
     "GYM_A": {
       "kind": "gym",
       "label": "Gym A — Full body",
-      "note": "Keep 2–3 reps in reserve on every set — never to failure. Warm-up ~5 min: easy cardio + leg swings, arm circles, bodyweight squats ×10, scapular pulls ×10, glute bridge ×10.",
+      "note": "Keep 2–3 reps in reserve on every set — never to failure. Warm-up ~5 min: 5 min easy cardio (walk/bike) + leg swings 10/side, arm circles, bodyweight squats ×10, scapular pulls ×10, glute bridge ×10.",
       "exercises": [
-        { "name": "Goblet squat", "target": "3×8–12", "stub": "8" },
-        { "name": "Knee push-up", "target": "3×6–10", "stub": "BW" },
-        { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (G+R)" },
-        { "name": "Glute bridge / hip thrust", "target": "3×10–15", "stub": "10" },
-        { "name": "Sit-ups", "target": "2×12–15", "stub": "2 kg/hand" },
-        { "name": "Plank", "target": "2×20–40 s", "stub": "BW" }
+        { "name": "Goblet squat", "target": "3×8–12", "stub": "8", "cue": "Light DB/kettlebell held at chest; sit tall. Bodyweight squat is a valid substitution." },
+        { "name": "Knee push-up", "target": "3×6–10", "stub": "BW", "cue": "Progress per the push-up ladder in gym_training_plan.md." },
+        { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (G+R)", "cue": "Band or machine; reduce assistance over time. Progress per the pull-up ladder." },
+        { "name": "Glute bridge / hip thrust", "target": "3×10–15", "stub": "10", "cue": "Squeeze glutes at the top." },
+        { "name": "Sit-ups", "target": "2×12–15", "stub": "2 kg/hand", "cue": "Controlled, no neck pull." },
+        { "name": "Plank", "target": "2×20–40 s", "stub": "BW", "cue": "Brace, flat back." }
       ],
       "mobility": "Daily mobility minimum (~8–10 min) still applies."
     },
@@ -64,12 +50,12 @@
       "label": "Gym B — Full body",
       "note": "Keep 2–3 reps in reserve. Same warm-up as Gym A.",
       "exercises": [
-        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "4" },
-        { "name": "Dumbbell row", "target": "3×8–12", "stub": "5" },
-        { "name": "Incline / knee push-up", "target": "3×6–10", "stub": "BW" },
-        { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "2.5" },
-        { "name": "Dead bug", "target": "2×8/side", "stub": "2" },
-        { "name": "Side plank", "target": "2×15–30 s/side", "stub": "BW" }
+        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "4", "cue": "Control the descent. Bodyweight before adding a light DB." },
+        { "name": "Dumbbell row", "target": "3×8–12", "stub": "5", "cue": "Pull to the ribs, no shrug. Chest-supported row is a valid substitution." },
+        { "name": "Incline / knee push-up", "target": "3×6–10", "stub": "BW", "cue": "Hands elevated = easier." },
+        { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "2.5", "cue": "Light start." },
+        { "name": "Dead bug", "target": "2×8/side", "stub": "2", "cue": "Anti-extension core." },
+        { "name": "Side plank", "target": "2×15–30 s/side", "stub": "BW", "cue": "Oblique/core." }
       ],
       "mobility": "Daily mobility minimum (~8–10 min) still applies."
     },
@@ -117,15 +103,9 @@
         { "name": "PNF finisher (contract–relax in deepest split)", "target": "3 reps/side" }
       ]
     },
-    "REST": {
-      "kind": "rest",
-      "label": "Rest day",
-      "note": "Full recovery. Wednesday: add light mobility (~8–10 min daily minimum)."
-    }
+    "REST": { "kind": "rest", "label": "Rest day", "note": "Full recovery. Wednesday: add light mobility (~8–10 min daily minimum)." }
   },
-  "skills": {
-    "enabled": false
-  },
+  "skills": { "enabled": false },
   "nutrition": {
     "style": "Ketogenic, 3 meals/day. Working draft ~1,798 kcal — slightly below ~1,850 maintenance; add a protein/fat source to reach a small muscle-building surplus (~1,900 kcal).",
     "totals": { "protein": 137, "carbs": 25.4, "fat": 116.3, "fiber": 18, "kcal": 1798 },
@@ -179,6 +159,6 @@
       { "name": "Beef collagen + vitamin C", "dose": "8,700 mg + vit C", "timing": "Pre-workout" },
       { "name": "Brazil nuts", "dose": "2", "timing": "Daily (selenium)" }
     ],
-    "notes": "Macros computed from her stats (164 cm / 52 kg / 24 yo / ~23% bf), not scaled from anyone else's plan."
+    "notes": "Macros computed from her stats (164 cm / 52 kg / 24 yo / ~23% bf), not scaled from anyone else's plan. No disliked or excluded foods."
   }
 }

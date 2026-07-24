@@ -1,13 +1,7 @@
 {
   "id": "denis",
   "name": "Denis",
-  "profile": {
-    "heightCm": 191,
-    "weightKg": 87,
-    "bodyFatPct": 11,
-    "diet": "ketogenic",
-    "stage": "Experienced hybrid athlete"
-  },
+  "profile": { "heightCm": 191, "weightKg": 87, "bodyFatPct": 11, "inseamCm": 91, "footMm": 305, "diet": "ketogenic", "stage": "Experienced hybrid athlete" },
   "goals": [
     "Gravel cycling performance",
     "Strength and hypertrophy",
@@ -16,76 +10,57 @@
     "Recovery and fatigue management",
     "Keto-compatible performance nutrition"
   ],
-  "tracking": {
-    "wearable": false
-  },
-  "mesocycle": {
-    "pattern": "3+1",
-    "week": 1,
-    "startedOn": "2026-07-20",
-    "note": "Rolling mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions); a skipped week freezes the counter (never advances it). Week 4 = deload: gym volume -30-40%, cycling drops to one maintenance rung below current level, long ride shortened to ~2 h Z1-Z2, extra sleep/mobility. After deload, reset week to 1. Paused while a training_block.md is active (the block has its own week structure). Fatigue markers (2+ amber/red days, RPE creep, pain) can pull the deload EARLIER; nothing pushes it later."
-  },
+  "tracking": { "wearable": false },
+  "mesocycle": { "pattern": "3+1", "week": 1, "startedOn": "2026-07-20", "note": "Rolling mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions); a skipped week freezes the counter (never advances it). Week 4 = deload: gym volume -30-40%, cycling drops to one maintenance rung below current level, long ride shortened to ~2 h Z1-Z2, extra sleep/mobility. After deload, reset week to 1. Paused while a training_block.md is active (the block has its own week structure). Fatigue markers (2+ amber/red days, RPE creep, pain) can pull the deload EARLIER; nothing pushes it later." },
   "cycling": {
+    "equipment": "Shimano SPD (2-bolt) pedals on gravel and road. Indoor: full metrics - power (smart trainer / ERG), HR, GPS. Outdoor: HR + GPS only, no power meter. No auto-sync; rides are logged manually via the dashboard.",
     "ftp": {
       "watts": null,
       "testedOn": null,
       "method": "Zwift Ramp Test (FTP = 75% of best 1-min power). Retest every 6-8 weeks, min 28 days apart, on a fresh day (not after Mon gym).",
       "history": []
     },
-    "zones": {
-      "note": "Percent of FTP. Until FTP is tested, ride hard intervals by RPE and use HR as sanity check (indoor sessions log avg HR).",
-      "Z2_endurance": "56-75%",
-      "tempo": "76-87%",
-      "sweet_spot": "88-94%",
-      "threshold": "95-105%",
-      "vo2max": "106-120%"
-    },
-    "levels": {
-      "note": "TrainerRoad-style progression levels: index into each session's ordered ladder (1 = first rung). Weekly review moves them: completed all intervals at target power/RPE <= 8 -> +1 next time; partial -> hold; failed or 2+ week cycling gap -> -1.",
-      "vo2max": 1,
-      "threshold": 1
-    },
-    "phase": {
-      "current": "base",
-      "note": "Rotate emphasis every 4-8 weeks (no races planned). base: Thu sweet-spot/threshold progresses, Tue VO2max stays at current level (maintenance dose). build: Tue VO2max progresses, Thu holds at threshold. Long ride stays Z1-Z2 year-round.",
-      "outdoor": "No power meter outdoors: Saturday long ride is HR + feel (conversational = Z2). Don't judge outdoor rides by power."
-    }
+    "zones": { "note": "Percent of FTP. Until FTP is tested, ride hard intervals by RPE and use HR as sanity check (indoor sessions log avg HR).", "Z2_endurance": "56-75%", "tempo": "76-87%", "sweet_spot": "88-94%", "threshold": "95-105%", "vo2max": "106-120%" },
+    "levels": { "note": "TrainerRoad-style progression levels: index into each session's ordered ladder (1 = first rung). Weekly review moves them: completed all intervals at target power/RPE <= 8 -> +1 next time; partial -> hold; failed or 2+ week cycling gap -> -1.", "vo2max": 1, "threshold": 1 },
+    "phase": { "current": "base", "note": "Rotate emphasis every 4-8 weeks (no races planned). base: Thu sweet-spot/threshold progresses, Tue VO2max stays at current level (maintenance dose). build: Tue VO2max progresses, Thu holds at threshold. Long ride stays Z1-Z2 year-round.", "outdoor": "No power meter outdoors: Saturday long ride is HR + feel (conversational = Z2). Don't judge outdoor rides by power." }
   },
-  "files": {
-    "workoutLog": "people/denis/workout_log.md",
-    "skillState": "people/denis/calisthenics_status.md"
-  },
+  "files": { "workoutLog": "people/denis/workout_log.md", "skillState": "people/denis/calisthenics_status.md" },
   "dashboard": {
     "accent": "#4f8ef7",
-    "tabs": ["today", "log", "skills", "nutrition"]
+    "tabs": [
+      "today",
+      "log",
+      "skills",
+      "nutrition"
+    ]
   },
-  "week": {
-    "0": "REST",
-    "1": "GYM_A",
-    "2": "CYCLING_VO2MAX",
-    "3": "GYM_B",
-    "4": "CYCLING_THRESHOLD",
-    "5": "GYM_C",
-    "6": "CYCLING_LONG"
-  },
+  "week": { "0": "REST", "1": "GYM_A", "2": "CYCLING_VO2MAX", "3": "GYM_B", "4": "CYCLING_THRESHOLD", "5": "GYM_C", "6": "CYCLING_LONG" },
   "logSessionTypes": [
-    "GYM_A", "GYM_B", "GYM_C",
-    "CYCLING_VO2MAX", "CYCLING_THRESHOLD", "CYCLING_LONG",
-    "RUN_EASY", "SWIM", "CALISTHENICS", "MOBILITY", "REST"
+    "GYM_A",
+    "GYM_B",
+    "GYM_C",
+    "CYCLING_VO2MAX",
+    "CYCLING_THRESHOLD",
+    "CYCLING_LONG",
+    "RUN_EASY",
+    "SWIM",
+    "CALISTHENICS",
+    "MOBILITY",
+    "REST"
   ],
   "sessions": {
     "GYM_A": {
       "kind": "gym",
       "label": "Gym A — Squat / Horizontal Push / Vertical Pull",
-      "note": "Keep lower body at RPE ≤ 8 — Tuesday is VO2max. Activation first: single-leg glute bridge 10/side + Copenhagen side plank 20–30 s/side.",
+      "note": "Keep lower body at RPE ≤ 8 — Tuesday is VO2max. Activation first (~3 min): single-leg glute bridge with 3 s hold at top, 10/side + Copenhagen side plank (bent knee) 1×20–30 s/side.",
       "exercises": [
-        { "name": "Hack squat", "target": "3×6–8 @ RPE 7–8", "stub": "75" },
-        { "name": "Bench press", "target": "3×5–6", "stub": "77.5" },
-        { "name": "Single-leg hip thrust", "target": "3×10–12/leg", "stub": "BW" },
-        { "name": "Chin-ups", "target": "3×6–8", "stub": "BW" },
-        { "name": "Seated leg curl", "target": "2×12–15", "stub": "40" },
-        { "name": "Cable lateral raises", "target": "2×12–15", "stub": "—" },
-        { "name": "Pallof press", "target": "2×10/side", "stub": "—" }
+        { "name": "Hack squat", "target": "3×6–8 @ RPE 7–8", "rest": "2–3 min", "stub": "75", "cue": "Machine load is not comparable to barbell squat." },
+        { "name": "Bench press", "target": "3×5–6", "rest": "2–3 min", "stub": "77.5" },
+        { "name": "Single-leg hip thrust", "target": "3×10–12/leg", "rest": "90 s", "stub": "BW", "cue": "Bodyweight until the glute pattern holds, then add bar 20–40 kg as tolerated." },
+        { "name": "Chin-ups", "target": "3×6–8", "rest": "2 min", "stub": "BW" },
+        { "name": "Seated leg curl", "target": "2×12–15", "rest": "60 s", "stub": "40" },
+        { "name": "Cable lateral raises", "target": "2×12–15", "rest": "60 s", "stub": "—" },
+        { "name": "Pallof press", "target": "2×10/side", "rest": "60 s", "stub": "—", "cue": "Anti-rotation core." }
       ],
       "addon": "Skills (fresh, before lifting): One Arm Handstand (adv. wall → freestanding) + Wall HSPU. Few shrimp-squat sets in warm-up, low volume.",
       "mobility": "10 min post-session: hip flexor 60 s/side · pigeon or 90/90 60 s/side · couch stretch 60 s/side · open book 10/side · cat-cow ×10."
@@ -95,15 +70,15 @@
       "label": "Gym B — Pull / Overhead Press / Arms / Core",
       "note": "No heavy axial loading.",
       "exercises": [
-        { "name": "Weighted pull-ups", "target": "3×5–6", "stub": "+20" },
-        { "name": "Chest-supported row", "target": "3×8–10", "stub": "60" },
-        { "name": "Seated DB OHP", "target": "2×8–10", "stub": "20" },
-        { "name": "Cable hip abduction", "target": "2×12–15/side", "stub": "—" },
-        { "name": "Face pulls", "target": "2×12–15", "stub": "—" },
-        { "name": "Cable lateral raises", "target": "2×12–15", "stub": "—" },
-        { "name": "Incline DB curl", "target": "2×10–12", "stub": "—" },
-        { "name": "Overhead tricep ext.", "target": "2×10–12", "stub": "—" },
-        { "name": "Ab wheel rollout", "target": "2×8–10", "stub": "BW" }
+        { "name": "Weighted pull-ups", "target": "3×5–6", "rest": "2–3 min", "stub": "+20" },
+        { "name": "Chest-supported row", "target": "3×8–10", "rest": "90 s", "stub": "60" },
+        { "name": "Seated DB OHP", "target": "2×8–10", "rest": "90 s", "stub": "20", "cue": "Handstand strength base." },
+        { "name": "Cable hip abduction", "target": "2×12–15/side", "rest": "60 s", "stub": "—" },
+        { "name": "Face pulls", "target": "2×12–15", "rest": "60 s", "stub": "—" },
+        { "name": "Cable lateral raises", "target": "2×12–15", "rest": "60 s", "stub": "—" },
+        { "name": "Incline DB curl", "target": "2×10–12", "rest": "60 s", "stub": "—" },
+        { "name": "Overhead tricep ext.", "target": "2×10–12", "rest": "60 s", "stub": "—" },
+        { "name": "Ab wheel rollout", "target": "2×8–10", "rest": "60 s", "stub": "BW", "cue": "Anti-extension core." }
       ],
       "addon": "Skills (before fatigue): Muscle Up (kip → strict transition) + Front Lever (adv. tuck → one leg).",
       "mobility": "Same 10 min routine as Gym A."
@@ -111,17 +86,17 @@
     "GYM_C": {
       "kind": "gym",
       "label": "Gym C — Hinge / Incline Push / Single-leg",
-      "note": "Saturday is the long ride — trap-bar reps stay quality, not grinders; on amber/red readiness drop to 2 sets. Activation same as Gym A.",
+      "note": "Saturday is the long ride — trap-bar reps stay quality, not grinders; on amber/red readiness drop to 2 sets. Activation same as Gym A (~3 min): single-leg glute bridge with 3 s hold at top, 10/side + Copenhagen side plank (bent knee) 1×20–30 s/side.",
       "exercises": [
-        { "name": "Trap bar deadlift", "target": "3×4–5 @ RPE 7–8", "stub": "100" },
-        { "name": "Incline DB press", "target": "3×8–10", "stub": "28" },
-        { "name": "Bulgarian split squats", "target": "3×8–10/leg", "stub": "20" },
-        { "name": "Nordic hamstring curl", "target": "2×5–8", "stub": "BW" },
-        { "name": "Dips", "target": "2×8–12", "stub": "BW" },
-        { "name": "Leg extension", "target": "2×12–15", "stub": "45" },
-        { "name": "DB lateral raises", "target": "2×12–15", "stub": "—" },
-        { "name": "Seated calf raise", "target": "2×12–15", "stub": "—" },
-        { "name": "Cable crunch", "target": "2×15–20", "stub": "—" }
+        { "name": "Trap bar deadlift", "target": "3×4–5 @ RPE 7–8", "rest": "3–4 min", "stub": "100" },
+        { "name": "Incline DB press", "target": "3×8–10", "rest": "90 s", "stub": "28", "cue": "Drop ~10% from the reference load if needed." },
+        { "name": "Bulgarian split squats", "target": "3×8–10/leg", "rest": "90 s", "stub": "20" },
+        { "name": "Nordic hamstring curl", "target": "2×5–8", "rest": "90 s", "stub": "BW" },
+        { "name": "Dips", "target": "2×8–12", "rest": "90 s", "stub": "BW" },
+        { "name": "Leg extension", "target": "2×12–15", "rest": "60 s", "stub": "45" },
+        { "name": "DB lateral raises", "target": "2×12–15", "rest": "60 s", "stub": "—" },
+        { "name": "Seated calf raise", "target": "2×12–15", "rest": "60 s", "stub": "—" },
+        { "name": "Cable crunch", "target": "2×15–20", "rest": "60 s", "stub": "—", "cue": "Flexion core." }
       ],
       "addon": "Skills (low fatigue, technical): Dragon Flag (one leg → straddle) + V-Sit (tuck L-sit → straddle).",
       "mobility": "Same 10 min routine as Gym A."
@@ -168,31 +143,206 @@
         "Electrolytes: 500–700 mg sodium/hr on top of baseline"
       ],
       "fueling": "No TKD for Z2. Maltodextrin:fructose 2:1 @ 60–80 g/hr only if deliberately pushing intensity > 90 min.",
-      "prep": "Hip flexor 30 s/side · leg swings front/back + lateral 10/side · deep squat hold 60 s · single-leg glute bridge 10/side (~4 min)."
+      "prep": "Hip flexor 30 s/side · leg swings front/back + lateral 10/side · deep squat hold 60 s · single-leg glute bridge 10/side (~4 min).",
+      "mobility": "Same 10 min routine as after a gym session: hip flexor 60 s/side · pigeon or 90/90 60 s/side · couch stretch 60 s/side · open book 10/side · cat-cow ×10."
     },
-    "REST": {
-      "kind": "rest",
-      "label": "Recovery day",
-      "note": "Mobility, easy spin/swim/walk, optional easy run 20–45 min Z1–Z2. Nothing hard."
-    }
+    "REST": { "kind": "rest", "label": "Recovery day", "note": "Mobility, easy spin/swim/walk, optional easy run 20–45 min Z1–Z2. Nothing hard." }
   },
   "skills": {
     "enabled": true,
     "ladders": {
-      "planche": { "name": "Planche", "cat": "Push", "goal": "Full planche", "levels": ["Pseudo Push Ups", "Frog Stand", "Tuck Planche", "Advanced Tuck Planche", "Straddle Planche", "Planche"] },
-      "handstand_push_up": { "name": "Handstand Push Up", "cat": "Push", "goal": "Freestanding HSPU", "levels": ["Pike Push Up", "Adv. Pike Push Up", "Wall Handstand Push Up", "Negative Handstand Push Up", "Handstand Push Up"] },
-      "one_arm_push_up": { "name": "One Arm Push Up", "cat": "Push", "goal": "One arm push up", "levels": ["Push Up", "Diamond Push Up", "Alligator Push Up", "Archer Push Up", "Incline One Arm Push Up", "Negative One Arm Push Up", "Rocky Push Up", "One Arm Push Up"] },
-      "one_arm_handstand": { "name": "One Arm Handstand", "cat": "Push", "goal": "One arm handstand (near-term: freestanding)", "levels": ["Downward Dog", "Pike Hold", "Wall Handstand", "Adv. Wall Handstand", "Handstand", "Diamond Handstand", "Bend Straddle Handstand", "Fingertip Straddle Handstand", "Straddle One Arm Handstand", "Diamond One Arm Handstand", "One Arm Handstand"] },
-      "muscle_up": { "name": "Muscle Up", "cat": "Pull", "goal": "Clean muscle up", "levels": ["Pull Up", "High Pull Up", "Jumping Muscle Up", "Kipping Muscle Up", "Muscle Up"] },
-      "front_lever": { "name": "Front Lever", "cat": "Pull", "goal": "Full front lever", "levels": ["Tuck Front Lever", "Advanced Tuck Front Lever", "One Leg Front Lever", "Half Front Lever", "Straddle Front Lever", "Front Lever"] },
-      "back_lever": { "name": "Back Lever", "cat": "Pull", "goal": "Full back lever", "levels": ["Skin the Cat", "Tuck Back Lever", "Adv. Tuck Back Lever", "Straddle Back Lever", "Back Lever"] },
-      "one_arm_pull_up": { "name": "One Arm Pull Up", "cat": "Pull", "goal": "One arm pull up", "levels": ["Pull Up", "Archer Pull Up", "Assisted One Arm Pull Up", "Negative One Arm Pull Up", "Little Assisted OAP", "One Arm Pull Up"] },
-      "hefesto": { "name": "Hefesto", "cat": "Pull", "goal": "Hefesto", "levels": ["Korean Dip", "Hefesto Dip", "Negative Hefesto", "Hefesto Pull", "Assisted Hefesto", "Hefesto"] },
-      "v_sit": { "name": "V-Sit", "cat": "Core", "goal": "V-sit", "levels": ["Straddle Leg Raise Hold", "Leg Raise Hold", "Tuck L-sit", "Straddle L-Sit", "L-sit", "Tuck V-Sit", "Straddle V-Sit", "V-Sit"] },
-      "dragon_flag": { "name": "Dragon Flag", "cat": "Core", "goal": "Dragon flag", "levels": ["Tuck Reverse Crunch", "Reverse Crunch", "Tuck Dragon Flag", "Half Dragon Flag", "One Leg Dragon Flag", "Straddle Dragon Flag", "Dragon Flag"] },
-      "human_flag": { "name": "Human Flag", "cat": "Core", "goal": "Human flag", "levels": ["Hanging Side Bend", "Angle Flag", "Low Flag", "Vertical Tuck Flag", "Vertical Flag", "Negative Flag", "Straddle Flag", "Human Flag"] },
-      "pistol_squat": { "name": "Pistol Squat", "cat": "Legs", "goal": "Pistol squat", "levels": ["Deep Squat", "Bulgarian Squat", "Archer Squat", "Bench Pistol Squat", "Assisted Pistol Squat", "Rolling Pistol Squat", "Elevated Pistol Squat", "Pistol Squat"] },
-      "shrimp_squat": { "name": "Shrimp Squat", "cat": "Legs", "goal": "Shrimp squat", "levels": ["Reverse Lunge", "Supported Shrimp Squat", "No Arm Shrimp Squat", "One Arm Shrimp Squat", "Shrimp Squat"] }
+      "planche": {
+        "name": "Planche",
+        "cat": "Push",
+        "goal": "Full planche",
+        "levels": [
+          "Pseudo Push Ups",
+          "Frog Stand",
+          "Tuck Planche",
+          "Advanced Tuck Planche",
+          "Straddle Planche",
+          "Planche"
+        ]
+      },
+      "handstand_push_up": {
+        "name": "Handstand Push Up",
+        "cat": "Push",
+        "goal": "Freestanding HSPU",
+        "levels": [
+          "Pike Push Up",
+          "Adv. Pike Push Up",
+          "Wall Handstand Push Up",
+          "Negative Handstand Push Up",
+          "Handstand Push Up"
+        ]
+      },
+      "one_arm_push_up": {
+        "name": "One Arm Push Up",
+        "cat": "Push",
+        "goal": "One arm push up",
+        "levels": [
+          "Push Up",
+          "Diamond Push Up",
+          "Alligator Push Up",
+          "Archer Push Up",
+          "Incline One Arm Push Up",
+          "Negative One Arm Push Up",
+          "Rocky Push Up",
+          "One Arm Push Up"
+        ]
+      },
+      "one_arm_handstand": {
+        "name": "One Arm Handstand",
+        "cat": "Push",
+        "goal": "One arm handstand (near-term: freestanding)",
+        "levels": [
+          "Downward Dog",
+          "Pike Hold",
+          "Wall Handstand",
+          "Adv. Wall Handstand",
+          "Handstand",
+          "Diamond Handstand",
+          "Bend Straddle Handstand",
+          "Fingertip Straddle Handstand",
+          "Straddle One Arm Handstand",
+          "Diamond One Arm Handstand",
+          "One Arm Handstand"
+        ]
+      },
+      "muscle_up": {
+        "name": "Muscle Up",
+        "cat": "Pull",
+        "goal": "Clean muscle up",
+        "levels": [
+          "Pull Up",
+          "High Pull Up",
+          "Jumping Muscle Up",
+          "Kipping Muscle Up",
+          "Muscle Up"
+        ]
+      },
+      "front_lever": {
+        "name": "Front Lever",
+        "cat": "Pull",
+        "goal": "Full front lever",
+        "levels": [
+          "Tuck Front Lever",
+          "Advanced Tuck Front Lever",
+          "One Leg Front Lever",
+          "Half Front Lever",
+          "Straddle Front Lever",
+          "Front Lever"
+        ]
+      },
+      "back_lever": {
+        "name": "Back Lever",
+        "cat": "Pull",
+        "goal": "Full back lever",
+        "levels": [
+          "Skin the Cat",
+          "Tuck Back Lever",
+          "Adv. Tuck Back Lever",
+          "Straddle Back Lever",
+          "Back Lever"
+        ]
+      },
+      "one_arm_pull_up": {
+        "name": "One Arm Pull Up",
+        "cat": "Pull",
+        "goal": "One arm pull up",
+        "levels": [
+          "Pull Up",
+          "Archer Pull Up",
+          "Assisted One Arm Pull Up",
+          "Negative One Arm Pull Up",
+          "Little Assisted OAP",
+          "One Arm Pull Up"
+        ]
+      },
+      "hefesto": {
+        "name": "Hefesto",
+        "cat": "Pull",
+        "goal": "Hefesto",
+        "levels": [
+          "Korean Dip",
+          "Hefesto Dip",
+          "Negative Hefesto",
+          "Hefesto Pull",
+          "Assisted Hefesto",
+          "Hefesto"
+        ]
+      },
+      "v_sit": {
+        "name": "V-Sit",
+        "cat": "Core",
+        "goal": "V-sit",
+        "levels": [
+          "Straddle Leg Raise Hold",
+          "Leg Raise Hold",
+          "Tuck L-sit",
+          "Straddle L-Sit",
+          "L-sit",
+          "Tuck V-Sit",
+          "Straddle V-Sit",
+          "V-Sit"
+        ]
+      },
+      "dragon_flag": {
+        "name": "Dragon Flag",
+        "cat": "Core",
+        "goal": "Dragon flag",
+        "levels": [
+          "Tuck Reverse Crunch",
+          "Reverse Crunch",
+          "Tuck Dragon Flag",
+          "Half Dragon Flag",
+          "One Leg Dragon Flag",
+          "Straddle Dragon Flag",
+          "Dragon Flag"
+        ]
+      },
+      "human_flag": {
+        "name": "Human Flag",
+        "cat": "Core",
+        "goal": "Human flag",
+        "levels": [
+          "Hanging Side Bend",
+          "Angle Flag",
+          "Low Flag",
+          "Vertical Tuck Flag",
+          "Vertical Flag",
+          "Negative Flag",
+          "Straddle Flag",
+          "Human Flag"
+        ]
+      },
+      "pistol_squat": {
+        "name": "Pistol Squat",
+        "cat": "Legs",
+        "goal": "Pistol squat",
+        "levels": [
+          "Deep Squat",
+          "Bulgarian Squat",
+          "Archer Squat",
+          "Bench Pistol Squat",
+          "Assisted Pistol Squat",
+          "Rolling Pistol Squat",
+          "Elevated Pistol Squat",
+          "Pistol Squat"
+        ]
+      },
+      "shrimp_squat": {
+        "name": "Shrimp Squat",
+        "cat": "Legs",
+        "goal": "Shrimp squat",
+        "levels": [
+          "Reverse Lunge",
+          "Supported Shrimp Squat",
+          "No Arm Shrimp Squat",
+          "One Arm Shrimp Squat",
+          "Shrimp Squat"
+        ]
+      }
     }
   },
   "nutrition": {
