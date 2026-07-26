@@ -1,4 +1,4 @@
-# Athlete Training
+# Sport Agent
 
 Expandable training + nutrition framework. Currently two athletes (**Denis**, **Alicja**);
 adding another is copying a folder — see `people/_template/README.md`.
@@ -6,7 +6,7 @@ adding another is copying a folder — see `people/_template/README.md`.
 ## Structure
 
 ```
-athlete-training/
+sport-agent/
 ├── README.md                       ← this file
 ├── CLAUDE.md                       ← standing instructions loaded every session
 ├── STATUS.md                       ← short-lived open items (FTP test pending, etc.)

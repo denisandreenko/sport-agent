@@ -86,7 +86,7 @@ Active whenever you want it — it's read-only and commits nothing.
 The presets are Manual, Hourly, Daily, Weekdays and Weekly. "First Sunday of the month" isn't among
 them, so create this one conversationally in any Desktop session:
 
-> Set up a local scheduled task called `monthly-nutrition-review`, in the athlete-training folder,
+> Set up a local scheduled task called `monthly-nutrition-review`, in the sport-agent folder,
 > running at 19:00 on the first Sunday of each month, whose instructions are:
 > Read `.claude/skills/monthly-nutrition-review/SKILL.md` in this project and follow it exactly.
 
@@ -159,10 +159,10 @@ the wrong trade. Because the prompt bodies live here rather than in the task reg
 requires no prompt changes, only a different runner:
 
 ```bash
-cd /path/to/athlete-training
+cd /path/to/sport-agent
 claude -p "Read .claude/skills/weekly-review-and-plan/SKILL.md and follow it exactly." \
   --permission-mode acceptEdits \
-  --output-format json >> ~/Library/Logs/athlete-training/weekly.jsonl 2>&1
+  --output-format json >> ~/Library/Logs/sport-agent/weekly.jsonl 2>&1
 ```
 
 Wrap in a plist with `StartCalendarInterval`, which fires on wake if a run was missed — plain cron just
