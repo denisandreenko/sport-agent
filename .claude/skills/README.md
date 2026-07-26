@@ -8,7 +8,7 @@ scheduled ones fire.
 |---|---|---|---|---|---|
 | `weekly-review-and-plan` | Sunday 18:00 | Active | repo root | **yes** | The engine. Reviews both athletes, progresses gym loads / calisthenics skills / cycling levels, maintains mesocycle counters and deloads, flags FTP retests and block readiness, plans next week. |
 | `daily-session-brief` | daily 07:45 | **Paused** | repo root | no | Denis's morning brief: today's session, last loads, readiness call, cycling ladder rung + watts, skill add-on, fueling. Activate when a training block starts. |
-| `start-training-block` | Manual | Active | repo root | **yes** | Builds Denis a deliberate 4-week overload block (`people/denis/training_block.md`). Manual by design — it commits four weeks of calendar. The Sunday review flags "📦 Block-ready" when the criteria pass. |
+| `start-training-block` | not registered — run `/start-training-block` | — | repo root | **yes** | Builds Denis a deliberate 4-week overload block (`people/denis/training_block.md`). Manual by design — it commits four weeks of calendar. The Sunday review flags "📦 Block-ready" when the criteria pass. |
 | `monthly-nutrition-review` | 1st Sunday 19:00 | Active | repo root | no | Nutrition + supplement safety audit for both (doses per bodyweight, macros, bloodwork checklist). |
 
 The two that commit carry `disable-model-invocation: true`, so ordinary conversation can't trigger
@@ -28,43 +28,111 @@ it" wording below, which doesn't depend on slash-invocation semantics.
 Claude Code has no project-scoped location for scheduled tasks, which is why the registration is a
 thin stub and the substance lives here.
 
-## Restoring on a new machine
+## Setting up the Desktop routines
 
-1. Clone the repo and trust the folder in Claude Code Desktop.
-2. For each of the four skills, create `~/.claude/scheduled-tasks/<name>/SKILL.md`:
+Do this once per machine. Three routines, ~10 minutes. The prompts are already in the repo — this only
+wires up the scheduling.
 
-   ```markdown
-   ---
-   name: weekly-review-and-plan
-   description: Sunday weekly review for Denis + Alicja
-   ---
+### 0. Prerequisites
 
-   Read `.claude/skills/weekly-review-and-plan/SKILL.md` in this project and follow it exactly.
-   ```
+Claude Code Desktop installed, this repo cloned, and the folder **trusted** in Desktop. Routines can't
+be saved against an untrusted folder, and Desktop will prompt you to trust it if you haven't.
 
-   Or just ask Claude in a Desktop session: *"set up a weekly task, Sunday 6pm, in the
-   athlete-training folder, that reads `.claude/skills/weekly-review-and-plan/SKILL.md` and follows
-   it."*
-3. Set schedule, folder, and enabled state per the table above. Routines presets cover Manual, Hourly,
-   Daily, Weekdays and Weekly — the monthly review's "first Sunday" has no preset, so set it in plain
-   language.
-4. Click **Run now** on each task and choose "always allow" for each permission prompt. Approvals
-   persist per task; without this, unattended runs stall waiting for you.
-5. Enable **Keep computer awake** (Settings → Desktop app → General) if the Sunday review matters.
-   Tasks only fire while the app is open and the Mac is awake; a closed lid still sleeps.
+### 1. Check the skills load before scheduling anything
 
-Missed runs: Desktop starts one catch-up run for the most recently missed slot within 7 days. Both
-time-sensitive prompts carry a late-run guard so a Monday-night catch-up doesn't silently review the
-wrong window.
+Open a session on the repo and type `/`. All four skills should appear. Then run a read-only one as a
+smoke test:
 
-**A late start is normal, not a fault.** Each task gets a small deterministic delay to stagger API
-traffic, so the 18:00 review actually firing around 18:06 is expected behaviour — the old Cowork tasks
-did the same thing.
+```
+/daily-session-brief
+```
 
-**Permission-rule syntax gotcha:** the space before `*` is significant. `Bash(git diff *)` matches,
-`Bash(git diff*)` does not, and neither form matches a *bare* `git diff` — which is why
-`.claude/settings.json` lists both the bare and starred forms of the git commands the prompts
-prescribe. Get this wrong and an unattended run stalls waiting for approval.
+It should produce a brief and change nothing — confirm with `git status`. If the skills don't appear in
+the menu, stop: nothing below will work until they do.
+
+### 2. Create the weekly review
+
+Sidebar → **Routines** → **New routine** → **Local**. Fill in:
+
+| Field | Value |
+|---|---|
+| Name | `weekly-review-and-plan` |
+| Description | Sunday weekly review for Denis + Alicja |
+| Instructions | ``Read `.claude/skills/weekly-review-and-plan/SKILL.md` in this project and follow it exactly.`` |
+| Folder | this repo's root |
+| Worktree | off — it needs to commit to the real working copy |
+| Schedule | **Weekly** → Sunday → 18:00 |
+
+Keep the instructions to that one line. The point of the split is that the real prompt stays in git; a
+second copy in the routine would be the drift problem all over again.
+
+### 3. Create the daily brief, then pause it
+
+Same form:
+
+| Field | Value |
+|---|---|
+| Name | `daily-session-brief` |
+| Instructions | ``Read `.claude/skills/daily-session-brief/SKILL.md` in this project and follow it exactly.`` |
+| Folder | this repo's root |
+| Schedule | **Daily** → 07:45 |
+
+Save, then open it and set **Status → Paused**. It earns its place once a training block is running or
+FTP is tested; until then the weekly template is stable and the brief mostly restates it. Flip it to
+Active whenever you want it — it's read-only and commits nothing.
+
+### 4. Create the monthly nutrition review — by asking, not by form
+
+The presets are Manual, Hourly, Daily, Weekdays and Weekly. "First Sunday of the month" isn't among
+them, so create this one conversationally in any Desktop session:
+
+> Set up a local scheduled task called `monthly-nutrition-review`, in the athlete-training folder,
+> running at 19:00 on the first Sunday of each month, whose instructions are:
+> Read `.claude/skills/monthly-nutrition-review/SKILL.md` in this project and follow it exactly.
+
+### 5. Don't register `start-training-block`
+
+It's manual-only and it's already a project skill, so `/start-training-block` in any session does
+exactly what a Manual routine's **Run now** would. Registering it just creates another thing to keep in
+sync.
+
+### 6. Pre-approve the permissions
+
+This is the step that makes unattended runs work. On `weekly-review-and-plan`, click **Run now** and
+choose **"always allow"** at every permission prompt. Approvals persist per task and are revocable from
+the task's detail page. Skip this and the first real Sunday run stalls silently, waiting for a click.
+
+Then check what it actually did:
+
+```bash
+git log -1 --stat
+```
+
+It must have staged **only** `data.json` and/or `calisthenics_status.md`. Anything else means the
+commit-scope instructions aren't being followed — investigate before trusting it unattended.
+
+### 7. Copy the git allow rules to the user-level settings
+
+The Desktop docs name `~/.claude/settings.json` specifically as the file whose allow rules apply to
+scheduled-task sessions. Whether the project-level `.claude/settings.json` also applies is unverified,
+so copy the `permissions.allow` block across as well. If step 6 stalled on a git permission, this is
+why.
+
+### 8. Keep the machine awake
+
+Settings → **Desktop app → General** → **Keep computer awake**, if the Sunday review matters. Tasks
+only fire while the app is open and the Mac is awake; closing the lid still sleeps it.
+
+### 9. Confirm
+
+Ask in any Desktop session: *"show me my scheduled tasks."* Expect three, with the monthly one's next
+run landing on the first Sunday of next month rather than weekly — that's the setting most likely to
+have been misread.
+
+### 10. Only then, retire the old Cowork tasks
+
+The Cowork copies are paused, not deleted, so they cost nothing as a fallback. Sit through one real
+Sunday review on the new setup before deleting them.
 
 ## Key design rules (context for any agent operating this repo)
 
@@ -101,9 +169,13 @@ Wrap in a plist with `StartCalendarInterval`, which fires on wake if a run was m
 skips. Trade-offs versus Desktop: no interactive review of a task that commits, permissions must be
 pre-granted more broadly, and you own logging and failure alerting.
 
-**Cloud routines** — rejected. They run from a fresh clone with no local file access, so commits would
-come from the cloud runner and the dashboard's browser->GitHub-API write path is out of reach. The
-1-hour minimum interval would have been fine; the file access is not.
+**Cloud routines** (`/schedule` in the CLI) — not chosen, but a closer call than it first appeared.
+They run on Anthropic infrastructure from a fresh clone, need no machine on, and push to
+`claude/`-prefixed branches by default, which would give a PR-per-change workflow for free. The
+"no local file access" objection is weak here: all state is committed, and the dashboard talks to the
+GitHub API from the browser regardless of where Claude runs. Real trade-offs are the 1-hour minimum
+interval, a daily run cap, commits carrying your GitHub identity, and research-preview status. Worth
+revisiting if the app-must-be-open constraint becomes annoying.
 
 **A committed subagent definition** — `start-training-block` spawns a sports-science consultant
 subagent inline via its prompt. Promoting that to `.claude/agents/sports-science-consultant.md`, a
