@@ -188,3 +188,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 5km
 
 ---
+
+## 2026-07-30 | GYM_B
+- sleep: 4/5
+- soreness: 4/5
+- energy: 3/5
+- motivation: 3/5
+- rpe: 5/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 8/8/8 | 5kg | |
+| Dumbbell row | 12/12/12 | 15kg | |
+| Incline / knee push-up | 6/6/6 | — | |
+| DB shoulder press (seated) | 10/10 | 5 kg | |
+| Dead bug | 8/8 | 2,5kg | |
+| Side plank | 30/30 | — | |
+
+---
