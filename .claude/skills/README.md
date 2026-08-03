@@ -9,7 +9,7 @@ scheduled ones fire.
 | `weekly-review-and-plan` | Sunday 18:00 | Active | repo root | **yes** | The engine. Reviews both athletes, progresses gym loads / calisthenics skills / cycling levels, maintains mesocycle counters and deloads, flags FTP retests and block readiness, plans next week. |
 | `daily-session-brief` | daily 07:45 | **Paused** | repo root | no | Denis's morning brief: today's session, last loads, readiness call, cycling ladder rung + watts, skill add-on, fueling. Activate when a training block starts. |
 | `start-training-block` | not registered — run `/start-training-block` | — | repo root | **yes** | Builds Denis a deliberate 4-week overload block (`people/denis/training_block.md`). Manual by design — it commits four weeks of calendar. The Sunday review flags "📦 Block-ready" when the criteria pass. |
-| `monthly-nutrition-review` | 1st Sunday 19:00 | Active | repo root | no | Nutrition + supplement safety audit for both (doses per bodyweight, macros, bloodwork checklist). |
+| `monthly-nutrition-review` | Sunday 19:00, self-guards to the 1st Sunday | Active | repo root | no | Nutrition + supplement safety audit for both (doses per bodyweight, macros, bloodwork checklist). |
 
 The two that commit carry `disable-model-invocation: true`, so ordinary conversation can't trigger
 them — only an explicit `/name` or a scheduled run. **If a scheduled run of one of those two ever does
@@ -50,73 +50,73 @@ smoke test:
 It should produce a brief and change nothing — confirm with `git status`. If the skills don't appear in
 the menu, stop: nothing below will work until they do.
 
-### 2. Create the weekly review
+### 2. Set the permission mode — this is the step that decides whether it works
 
-Sidebar → **Routines** → **New routine** → **Local**. Fill in:
+Every routine form has a permission picker at the bottom-left of the **Instructions** box. It defaults
+to **Settings default**, which resolves to whatever `~/.claude/settings.json` says — in practice
+Manual. You must change it explicitly.
 
-| Field | Value |
+| Option | Verdict |
 |---|---|
-| Name | `weekly-review-and-plan` |
-| Description | Sunday weekly review for Denis + Alicja |
-| Instructions | ``Read `.claude/skills/weekly-review-and-plan/SKILL.md` in this project and follow it exactly.`` |
-| Folder | this repo's root |
-| Worktree | off — it needs to commit to the real working copy |
-| Schedule | **Weekly** → Sunday → 18:00 |
+| Settings default / Manual | ❌ stalls on the first `git` command, silently, with nobody watching |
+| **Accept edits** | ❌ **the trap** — auto-approves file *edits* but not Bash, so the weekly review still stalls on `git commit` |
+| Plan | ❌ plans, doesn't execute |
+| **Auto** | ✅ **use this** — a classifier gates each action; safe edits *and commands* proceed, destructive ones are blocked and surfaced |
+| Bypass permissions | ❌ the docs restrict it to "isolated environments like containers, VMs... where Claude Code cannot damage your host system" |
 
-Keep the instructions to that one line. The point of the split is that the real prompt stays in git; a
-second copy in the routine would be the drift problem all over again.
+Use **Auto** for all three. Keep the allow/deny rules in `.claude/settings.json` — a task's permission
+mode and the allow rules *stack*, they don't replace each other. The deny list matters most: this
+repo's whole commit discipline is *stage by name*, and a classifier could reasonably wave `git add -A`
+through as routine.
 
-### 3. Create the daily brief, then pause it
+### 3. Create the three routines
 
-Same form:
+Sidebar → **Routines** → **New routine** → **Local**. The Instructions field is always one line — keep
+the real prompt in git or you have recreated the drift problem this layout exists to prevent.
 
-| Field | Value |
-|---|---|
-| Name | `daily-session-brief` |
-| Instructions | ``Read `.claude/skills/daily-session-brief/SKILL.md` in this project and follow it exactly.`` |
-| Folder | this repo's root |
-| Schedule | **Daily** → 07:45 |
+| Name | Schedule | Permissions | Worktree | After saving |
+|---|---|---|---|---|
+| `weekly-review-and-plan` | Weekly → Sunday → 18:00 | Auto | **unchecked** | leave Active |
+| `daily-session-brief` | Daily → 07:45 | Auto | unchecked | set **Paused** |
+| `monthly-nutrition-review` | Weekly → Sunday → 19:00 | Auto | unchecked | leave Active |
 
-Save, then open it and set **Status → Paused**. It earns its place once a training block is running or
-FTP is tested; until then the weekly template is stable and the brief mostly restates it. Flip it to
-Active whenever you want it — it's read-only and commits nothing.
+Set **Folder** to this repo's root on all three. Leave **Worktree** unchecked — the weekly review
+commits to the real working copy, and a worktree would isolate its changes away from it.
 
-### 4. Create the monthly nutrition review — by asking, not by form
+### 4. Why the monthly review is scheduled weekly
 
-The presets are Manual, Hourly, Daily, Weekdays and Weekly. "First Sunday of the month" isn't among
-them, so create this one conversationally in any Desktop session:
+There is a **Custom** schedule option that accepts cron, but do not use `0 19 1-7 * 0` for "first
+Sunday". Claude Code follows vixie-cron semantics: *"When both day-of-month and day-of-week are
+constrained, a date matches if **either** field matches."* That expression therefore fires on days 1–7
+**and** every Sunday — about ten times a month. (Cowork's scheduler treated the same string as AND,
+which is why it worked there.)
 
-> Set up a local scheduled task called `monthly-nutrition-review`, in the sport-agent folder,
-> running at 19:00 on the first Sunday of each month, whose instructions are:
-> Read `.claude/skills/monthly-nutrition-review/SKILL.md` in this project and follow it exactly.
+So the routine runs weekly and the prompt carries a first-Sunday guard that exits in one line on the
+other three Sundays. Correct under either interpretation, and cheap because the task is read-only.
 
 ### 5. Don't register `start-training-block`
 
-It's manual-only and it's already a project skill, so `/start-training-block` in any session does
-exactly what a Manual routine's **Run now** would. Registering it just creates another thing to keep in
-sync.
+It's manual-only and already a project skill, so `/start-training-block` in any session does exactly
+what a Manual routine's **Run now** would. Registering it just adds a copy to keep in sync.
 
-### 6. Pre-approve the permissions
+### 6. Run it once and check the commit scope
 
-This is the step that makes unattended runs work. On `weekly-review-and-plan`, click **Run now** and
-choose **"always allow"** at every permission prompt. Approvals persist per task and are revocable from
-the task's detail page. Skip this and the first real Sunday run stalls silently, waiting for a click.
-
-Then check what it actually did:
+Click **Run now** on `weekly-review-and-plan`. On Auto this is no longer about pre-approving
+permissions — it is about verifying the thing no permission mode checks for you:
 
 ```bash
 git log -1 --stat
 ```
 
-It must have staged **only** `data.json` and/or `calisthenics_status.md`. Anything else means the
-commit-scope instructions aren't being followed — investigate before trusting it unattended.
+It must have staged **only** `data.json` and/or `calisthenics_status.md`. Anything wider means the
+commit-scope instructions aren't holding, and that is worth catching before it runs unattended against
+your training data.
 
 ### 7. Copy the git allow rules to the user-level settings
 
 The Desktop docs name `~/.claude/settings.json` specifically as the file whose allow rules apply to
 scheduled-task sessions. Whether the project-level `.claude/settings.json` also applies is unverified,
-so copy the `permissions.allow` block across as well. If step 6 stalled on a git permission, this is
-why.
+so copy the `permissions.allow` and `permissions.deny` blocks across as well.
 
 ### 8. Keep the machine awake
 
@@ -125,9 +125,8 @@ only fire while the app is open and the Mac is awake; closing the lid still slee
 
 ### 9. Confirm
 
-Ask in any Desktop session: *"show me my scheduled tasks."* Expect three, with the monthly one's next
-run landing on the first Sunday of next month rather than weekly — that's the setting most likely to
-have been misread.
+Ask in any Desktop session: *"show me my scheduled tasks."* Expect three, all on Auto. The monthly
+review will show a *weekly* next-run time — that is correct; its prompt no-ops on the other Sundays.
 
 ### 10. Only then, retire the old Cowork tasks
 
