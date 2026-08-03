@@ -47,6 +47,15 @@ together and which ones are allowed to commit.
 - Never edit `shared/` for a person-specific change. Never edit `people/_template/` except to improve
   the template itself.
 
+## Git workflow
+
+- Never commit to `main` or push it directly — branch protection requires changes to arrive via pull
+  request; a direct push only succeeds by bypassing the rules.
+- For any change: create a feature branch (short kebab-case name, e.g. `fix-routine-setup-guide`),
+  commit there, push the branch, and open a PR with `gh pr create`.
+- Rebase on `origin/main` before pushing if it has moved — dashboard workout logs land on `main`
+  continuously.
+
 ## Focus
 
 My current focus is transitioning from triathlon to gravel cycling and calisthenics while maintaining
