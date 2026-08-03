@@ -220,3 +220,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 5km
 
 ---
+
+## 2026-08-03 | GYM_A
+- sleep: 3/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 4/5
+- rpe: 5/10
+- notes: I didn't have pull-up bar, so instead of Assisted  pull up I did Lat Pully 15kg x 10x10x10.
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 12/12/12 | 7,5kg | |
+| Knee push-up | 6/6/6 | BW | |
+| Glute bridge / hip thrust | 15/15/15 | 10kg | |
+| Sit-ups | 15/15 | 2,5kg/hand | |
+| Plank | 40/30 | — | |
+
+---
