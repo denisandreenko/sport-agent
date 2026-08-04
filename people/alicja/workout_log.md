@@ -239,3 +239,16 @@ I did a bit different exercise instead of dumbbell row because I had different m
 | Plank | 40/30 | — | |
 
 ---
+
+## 2026-08-04 | RUN_EASY
+- sleep: 3/5
+- soreness: 3/5
+- energy: 5/5
+- motivation: 4/5
+- rpe: 4/10
+
+### Endurance
+- duration: 40min
+- notes: 4×15 s relaxed strides at the end; total 6,2km
+
+---
