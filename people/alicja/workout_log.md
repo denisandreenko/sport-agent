@@ -252,3 +252,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 4×15 s relaxed strides at the end; total 6,2km
 
 ---
+
+## 2026-08-06 | GYM_B
+- sleep: 5/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 4/5
+- rpe: 5/10
+- notes: I didn't have machine to do Dumbbell Row, so instead of it I did Lat Pully 20kg ×12×12×12.
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 10/10/10 | 5kg | |
+| Incline / knee push-up | 6/6/6 | — | |
+| DB shoulder press (seated) | 10/10 | 5 kg | |
+| Dead bug | 8/8 | 2,5kg | |
+| Side plank | 30/30 | — | |
+
+---
