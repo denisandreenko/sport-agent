@@ -38,7 +38,7 @@ For EACH supplement listed: dose vs evidence and safety. Specifically check per 
 - Magnesium stack: Zn:Cu ratio (~10:1), zinc vs 40 mg UL, Mg adequacy for training load
 - Creatine 10 g: maintenance evidence (3–5 g typical) — is 10 g justified per bodyweight?
 - Omega-3: therapeutic range per person
-- Ergogenics (citrulline, beta-alanine, caffeine 200 mg): timing vs schedule; caffeine per kg for Alicja
+- Ergogenics (citrulline, caffeine 200 mg): timing vs schedule; caffeine per kg for Alicja
 - Ashwagandha (Denis only): thyroid interaction, 6–8 week cycling
 - Brazil nuts/selenium: UL check
 Do not audit anything not present in the files.
