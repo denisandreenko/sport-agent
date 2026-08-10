@@ -284,3 +284,23 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 6km
 
 ---
+
+## 2026-08-10 | GYM_A
+- sleep: 4/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 5/5
+- rpe: 7/10
+- notes: I felt dizziness
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 12/12/12 | 8kg | |
+| Knee push-up | 6/6/6 | BW | |
+| Assisted pull-up | 8/4/6 | 2 bands (G+R) | |
+| Glute bridge / hip thrust | 5/5/0 | 20kg | |
+| Sit-ups | 15/15 | 5kg/hand | |
+| Plank | 40/40 | — | |
+
+---
