@@ -317,3 +317,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 15min/7speed stair climber, 10min/8,5speed treadmill,15 min/1speed elliptical trainer
 
 ---
+
+## 2026-08-13 | GYM_A
+- sleep: 4/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 5/5
+- rpe: 5/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 12/12/12 | 10kg | |
+| Knee push-up | 6/6/6 | BW | |
+| Assisted pull-up | 6/6/6 | 2 bands (G+R) | |
+| Glute bridge / hip thrust | 8/8/8 | 20kg | |
+| Sit-ups | 15/15 | 5kg/hand | |
+| Plank | 40/40 | — | |
+
+---
