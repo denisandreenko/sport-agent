@@ -349,3 +349,12 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 4min/8speed stair climber, 11min/7speed stair climber,15min/8,5speed treadmill,10 min/2speed elliptical trainer
 
 ---
+
+## 2026-08-16 | MOBILITY_FULL
+- sleep: 5/5
+- soreness: 3/5
+- energy: 3/5
+- motivation: 3/5
+- rpe: 5/10
+
+---
