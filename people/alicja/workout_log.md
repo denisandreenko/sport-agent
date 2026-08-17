@@ -358,3 +358,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - rpe: 5/10
 
 ---
+
+## 2026-08-17 | GYM_A
+- sleep: 4/5
+- soreness: 4/5
+- energy: 4/5
+- motivation: 4/5
+- rpe: 5/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 12/10/10 | 12,5kg | |
+| Knee push-up | 7/7/6 | BW | |
+| Assisted pull-up | 6/5/4 | 2 bands (G+R) | |
+| Glute bridge / hip thrust | 10/10/10 | 20kg | |
+| Sit-ups | 15/15 | 5kg/hand | |
+| Plank | 40/40 | — | |
+
+---
