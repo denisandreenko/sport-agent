@@ -390,3 +390,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 5min/8speed stair climber, 10min/7speed stair climber,7min/9speed treadmill, 8min/8,5speed treadmill,10 min/2speed elliptical trainer
 
 ---
+
+## 2026-08-20 | GYM_B
+- sleep: 4/5
+- soreness: 4/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 4/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 12/12/12 | 7,5kg | |
+| Dumbbell row | 12/12/12 | 7,5kg | |
+| Incline / knee push-up | 7/7/7 | — | |
+| DB shoulder press (seated) | 10/10 | 5 kg | |
+| Dead bug | 8/8 | 2,5kg | |
+| Side plank | 30/30 | — | |
+
+---
