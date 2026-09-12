@@ -551,3 +551,23 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: Steady run
 
 ---
+
+## 2026-09-12 | GYM_B
+- sleep: 5/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 6/10
+- notes: 10 minutes run, 5x 100 m sprint (13speed)/ 100 m easy run (8,5 speed)
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 12/12/12 | 10kg | |
+| Dumbbell row | 12/12/12 | 8kg | |
+| Incline / knee push-up | 10/10/8 | — | |
+| DB shoulder press (seated) | 8/8 | 6 kg | |
+| Dead bug | 10/10 | 2,5kg | |
+| Side plank | 30/30 | — | |
+
+---
