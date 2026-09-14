@@ -571,3 +571,23 @@ I did a bit different exercise instead of dumbbell row because I had different m
 | Side plank | 30/30 | — | |
 
 ---
+
+## 2026-09-14 | GYM_A
+- sleep: 5/5
+- soreness: 3/5
+- energy: 4/5
+- motivation: 4/5
+- rpe: 5/10
+- notes: Knee push-up becomes push-up
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 8/8/8 | 14kg | |
+| Knee push-up | 3/3/3 | BW | |
+| Assisted pull-up | 9/7/6 | 2 bands (O+R) | |
+| Glute bridge / hip thrust | 12/12/12 | 20kg | |
+| Sit-ups | 10/10 | 5kg/hand | |
+| Plank | 40/40 | — | |
+
+---
