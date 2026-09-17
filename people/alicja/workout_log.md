@@ -604,3 +604,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: Easy run
 
 ---
+
+## 2026-09-17 | GYM_B
+- sleep: 5/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 4/5
+- notes: Knee push-up is negative push-up
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 10/10/10 | 12kg | |
+| Dumbbell row | 10/9/8 | 10kg | |
+| Incline / knee push-up | 6/5/5 | — | |
+| DB shoulder press (seated) | 9/8 | 6 kg | |
+| Dead bug | 10/10 | 2,5kg | |
+| Side plank | 30/30 | — | |
+
+---
