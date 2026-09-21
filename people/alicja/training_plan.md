@@ -17,7 +17,7 @@ General methodology is in `shared/training_principles.md`. This file holds Alicj
 | **Tue** | Easy run, Zone 2 (4–7 km) + strides | Easy effort aids recovery from Mon's gym; never hard the day after legs |
 | **Wed** | Rest + light mobility | Primes fresh legs for Thursday's gym |
 | **Thu** | Gym B (full body) | Fresh after Wed rest → protects strength (priority #1) |
-| **Fri** | Run — easy in base phase; **quality** (threshold → later VO2max) once progressing | Saturday rest follows; if legs feel heavy from Thu's gym, keep it easy |
+| **Fri** | **Quality run** — threshold / sprints, alternating week to week | Saturday rest follows; if legs feel heavy from Thu's gym, keep it easy |
 | **Sat** | Rest | Full recovery day |
 | **Sun** | Full mobility & splits (longer session) | Dedicated flexibility work (priority #2) |
 
@@ -25,7 +25,7 @@ Plus a short **daily mobility minimum** every day (~8–10 min, see `mobility_sp
 
 **Why this layout (strength is priority #1):**
 - Both gym days are preceded by a rest or light day (Mon after the weekend, Thu after Wed rest) so legs are fresh for lifting.
-- The two runs sit *after* gym days but each is followed by a rest day, and only the easy run lands right after a gym day in the base phase.
+- The two runs sit *after* gym days but each is followed by a rest day.
 - Gym and hard running never share a day; there are always ≥2 days between the two gym sessions.
 - Only mild residual conflict: Friday's quality run follows Thursday's gym — if legs are heavy, keep Friday easy. Strength comes first.
 

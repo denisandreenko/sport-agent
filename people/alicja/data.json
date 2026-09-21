@@ -37,10 +37,10 @@
       "note": "Keep 2–3 reps in reserve on every set — never to failure. Warm-up ~5 min: 5 min easy cardio (walk/bike) + leg swings 10/side, arm circles, bodyweight squats ×10, scapular pulls ×10, glute bridge ×10.",
       "exercises": [
         { "name": "Goblet squat", "target": "3×8–12", "stub": "12.5", "cue": "Light DB/kettlebell held at chest; sit tall. Bodyweight squat is a valid substitution." },
-        { "name": "Knee push-up", "target": "3×6–10", "stub": "BW", "cue": "Progress per the push-up ladder in gym_training_plan.md." },
+        { "name": "Negative push-up", "target": "3×3–5", "stub": "BW", "cue": "Start at the top, lower slowly (3–5 s) to the floor, reset. Progress per the push-up ladder in gym_training_plan.md." },
         { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (G+R)", "cue": "Band or machine; reduce assistance over time. Progress per the pull-up ladder." },
-        { "name": "Glute bridge / hip thrust", "target": "3×10–15", "stub": "20", "cue": "Squeeze glutes at the top. Load only as far as all 3 sets stay inside the rep range." },
-        { "name": "Sit-ups", "target": "2×12–15", "stub": "6 kg/hand", "cue": "Controlled, no neck pull." },
+        { "name": "Hip thrust", "target": "3×10–15", "stub": "20", "cue": "Squeeze glutes at the top. Load only as far as all 3 sets stay inside the rep range." },
+        { "name": "Hanging side knee raises", "target": "2×8–12/side", "stub": "BW", "cue": "Hang from the bar, knees up and across to one side; no swing, control the lower." },
         { "name": "Plank", "target": "2×30–50 s", "stub": "BW", "cue": "Brace, flat back." }
       ],
       "mobility": "Daily mobility minimum (~8–10 min) still applies."
@@ -52,9 +52,9 @@
       "exercises": [
         { "name": "Reverse lunge", "target": "3×8/leg", "stub": "10", "cue": "Control the descent. Drop back to 5 kg and check form if the left knee complains." },
         { "name": "Dumbbell row", "target": "3×8–12", "stub": "10", "cue": "Pull to the ribs, no shrug. Chest-supported row or lat pulldown is a valid substitution." },
-        { "name": "Incline / knee push-up", "target": "3×6–10", "stub": "BW", "cue": "Hands elevated = easier." },
+        { "name": "Negative push-up", "target": "3×3–5", "stub": "BW", "cue": "Same as Gym A — slow 3–5 s lower. Drop to knee push-up if form breaks." },
         { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "5", "cue": "Light start." },
-        { "name": "Dead bug", "target": "2×8/side", "stub": "2.5", "cue": "Anti-extension core." },
+        { "name": "Tuck reverse crunch", "target": "2×12", "stub": "BW", "cue": "Knees tucked, curl hips off the floor, lower slowly." },
         { "name": "Side plank", "target": "2×25–45 s/side", "stub": "BW", "cue": "Oblique/core." }
       ],
       "mobility": "Daily mobility minimum (~8–10 min) still applies."
@@ -72,12 +72,12 @@
     },
     "RUN_QUALITY": {
       "kind": "endurance",
-      "label": "Quality run (easy in base phase)",
-      "purpose": "Structured intensity once the base is consolidated. If legs are heavy from Thursday's gym, keep it easy.",
+      "label": "Quality run — threshold / sprints",
+      "purpose": "Structured intensity, alternating threshold and sprints week to week. If legs are heavy from Thursday's gym, keep it easy.",
       "options": [
-        "Base phase (wks 1–3): easy Z2 run, 4–7 km",
-        "Threshold (wks 4–7): 10 min easy → 3–5 × 4–5 min comfortably hard / 2 min jog → cooldown",
-        "VO2max (wks 8+): warm-up + strides → 5–6 × 1 min hard / 2 min easy, or 8–10 × 60–90 s uphill"
+        "Threshold: 10 min easy → 3–5 × 4–5 min comfortably hard / 2 min jog → cooldown",
+        "Sprints: 10 min easy + strides → 100/200/300/200/100 m ladder hard, equal easy jog between → 5 min walk cooldown",
+        "Later — VO2max: warm-up + strides → 5–6 × 1 min hard / 2 min easy, or 8–10 × 60–90 s uphill"
       ],
       "fueling": "Optional small pre-run carb dose only for genuinely hard interval days if energy feels low.",
       "prep": "Leg swings 10/side + 5–10 min easy jog warm-up."
