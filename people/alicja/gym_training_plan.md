@@ -7,7 +7,9 @@ ladders**, which exist nowhere else. Never restate a load here.
 Two full-body sessions on a fixed schedule, **Monday (A)** and **Thursday (B)**, three days apart for
 recovery. The goal is a strength and muscle base with clean technique, so the governing rule is
 **2–3 reps in reserve on every set — never to failure**, and technique before load. Increase load in
-small jumps (1–2 kg on dumbbells).
+small jumps (1–2 kg on dumbbells). The one exception is the knee push-up **back-off** set, which runs to
+1–2 RIR: a mastered bodyweight movement with no failure risk, and the hypertrophy volume the low-rep
+ladder sets don't provide on their own.
 
 ## Bodyweight progression ladders
 
@@ -21,8 +23,11 @@ Her current stage is whichever variation `data.json` names as the exercise — d
 | Wall push-up | 3 × 12 |
 | Incline push-up (hands on bench) | 3 × 10 |
 | Knee push-up | 3 × 10 |
-| Negative full push-up (slow lower) | 3 × 5 |
+| Full push-ups + negatives to fill (slow lower) | 3 × 5 total; advance when all 5 are full |
 | Full push-up | 3 × 8 |
+
+From the negative stage onward, follow the ladder sets with the knee push-up back-off (`data.json`):
+the ladder sets build the skill and strength, the back-off builds the muscle.
 
 ### Pull-up
 
