@@ -83,9 +83,9 @@ the real prompt in git or you have recreated the drift problem this layout exist
 Set **Folder** to this repo's root on all three. Tick **Worktree** for the weekly review, source
 branch `main`: the run then gets an isolated checkout cut from `main`, so it never inherits whatever
 branch or uncommitted edits your working copy happens to have, and never leaves your checkout parked
-on a `weekly-review-*` branch afterwards. Its changes reach `main` through the PR it opens, not
-through the working copy. The two read-only routines change nothing, so Worktree is irrelevant for
-them — leave it unchecked.
+on a stray branch afterwards. It pushes its commit straight to `main` — the same trust model the
+dashboard has always used for workout logs — so your working copy is simply behind until you pull.
+The two read-only routines change nothing, so Worktree is irrelevant for them — leave it unchecked.
 
 ### 4. Why the monthly review is on a fixed date, not "first Sunday"
 
@@ -110,18 +110,17 @@ what a Manual routine's **Run now** would. Registering it just adds a copy to ke
 
 Click **Run now** on `weekly-review-and-plan`. On Auto this is no longer about pre-approving
 permissions — it is about verifying the thing no permission mode checks for you. The run works in a
-worktree and ends by opening a PR, so check the PR's file list rather than your working copy:
+worktree and pushes to `main`, so check the pushed commit rather than your working copy:
 
 ```bash
-gh pr list --state open --json number,headRefName
-gh pr diff <number> --name-only
+git fetch origin && git log origin/main -1 --stat
 ```
 
-It must list **only** `data.json` and/or `calisthenics_status.md`. Anything wider means the
+It must have touched **only** `data.json` and/or `calisthenics_status.md`. Anything wider means the
 commit-scope instructions aren't holding, and that is worth catching before it runs unattended against
-your training data. Merge the PR the same day: the next Sunday's run branches from `main`, and the
-mesocycle counter and load stubs it relies on are in that PR. If a review PR is still open when the
-next run starts, the run branches from that PR instead and says "Stacked on #N" in its first line.
+your training data. If the run reports that the push failed and it pushed a `weekly-review-*` branch
+instead, merge that branch by hand — the next Sunday's run branches from `main` and needs the counter
+and stub updates in it.
 
 ### 7. Copy the git allow rules to the user-level settings
 

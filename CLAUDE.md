@@ -50,7 +50,9 @@ together and which ones are allowed to commit.
 ## Git workflow
 
 - Never commit to `main` or push it directly — branch protection requires changes to arrive via pull
-  request; a direct push only succeeds by bypassing the rules.
+  request; a direct push only succeeds by bypassing the rules. The one exception is the scheduled
+  `weekly-review-and-plan` run, which pushes its `data.json` / `calisthenics_status.md` updates
+  straight to `main` per its own prompt (the dashboard's workout-log commits already work this way).
 - For any change: create a feature branch (short kebab-case name, e.g. `fix-routine-setup-guide`),
   commit there, push the branch, and open a PR with `gh pr create`.
 - Rebase on `origin/main` before pushing if it has moved — dashboard workout logs land on `main`

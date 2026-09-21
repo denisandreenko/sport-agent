@@ -17,11 +17,10 @@
       "Bash(git log)",
       "Bash(git commit *)",
       "Bash(git fetch origin)",
-      "Bash(git branch -r)",
       "Bash(git checkout -b weekly-review-*)",
       "Bash(git push -u origin weekly-review-*)",
-      "Bash(gh pr list *)",
-      "Bash(gh pr create *)"
+      "Bash(git push origin HEAD:main)",
+      "Bash(git pull --rebase origin main)"
     ],
     "deny": [
       "Bash(git add -A*)",

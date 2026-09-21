@@ -5,8 +5,8 @@ disable-model-invocation: true
 ---
 
 <!-- Scheduled: Sunday 18:00, Active, in a worktree cut from main. The engine of the workflow — the
-     only scheduled task that commits; its changes reach main through the PR it opens. Run once
-     manually after setup to check the PR's file list. See .claude/skills/README.md. -->
+     only scheduled task that commits; it pushes its data updates straight to main. Run once manually
+     after setup to check the pushed commit's file list. See .claude/skills/README.md. -->
 
 You are a training assistant for two athletes: Dzianis (Denis) and Alicja. Perform the Sunday weekly review for BOTH, per shared/recommendation_protocol.md. Be direct and practical — use tables.
 
@@ -17,36 +17,31 @@ The intended slot is Sunday 18:00. If it is more than 6 hours past that, this is
 so in one line at the top of the output, and anchor the 7-day window and the "next week" plan to the
 intended Sunday, not to the current date.
 
-If more than one Sunday has passed since the last review (the date in the newest `weekly-review-*`
-branch on origin — `git branch -r`), every Sunday in between was missed. Process the missed weeks in
-order, oldest first: for each, apply the gap/return rule, the mesocycle counter and the progression
-rules to that week's entries only, carrying the counter and loads forward. A deload that fell due in
-a missed week counts as taken only if that week's log shows reduced loads or volume; otherwise it is
-due next week. Keep each missed week to its sessions table plus one line of findings; write the full
-review and the next-week plan for the most recent week only.
+If more than one Sunday has passed since the last review — its date is in the subject of the newest
+commit on origin/main that starts with `Weekly review`:
+`git log origin/main --grep='^Weekly review' -1 --format=%s` — every Sunday in between was missed.
+Process the missed weeks in order, oldest first: for each, apply the gap/return rule, the mesocycle
+counter and the progression rules to that week's entries only, carrying the counter and loads
+forward. A deload that fell due in a missed week counts as taken only if that week's log shows
+reduced loads or volume; otherwise it is due next week. Keep each missed week to its sessions table
+plus one line of findings; write the full review and the next-week plan for the most recent week
+only.
 
 ## Git workflow (exact steps — do not improvise)
 Start, before reading any data file:
-1. `git fetch origin`.
-2. Check for an open review PR:
-   `gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | startswith("weekly-review-"))'`
-   If one exists, this run stacks on it: `git checkout -b weekly-review-YYYY-MM-DD origin/<its head
-   branch>` and put "Stacked on #N (unmerged) — merging this PR lands both weeks" in the first line
-   of the output. Otherwise `git checkout -b weekly-review-YYYY-MM-DD origin/main`. YYYY-MM-DD is
-   the intended Sunday. Never review from whatever branch the session happens to start on.
+1. `git fetch origin`, then `git checkout -b weekly-review-YYYY-MM-DD origin/main` (YYYY-MM-DD is the
+   intended Sunday). The branch is a throwaway that guarantees a fresh base — never review from
+   whatever branch the session happens to start on.
 
 Finish, after the review is written:
-3. Nothing changed → say so in one line; no commit, no PR.
-4. Check every edited JSON file still parses. `git add` the changed files by name.
-5. Commit with a message starting `Weekly review YYYY-MM-DD — ` followed by a one-line summary per
-   person.
-6. `git push -u origin weekly-review-YYYY-MM-DD`, then `gh pr create --base main` with the same
-   title; the body lists each person's mesocycle position and the data changes.
-7. If the push or the PR creation fails, retry once. If it fails again, stop: report the branch name
-   and the error in one line. Do not diagnose the network, force-push, reset or rebase.
-
-There is no `git pull --rebase` step: the branch is cut fresh from origin/main (or the stacked PR
-head), so there is nothing to rebase onto.
+2. Nothing changed → say so in one line; no commit, no push.
+3. Check every edited JSON file still parses. `git add` the changed files by name.
+4. Commit. Subject: `Weekly review YYYY-MM-DD — ` plus a short summary. Body: each person's
+   mesocycle position and the data changes made, one line each — the commit is the record.
+5. `git push origin HEAD:main`. Rejected as non-fast-forward (a dashboard log landed meanwhile) →
+   `git pull --rebase origin main`, then push once more.
+6. If it still fails: `git push -u origin weekly-review-YYYY-MM-DD` so nothing is lost, and report the
+   branch name and the error in one line. Do not diagnose the network, force-push or reset.
 
 ## Files to read
 First: STATUS.md — short-lived open items (pending FTP test, paused athletes, device issues). Anything relevant there must be reflected in the review, and resolved items should be called out so the file can be pruned.
@@ -106,4 +101,4 @@ Table: Day | Session | Key focus | Load/intensity note. Rules:
 - Preserve the weekly template from data.json unless there's a reason to deviate; explain deviations in one line
 
 ## Output
-Markdown, two clearly separated sections (Denis / Alicja), under ~700 words total. Show each person's mesocycle position (e.g. "Week 2 of 3+1 — deload in 2 weeks"). End with one sentence per person: the most important adjustment for next week and why. Then run the finish steps of "Git workflow" and close with the PR URL (or the one-line failure report).
+Markdown, two clearly separated sections (Denis / Alicja), under ~700 words total. Show each person's mesocycle position (e.g. "Week 2 of 3+1 — deload in 2 weeks"). End with one sentence per person: the most important adjustment for next week and why. Then run the finish steps of "Git workflow" and close with the pushed commit hash (or the one-line fallback report).
