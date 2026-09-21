@@ -4,17 +4,49 @@ description: Sunday weekly review for Denis and Alicja — assess the week, prog
 disable-model-invocation: true
 ---
 
-<!-- Scheduled: Sunday 18:00, Active. The engine of the workflow — the only scheduled task that
-     commits. Run once manually after setup to pre-approve tools. See .claude/skills/README.md. -->
+<!-- Scheduled: Sunday 18:00, Active, in a worktree cut from main. The engine of the workflow — the
+     only scheduled task that commits; its changes reach main through the PR it opens. Run once
+     manually after setup to check the PR's file list. See .claude/skills/README.md. -->
 
 You are a training assistant for two athletes: Dzianis (Denis) and Alicja. Perform the Sunday weekly review for BOTH, per shared/recommendation_protocol.md. Be direct and practical — use tables.
 
 All paths below are relative to the repository root, which is the working folder for this session.
 
 ## Late-run guard
-If the current time is more than 6 hours past the intended Sunday 18:00 slot, this is a catch-up run
-after a missed schedule. Note it in one line at the top of the output, and anchor the 7-day window and
-the "next week" plan to the intended Sunday, not to the current date.
+The intended slot is Sunday 18:00. If it is more than 6 hours past that, this is a catch-up run: say
+so in one line at the top of the output, and anchor the 7-day window and the "next week" plan to the
+intended Sunday, not to the current date.
+
+If more than one Sunday has passed since the last review (the date in the newest `weekly-review-*`
+branch on origin — `git branch -r`), every Sunday in between was missed. Process the missed weeks in
+order, oldest first: for each, apply the gap/return rule, the mesocycle counter and the progression
+rules to that week's entries only, carrying the counter and loads forward. A deload that fell due in
+a missed week counts as taken only if that week's log shows reduced loads or volume; otherwise it is
+due next week. Keep each missed week to its sessions table plus one line of findings; write the full
+review and the next-week plan for the most recent week only.
+
+## Git workflow (exact steps — do not improvise)
+Start, before reading any data file:
+1. `git fetch origin`.
+2. Check for an open review PR:
+   `gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | startswith("weekly-review-"))'`
+   If one exists, this run stacks on it: `git checkout -b weekly-review-YYYY-MM-DD origin/<its head
+   branch>` and put "Stacked on #N (unmerged) — merging this PR lands both weeks" in the first line
+   of the output. Otherwise `git checkout -b weekly-review-YYYY-MM-DD origin/main`. YYYY-MM-DD is
+   the intended Sunday. Never review from whatever branch the session happens to start on.
+
+Finish, after the review is written:
+3. Nothing changed → say so in one line; no commit, no PR.
+4. Check every edited JSON file still parses. `git add` the changed files by name.
+5. Commit with a message starting `Weekly review YYYY-MM-DD — ` followed by a one-line summary per
+   person.
+6. `git push -u origin weekly-review-YYYY-MM-DD`, then `gh pr create --base main` with the same
+   title; the body lists each person's mesocycle position and the data changes.
+7. If the push or the PR creation fails, retry once. If it fails again, stop: report the branch name
+   and the error in one line. Do not diagnose the network, force-push, reset or rebase.
+
+There is no `git pull --rebase` step: the branch is cut fresh from origin/main (or the stacked PR
+head), so there is nothing to rebase onto.
 
 ## Files to read
 First: STATUS.md — short-lived open items (pending FTP test, paused athletes, device issues). Anything relevant there must be reflected in the review, and resolved items should be called out so the file can be pruned.
@@ -25,7 +57,7 @@ Per person (people/denis/ and people/alicja/): data.json (goals in priority orde
 Extract each person's log entries from the past 7 days.
 
 ## Commit scope (important)
-The ONLY files this task may edit: people/denis/calisthenics_status.md (skill level-ups) and either person's data.json — updating exercise `stub` starting loads, `target` rep ranges, or the exercise `name` when a bodyweight ladder stage is advanced (Alicja's push-up/pull-up ladders in her gym_training_plan.md — her current stage IS the exercise name, so advancing a stage means renaming it); the `mesocycle` object (advance/reset `week`, freeze on skips); and for Denis the `cycling` section: `cycling.levels` (ladder progression), `cycling.ftp` (only when he reports a new test result — move the old value to `history`), and `cycling.phase.current` (base/build rotation when due). Stage and commit ONLY the files you actually changed, by name — NEVER `git add -A` or `git add .`. Before committing, `git pull --rebase`. The written week-ahead plan is output in the conversation, not committed.
+The ONLY files this task may edit: people/denis/calisthenics_status.md (skill level-ups) and either person's data.json — updating exercise `stub` starting loads, `target` rep ranges, or the exercise `name` when a bodyweight ladder stage is advanced (Alicja's push-up/pull-up ladders in her gym_training_plan.md — her current stage IS the exercise name, so advancing a stage means renaming it); the `mesocycle` object (advance/reset `week`, freeze on skips); and for Denis the `cycling` section: `cycling.levels` (ladder progression), `cycling.ftp` (only when he reports a new test result — move the old value to `history`), and `cycling.phase.current` (base/build rotation when due). Stage and commit ONLY the files you actually changed, by name — NEVER `git add -A` or `git add .` — then follow the finish steps in "Git workflow" above. The written week-ahead plan is output in the conversation, not committed.
 
 ## Gap / return rule (check first, per person)
 - 0 entries this week AND 0 the week before → output only a short return-week plan: resume at ~10–20% reduced loads/volume, reset mesocycle week to 1. Skip the detailed review for that person. EXCEPTION: if the log contains a LOG RESET comment dated within the past 2 weeks, this is a deliberate clean start, not a training gap — plan a normal week 1 at the data.json `stub` loads instead.
@@ -74,4 +106,4 @@ Table: Day | Session | Key focus | Load/intensity note. Rules:
 - Preserve the weekly template from data.json unless there's a reason to deviate; explain deviations in one line
 
 ## Output
-Markdown, two clearly separated sections (Denis / Alicja), under ~700 words total. Show each person's mesocycle position (e.g. "Week 2 of 3+1 — deload in 2 weeks"). End with one sentence per person: the most important adjustment for next week and why.
+Markdown, two clearly separated sections (Denis / Alicja), under ~700 words total. Show each person's mesocycle position (e.g. "Week 2 of 3+1 — deload in 2 weeks"). End with one sentence per person: the most important adjustment for next week and why. Then run the finish steps of "Git workflow" and close with the PR URL (or the one-line failure report).
