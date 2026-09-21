@@ -11,7 +11,6 @@ detail is in `.claude/skills/README.md`.
 - [ ] Create the four stub files in `~/.claude/scheduled-tasks/`, or ask Claude in a Desktop session
       to set them up
 - [ ] Set schedule / folder / enabled state per the table in `.claude/skills/README.md`
-      (the monthly review's "first Sunday" has no preset — set it conversationally)
 - [ ] Copy the git allow rules from `.claude/settings.json` into `~/.claude/settings.json` too — the
       Desktop docs name *that* file specifically for scheduled-task sessions. Unverified which one
       actually applies; if a scheduled run stalls on a git permission, this is why

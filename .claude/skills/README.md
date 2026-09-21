@@ -9,7 +9,7 @@ scheduled ones fire.
 | `weekly-review-and-plan` | Sunday 18:00 | Active | repo root | **yes** | The engine. Reviews both athletes, progresses gym loads / calisthenics skills / cycling levels, maintains mesocycle counters and deloads, flags FTP retests and block readiness, plans next week. |
 | `daily-session-brief` | daily 07:45 | **Paused** | repo root | no | Denis's morning brief: today's session, last loads, readiness call, cycling ladder rung + watts, skill add-on, fueling. Activate when a training block starts. |
 | `start-training-block` | not registered — run `/start-training-block` | — | repo root | **yes** | Builds Denis a deliberate 4-week overload block (`people/denis/training_block.md`). Manual by design — it commits four weeks of calendar. The Sunday review flags "📦 Block-ready" when the criteria pass. |
-| `monthly-nutrition-review` | Sunday 19:00, self-guards to the 1st Sunday | Active | repo root | no | Nutrition + supplement safety audit for both (doses per bodyweight, macros, bloodwork checklist). |
+| `monthly-nutrition-review` | 1st of the month, 19:00 | Active | repo root | no | Nutrition + supplement safety audit for both (doses per bodyweight, macros, bloodwork checklist). |
 
 The two that commit carry `disable-model-invocation: true`, so ordinary conversation can't trigger
 them — only an explicit `/name` or a scheduled run. **If a scheduled run of one of those two ever does
@@ -78,21 +78,24 @@ the real prompt in git or you have recreated the drift problem this layout exist
 |---|---|---|---|---|
 | `weekly-review-and-plan` | Weekly → Sunday → 18:00 | Auto | **unchecked** | leave Active |
 | `daily-session-brief` | Daily → 07:45 | Auto | unchecked | set **Paused** |
-| `monthly-nutrition-review` | Weekly → Sunday → 19:00 | Auto | unchecked | leave Active |
+| `monthly-nutrition-review` | Monthly → day 1 → 19:00 | Auto | unchecked | leave Active |
 
 Set **Folder** to this repo's root on all three. Leave **Worktree** unchecked — the weekly review
 commits to the real working copy, and a worktree would isolate its changes away from it.
 
-### 4. Why the monthly review is scheduled weekly
+### 4. Why the monthly review is on a fixed date, not "first Sunday"
 
-There is a **Custom** schedule option that accepts cron, but do not use `0 19 1-7 * 0` for "first
-Sunday". Claude Code follows vixie-cron semantics: *"When both day-of-month and day-of-week are
-constrained, a date matches if **either** field matches."* That expression therefore fires on days 1–7
-**and** every Sunday — about ten times a month. (Cowork's scheduler treated the same string as AND,
-which is why it worked there.)
+Cron cannot express "first Sunday of the month". There is a **Custom** schedule option that accepts
+cron, but do not use `0 19 1-7 * 0` for it. Claude Code follows vixie-cron semantics: *"When both
+day-of-month and day-of-week are constrained, a date matches if **either** field matches."* That
+expression therefore fires on days 1–7 **and** every Sunday — about eleven times a month. (Cowork's
+scheduler treated the same string as AND, which is why it worked there.) The earlier workaround —
+schedule weekly and have the prompt exit in one line on the other Sundays — was correct but still
+started four or five sessions a month and cluttered the routine's history with no-op runs.
 
-So the routine runs weekly and the prompt carries a first-Sunday guard that exits in one line on the
-other three Sundays. Correct under either interpretation, and cheap because the task is read-only.
+So the routine runs on the 1st at 19:00 (`0 19 1 * *`): exactly one session a month, whatever weekday
+that is, and the prompt needs no date guard. The review is read-only and looks back over four weeks
+of logs, so it does not need to land right after the Sunday weekly review.
 
 ### 5. Don't register `start-training-block`
 
@@ -126,7 +129,7 @@ only fire while the app is open and the Mac is awake; closing the lid still slee
 ### 9. Confirm
 
 Ask in any Desktop session: *"show me my scheduled tasks."* Expect three, all on Auto. The monthly
-review will show a *weekly* next-run time — that is correct; its prompt no-ops on the other Sundays.
+review's next run should be the 1st of next month at 19:00.
 
 ### 10. Only then, retire the old Cowork tasks
 
