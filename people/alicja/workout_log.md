@@ -623,3 +623,22 @@ I did a bit different exercise instead of dumbbell row because I had different m
 | Side plank | 30/30 | — | |
 
 ---
+
+## 2026-09-21 | GYM_A
+- sleep: 5/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 5/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 9/9/8 | 14kg | |
+| Negative push-up | 5/5/5 | — | |
+| Assisted pull-up | 9/7/6 | 2 bands (O+R) | |
+| Hip thrust | 8/8/8 | 24kg | |
+| Hanging side knee raises | 7/5 | — | |
+| Plank | 40/40 | — | |
+
+---
