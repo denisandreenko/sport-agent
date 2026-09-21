@@ -35,9 +35,9 @@ Her current stage is whichever variation `data.json` names as the exercise — d
 
 ### Core
 
-No named stages — progress sit-ups and planks by adding reps or time first, then move to harder
-variations in this order: dead bug → hollow hold → leg raises. Judge the current point from the log
-rather than from an exercise name.
+No named stages — progress hanging side knee raises, tuck reverse crunches and planks by adding reps
+or time first, then move to harder variations: hollow hold → straight-leg / hanging leg raises. Judge
+the current point from the log rather than from an exercise name.
 
 ## Progression & deload
 
