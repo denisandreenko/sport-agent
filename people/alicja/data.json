@@ -36,10 +36,10 @@
       "label": "Gym A — Full body",
       "note": "Keep 2–3 reps in reserve on every set — never to failure. Warm-up ~5 min: 5 min easy cardio (walk/bike) + leg swings 10/side, arm circles, bodyweight squats ×10, scapular pulls ×10, glute bridge ×10.",
       "exercises": [
-        { "name": "Goblet squat", "target": "3×8–12", "stub": "12.5", "cue": "Light DB/kettlebell held at chest; sit tall. Bodyweight squat is a valid substitution." },
+        { "name": "Goblet squat", "target": "3×8–12", "stub": "14", "cue": "Light DB/kettlebell held at chest; sit tall. Bodyweight squat is a valid substitution." },
         { "name": "Push-up — full + negatives", "target": "3×5", "stub": "BW", "cue": "Full push-ups until ~2 RIR, then negatives (3–5 s lower) to 5 total. Log full reps only; at 5/5/5 full, move to Full push-up 3×8 per the ladder in gym_training_plan.md." },
         { "name": "Knee push-up back-off", "target": "2×10–15", "stub": "BW", "cue": "Right after the push-up sets. The hypertrophy set — 1–2 RIR (harder than the usual 2–3), no failure risk on a mastered movement. 1 set on an amber day." },
-        { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (G+R)", "cue": "Band or machine; reduce assistance over time. Progress per the pull-up ladder." },
+        { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (O+R)", "cue": "Band or machine; reduce assistance over time. Progress per the pull-up ladder." },
         { "name": "Hip thrust", "target": "3×10–15", "stub": "20", "cue": "Squeeze glutes at the top. Load only as far as all 3 sets stay inside the rep range." },
         { "name": "Hanging side knee raises", "target": "2×8–12/side", "stub": "BW", "cue": "Hang from the bar, knees up and across to one side; no swing, control the lower." },
         { "name": "Plank", "target": "2×30–50 s", "stub": "BW", "cue": "Brace, flat back." }
@@ -51,11 +51,11 @@
       "label": "Gym B — Full body",
       "note": "Keep 2–3 reps in reserve. Same warm-up as Gym A.",
       "exercises": [
-        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "10", "cue": "Control the descent. Drop back to 5 kg and check form if the left knee complains." },
+        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "12", "cue": "Control the descent. Drop back to 5 kg and check form if the left knee complains." },
         { "name": "Dumbbell row", "target": "3×8–12", "stub": "10", "cue": "Pull to the ribs, no shrug. Chest-supported row or lat pulldown is a valid substitution." },
         { "name": "Push-up — full + negatives", "target": "3×5", "stub": "BW", "cue": "As Gym A: full reps to ~2 RIR, then negatives to 5 total. Log full reps only." },
         { "name": "Knee push-up back-off", "target": "2×10–15", "stub": "BW", "cue": "As Gym A — 1–2 RIR, right after the push-up sets." },
-        { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "5", "cue": "Light start." },
+        { "name": "DB shoulder press (seated)", "target": "2×8–12", "stub": "6", "cue": "Light start." },
         { "name": "Tuck reverse crunch", "target": "2×12", "stub": "BW", "cue": "Knees tucked, curl hips off the floor, lower slowly." },
         { "name": "Side plank", "target": "2×25–45 s/side", "stub": "BW", "cue": "Oblique/core." }
       ],
