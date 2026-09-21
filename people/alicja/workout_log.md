@@ -624,6 +624,13 @@ I did a bit different exercise instead of dumbbell row because I had different m
 
 ---
 
+## 2026-09-18 | RUN_QUALITY
+
+### Endurance
+- notes: 10min easy WU → 3 × 300m sprint / 300m rest → 5min walk cooldown
+
+---
+
 ## 2026-09-21 | GYM_A
 - sleep: 5/5
 - soreness: 5/5
