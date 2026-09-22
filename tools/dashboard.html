@@ -47,6 +47,10 @@
   .badge.green { background: rgba(62,207,142,0.15); color: var(--green); }
   .badge.amber { background: rgba(245,177,76,0.15); color: var(--amber); }
   .badge.red   { background: rgba(239,100,97,0.15);  color: var(--red); }
+  /* mesocycle / deload */
+  .meso { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
+  .deload { margin-top: 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--amber); background: rgba(245,177,76,0.12); font-size: 13px; }
+  .deload b { color: var(--amber); }
   .ready-advice { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
   /* tables */
@@ -284,7 +288,8 @@ function updateReadinessBadge() {
   const el = $('ready-badge'); if (!el) return;
   const s = readinessStatus(getReadiness());
   if (!s) { el.innerHTML = '<span class="muted">Rate all four to get today\'s call.</span>'; return; }
-  el.innerHTML = `<span class="badge ${s}">${s.toUpperCase()}</span><div class="ready-advice">${READY_ADVICE[s]}</div>`;
+  const advice = (s === 'green' && deloadActive()) ? 'Deload week — train as shown at reduced volume; hold loads.' : READY_ADVICE[s];
+  el.innerHTML = `<span class="badge ${s}">${s.toUpperCase()}</span><div class="ready-advice">${advice}</div>`;
 }
 
 // ── log parsing ──────────────────────────────────────────────
@@ -323,6 +328,24 @@ function parseTarget(target) {
   return { sets, top };
 }
 
+// ── mesocycle / deload ───────────────────────────────────────
+// The Sunday review sets mesocycle.deload.weekOf (a Monday) when the coming week is a deload and
+// removes it once the deload has been logged. Absent = normal week. deloadRules is static prose.
+function addDaysISO(iso, n) { const d = new Date(iso + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+function deloadInfo() {
+  const m = P.mesocycle; if (!m) return null;
+  const weekOf = m.deload?.weekOf; if (!weekOf) return { state: 'none', m };
+  const start = weekOf, end = addDaysISO(weekOf, 6), today = todayISO();
+  return { state: today < start ? 'upcoming' : (today > end ? 'ended' : 'active'), start, end, m };
+}
+function deloadActive() { return deloadInfo()?.state === 'active'; }
+// gym targets during a deload: one set fewer at the same loads ("3×8–12" → "2×8–12")
+function sessionSets(t) { return deloadActive() ? Math.max(1, t.sets - 1) : t.sets; }
+function displayTarget(target) {
+  const t = parseTarget(target), sets = sessionSets(t);
+  return sets === t.sets ? target : target.replace(/^\d+(?=\s*×)/, String(sets));
+}
+
 // ── TODAY view ───────────────────────────────────────────────
 function renderToday() {
   const day = new Date().getDay();
@@ -343,8 +366,19 @@ function renderToday() {
       </select></div>`;
   }).join('');
 
+  const dl = deloadInfo();
+  let mesoHtml = '';
+  if (dl) {
+    const pos = `Mesocycle: week ${esc(dl.m.week)} of ${esc(dl.m.pattern)}`;
+    const rules = dl.m.deloadRules ? `<div>${esc(dl.m.deloadRules)}</div>` : '';
+    if (dl.state === 'active')        mesoHtml = `<div class="deload"><b>🔻 DELOAD WEEK</b> · ${dl.start} → ${dl.end}${rules}<div class="meso">${pos}</div></div>`;
+    else if (dl.state === 'upcoming') mesoHtml = `<div class="deload"><b>🔻 Deload week starts ${dl.start}</b>${rules}<div class="meso">${pos}</div></div>`;
+    else if (dl.state === 'ended')    mesoHtml = `<div class="meso">${pos} · deload week of ${dl.start} ended — counter resets at the next Sunday review</div>`;
+    else                              mesoHtml = `<div class="meso">${pos}</div>`;
+  }
+
   return `
-  <div class="card"><h2>Week</h2><div class="week">${weekHtml}</div></div>
+  <div class="card"><h2>Week</h2><div class="week">${weekHtml}</div>${mesoHtml}</div>
 
   <div class="card">
     <h2>Morning readiness (1–5, 5 = best)</h2>
@@ -381,20 +415,23 @@ function renderSessionBody() {
   if (!s) { el.innerHTML = `<div class="muted">No plan defined for ${esc(currentType)} — log it free-form below.</div>`; return; }
   let html = `<h3>${esc(s.label)}</h3>`;
   if (s.note) html += `<div class="note">${esc(s.note)}</div>`;
+  const deload = deloadActive();
+  if (deload && s.kind === 'gym') html += `<div class="deload">🔻 <b>Deload week</b> — one set fewer per exercise (targets below are already reduced); hold loads.</div>`;
+  if (deload && s.kind === 'endurance') html += `<div class="deload">🔻 <b>Deload week</b> — ${esc(P.mesocycle.deloadRules || 'easy only, no quality work')}</div>`;
 
   if (s.kind === 'gym') {
     lastLoads = parseLastLoads(currentType);
     html += s.exercises.map((ex, i) => {
       const last = getLoad(ex.name);
       const t = parseTarget(ex.target);
-      const hitTop = last?.reps && t.top && last.reps.length >= t.sets && last.reps.every(r => r >= t.top);
-      const repInputs = Array.from({ length: t.sets }, (_, j) =>
+      const hitTop = !deload && last?.reps && t.top && last.reps.length >= t.sets && last.reps.every(r => r >= t.top);
+      const repInputs = Array.from({ length: sessionSets(t) }, (_, j) =>
         `<input class="rep-input" id="rep-${i}-${j}" inputmode="numeric" placeholder="${esc(last?.reps?.[j] ?? (t.top || ''))}">`
       ).join('');
       return `<div class="ex-row">
         <div class="ex-head">
           <span class="exname">${esc(ex.name)}</span>
-          <span class="target">${esc(ex.target)}</span>
+          <span class="target">${esc(displayTarget(ex.target))}</span>
           ${hitTop ? '<span class="hint-up">↑ add load</span>' : ''}
         </div>
         <div class="ex-inputs">
@@ -449,10 +486,10 @@ function buildEntry() {
       const input = $(`load-${i}`);
       const load = input?.value.trim();
       const t = parseTarget(ex.target);
-      const reps = Array.from({ length: t.sets }, (_, j) => $(`rep-${i}-${j}`)?.value.trim()).filter(Boolean);
+      const reps = Array.from({ length: sessionSets(t) }, (_, j) => $(`rep-${i}-${j}`)?.value.trim()).filter(Boolean);
       const touched = reps.length || (load && load !== input.defaultValue);
       if (!touched) return null;   // untouched exercise → not logged
-      return `| ${ex.name} | ${reps.length ? reps.join('/') : ex.target.split('@')[0].trim()} | ${load || '—'} | |`;
+      return `| ${ex.name} | ${reps.length ? reps.join('/') : displayTarget(ex.target).split('@')[0].trim()} | ${load || '—'} | |`;
     }).filter(Boolean);
     if (rows.length) md += `\n### Key lifts\n| Exercise | Reps | Load | Notes |\n|---|---|---|---|\n${rows.join('\n')}\n`;
   } else if (s.kind === 'endurance') {

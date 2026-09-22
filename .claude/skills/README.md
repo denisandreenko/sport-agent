@@ -147,7 +147,9 @@ Sunday review on the new setup before deleting them.
 
 - **State lives in the repo, not in chat**: `people/<id>/data.json` (structured: sessions, ladders,
   cycling FTP/levels/phase, mesocycle counters, nutrition) + markdown files (plans, logs, skill
-  state). `shared/recommendation_protocol.md` defines how recommendations are produced.
+  state). `shared/recommendation_protocol.md` defines how recommendations are produced. The weekly
+  review's plan is chat output; the only part of it the dashboard can show is what lands in
+  `data.json` — hence `mesocycle.deload.weekOf`, the machine-readable deload flag.
 - **Commit scopes are strict**: each skill may only edit the files named in its own prompt, staged by
   name — never `git add -A`. `.claude/settings.json` allows only those paths and denies the bulk-add
   forms, but the prompt is still the primary constraint.

@@ -9,6 +9,10 @@
      - `endurance` — renders purpose / interval options / fueling
      - `mobility` — renders exercise/duration list
      - `rest` — renders the note only
+   - `mesocycle` (optional) — `pattern`, `week`, `startedOn`, `note`, maintained by the weekly review. The
+     dashboard shows "week N of pattern"; `deloadRules` is the prose it prints during a deload, and
+     `deload.weekOf` (a Monday) marks the deload week — banner on, gym targets one set fewer, no
+     "add load" hints. The review sets and clears `deload`; edit it by hand only to correct a mistake
    - `dashboard.tabs` — which tabs show: `today`, `log`, `skills` (needs `skills.enabled`), `nutrition`
    - `nutrition` — immutable in the dashboard; edit this file to change it
    - Macro keys in meals: `p` protein, `c` carbs, `f` fat, `fiber`, `kcal` (grams/kcal)
