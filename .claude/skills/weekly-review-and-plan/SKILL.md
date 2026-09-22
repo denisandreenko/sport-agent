@@ -52,7 +52,7 @@ Per person (people/denis/ and people/alicja/): data.json (goals in priority orde
 Extract each person's log entries from the past 7 days.
 
 ## Commit scope (important)
-The ONLY files this task may edit: people/denis/calisthenics_status.md (skill level-ups) and either person's data.json — updating exercise `stub` starting loads, `target` rep ranges, or the exercise `name` when a bodyweight ladder stage is advanced (Alicja's push-up/pull-up ladders in her gym_training_plan.md — her current stage IS the exercise name, so advancing a stage means renaming it); the `mesocycle` object (advance/reset `week`, freeze on skips); and for Denis the `cycling` section: `cycling.levels` (ladder progression), `cycling.ftp` (only when he reports a new test result — move the old value to `history`), and `cycling.phase.current` (base/build rotation when due). Stage and commit ONLY the files you actually changed, by name — NEVER `git add -A` or `git add .` — then follow the finish steps in "Git workflow" above. The written week-ahead plan is output in the conversation, not committed.
+The ONLY files this task may edit: people/denis/calisthenics_status.md (skill level-ups) and either person's data.json — updating exercise `stub` starting loads, `target` rep ranges, or the exercise `name` when a bodyweight ladder stage is advanced (Alicja's push-up/pull-up ladders in her gym_training_plan.md — her current stage IS the exercise name, so advancing a stage means renaming it); the `mesocycle` object (advance/reset `week`, freeze on skips, set/clear `deload`); and for Denis the `cycling` section: `cycling.levels` (ladder progression), `cycling.ftp` (only when he reports a new test result — move the old value to `history`), and `cycling.phase.current` (base/build rotation when due). Stage and commit ONLY the files you actually changed, by name — NEVER `git add -A` or `git add .` — then follow the finish steps in "Git workflow" above. The written week-ahead plan is output in the conversation, not committed.
 
 ## Gap / return rule (check first, per person)
 - 0 entries this week AND 0 the week before → output only a short return-week plan: resume at ~10–20% reduced loads/volume, reset mesocycle week to 1. Skip the detailed review for that person. EXCEPTION: if the log contains a LOG RESET comment dated within the past 2 weeks, this is a deliberate clean start, not a training gap — plan a normal week 1 at the data.json `stub` loads instead.
@@ -64,6 +64,13 @@ Rules in each person's data.json `mesocycle.note`. Denis: 3+1 (deload every 4th 
 - Next week hits the deload number (Denis week 4, Alicja week 6) → NEXT WEEK IS THE DELOAD; plan it accordingly, then reset `week` to 1 after the deload week completes.
 - Fatigue markers this week (2+ amber/red days, RPE creep at same loads, pain notes) → pull the deload forward to next week regardless of the counter, and reset the counter after it.
 - Never postpone a due deload because the week "went well".
+- **Deload flag (what the dashboard reads).** When next week is the deload — by counter or by fatigue
+  pull-forward — set `mesocycle.deload` to `{ "weekOf": "YYYY-MM-DD" }` with next Monday's date in
+  that person's data.json. The dashboard shows the deload banner, cuts gym targets to one set fewer
+  and suppresses "add load" hints from this field alone; the written plan reaches nobody else. When
+  the week under review was the flagged deload week: if the log shows the reduced volume, remove
+  `deload` and reset `week` to 1; if it was not taken, move `weekOf` to next Monday and say so.
+  `mesocycle.deloadRules` is static prose the banner displays — leave it alone.
 
 ## Per-person review (do Denis first, then Alicja)
 
@@ -94,7 +101,7 @@ Spawn a subagent: "You are a sports science reviewer. Athlete: 87 kg male, ketog
 
 ## Next week plan (per person)
 Table: Day | Session | Key focus | Load/intensity note. Rules:
-- Deload week due (rolling counter, fatigue pull-forward, or week 4 of an active block) → plan it per the person's mesocycle.note: Denis gym volume −30–40%, cycling one rung below current level, long ride ~2 h Z1–Z2; Alicja gym −1 set at same loads, runs easy Z2, mobility kept in full. Label the plan "DELOAD WEEK".
+- Deload week due (rolling counter, fatigue pull-forward, or week 4 of an active block) → plan it per the person's mesocycle.note: Denis gym volume −30–40%, cycling one rung below current level, long ride ~2 h Z1–Z2; Alicja gym −1 set at same loads, runs easy Z2, mobility kept in full. Label the plan "DELOAD WEEK" and set the deload flag (see Mesocycle counter).
 - 2+ amber/red days or RPE creep → apply removal hierarchy; protect goal #1 (Denis: the long ride & cycling quality; Alicja: the two gym days)
 - Pain flagged → hold load / regress a stage / check form
 - Denis cycling rows: name the exact ladder rung (e.g. "Threshold L2: 3×15 min sweet spot") and watt targets if FTP is set; include a Ramp Test row if a retest was flagged
