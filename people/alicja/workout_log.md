@@ -662,3 +662,23 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: Easy run
 
 ---
+
+## 2026-09-24 | GYM_B
+- sleep: 5/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 3/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 8/8 | 14kg | |
+| Dumbbell row | 10/10 | 10kg | |
+| Push-up — full + negatives | 2/2 | — | |
+| Knee push-up back-off | 8 | — | |
+| DB shoulder press (seated) | 10 | 6 kg | |
+| Tuck reverse crunch | 12 | — | |
+| Side plank | 30 | — | |
+
+---
