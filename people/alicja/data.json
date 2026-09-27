@@ -10,7 +10,7 @@
     "Keto-compatible nutrition"
   ],
   "tracking": { "wearable": false },
-  "mesocycle": { "pattern": "5+1", "week": 5, "startedOn": "2026-07-20", "note": "Light-touch novice mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions incl. both gym days); skipped weeks freeze the counter. Week 6 = deload: gym -1 set per exercise at same loads, both runs easy Z2, keep full mobility/splits (deload does NOT reduce mobility work). After deload, reset to 1. Everything else stays simple linear progression - no wave loading for a novice. Fatigue markers can pull the deload earlier.", "deloadRules": "Gym: one set fewer per exercise at the same loads. Runs: easy Z2 only, no strides or sprints. Mobility and splits in full.", "deload": { "weekOf": "2026-09-21" } },
+  "mesocycle": { "pattern": "5+1", "week": 1, "startedOn": "2026-09-28", "note": "Light-touch novice mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions incl. both gym days); skipped weeks freeze the counter. Week 6 = deload: gym -1 set per exercise at same loads, both runs easy Z2, keep full mobility/splits (deload does NOT reduce mobility work). After deload, reset to 1. Everything else stays simple linear progression - no wave loading for a novice. Fatigue markers can pull the deload earlier.", "deloadRules": "Gym: one set fewer per exercise at the same loads. Runs: easy Z2 only, no strides or sprints. Mobility and splits in full." },
   "files": { "workoutLog": "people/alicja/workout_log.md" },
   "dashboard": {
     "accent": "#e05fa0",
@@ -51,7 +51,7 @@
       "label": "Gym B — Full body",
       "note": "Keep 2–3 reps in reserve. Same warm-up as Gym A.",
       "exercises": [
-        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "12", "cue": "Control the descent. Drop back to 5 kg and check form if the left knee complains." },
+        { "name": "Reverse lunge", "target": "3×8/leg", "stub": "14", "cue": "Control the descent. Drop back to 5 kg and check form if the left knee complains." },
         { "name": "Dumbbell row", "target": "3×8–12", "stub": "10", "cue": "Pull to the ribs, no shrug. Chest-supported row or lat pulldown is a valid substitution." },
         { "name": "Push-up — full + negatives", "target": "3×5", "stub": "BW", "cue": "As Gym A: full reps to ~2 RIR, then negatives to 5 total. Log full reps only." },
         { "name": "Knee push-up back-off", "target": "2×10–15", "stub": "BW", "cue": "As Gym A — 1–2 RIR, right after the push-up sets." },
