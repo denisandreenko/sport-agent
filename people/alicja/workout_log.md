@@ -694,3 +694,12 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - duration: 30min
 
 ---
+
+## 2026-09-27 | MOBILITY_FULL
+- sleep: 5/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 5/10
+
+---
