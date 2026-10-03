@@ -764,4 +764,8 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - energy: 4/5
 - motivation: 5/5
 
+### Endurance
+- duration: 20min
+- notes: 8x sprint 15sek
+
 ---
