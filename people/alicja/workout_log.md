@@ -759,10 +759,9 @@ I did a bit different exercise instead of dumbbell row because I had different m
 ---
 
 ## 2026-10-03 | RUN_QUALITY
-- rpe: 6/10
-
-### Endurance
-- duration: 20min
-- notes: 8x sprint 15sek
+- sleep: 5/5
+- soreness: 4/5
+- energy: 4/5
+- motivation: 5/5
 
 ---
