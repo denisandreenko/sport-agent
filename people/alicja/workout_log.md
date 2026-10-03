@@ -757,3 +757,12 @@ I did a bit different exercise instead of dumbbell row because I had different m
 | Side plank | 30/30 | — | |
 
 ---
+
+## 2026-10-03 | RUN_QUALITY
+- rpe: 6/10
+
+### Endurance
+- duration: 20min
+- notes: 8x sprint 15sek
+
+---
