@@ -769,3 +769,23 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 8x sprint 15sek
 
 ---
+
+## 2026-10-05 | GYM_A
+- sleep: 4/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 5/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Goblet squat | 11/10/10 | 14kg | |
+| Push-up — full + negatives | 3/2/2 | — | |
+| Knee push-up back-off | 10/8 | — | |
+| Assisted pull-up | 8/6/5 | 2 bands (O+R) | |
+| Hip thrust | 11/9/9 | 22kg | |
+| Hanging side knee raises | 5/4 | — | |
+| Plank | 40/40 | — | |
+
+---
