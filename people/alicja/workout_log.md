@@ -790,6 +790,14 @@ I did a bit different exercise instead of dumbbell row because I had different m
 
 ---
 
+## 2026-10-06 | RUN_EASY
+
+### Endurance
+- duration: 40min
+- notes: Steady cardio
+
+---
+
 ## 2026-10-08 | GYM_B
 - sleep: 5/5
 - soreness: 5/5
