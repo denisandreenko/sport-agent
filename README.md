@@ -60,6 +60,10 @@ Open `tools/dashboard.html?person=<id>` (GitHub Pages or locally via any static 
 Reading works without credentials on Pages; **saving log entries needs a GitHub fine-grained
 token** (repo contents read/write) entered via ⚙︎ — stored only in that browser.
 
+**Missed or wrong day:** pick it in the Date field at the top of the Session card. A logged day opens
+with its saved values (readiness, RPE, notes, loads, reps, duration) and saving updates that entry;
+an unlogged day opens with that weekday's planned session and saving inserts it in date order.
+
 ## Using the assistant
 
 Say **whose** plan you mean. The assistant follows `CLAUDE.md` (loaded automatically every session)
