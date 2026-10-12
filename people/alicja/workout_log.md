@@ -818,6 +818,19 @@ I did a bit different exercise instead of dumbbell row because I had different m
 
 ---
 
+## 2026-10-09 | RUN_QUALITY
+- sleep: 5/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 6/10
+
+### Endurance
+- duration: 20min
+- notes: 10 min run and 8 x 15 sekund sprint
+
+---
+
 ## 2026-10-11 | MOBILITY_FULL
 - sleep: 5/5
 - soreness: 5/5
