@@ -82,7 +82,8 @@
   /* buttons / inputs */
   .btn { background: var(--accent); border: none; color: #fff; border-radius: 10px; padding: 11px 16px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-  textarea, input[type=text], input[type=password] { width: 100%; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; }
+  textarea, input[type=text], input[type=password], input[type=date] { width: 100%; background: var(--card2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; }
+  input[type=date] { color-scheme: dark; }
   .field { margin-top: 10px; }
   .field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -164,11 +165,18 @@ let logContent = '', logSha = '';
 let skillState = {};
 let lastLoads = {};
 let currentType = '';
+let selectedDate = '';   // day being logged or edited (YYYY-MM-DD, local time)
+let dayEntry = null;     // parsed log entry for selectedDate; null when that day isn't logged yet
+let readiness = {};      // readiness ratings for selectedDate
+let formRows = [];       // gym rows on the form: planned exercises + logged ones no longer in the plan
 
 // ── helpers ──────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function todayISO() { const d = new Date(); return d.toISOString().slice(0,10); }
+function todayISO() { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function weekdayOf(iso) { return new Date(iso + 'T00:00:00Z').getUTCDay(); }
+function formatDay(iso) { const d = new Date(iso + 'T00:00:00Z'); return `${DAY_NAMES[d.getUTCDay()]} ${d.getUTCDate()} ${MONTH_NAMES[d.getUTCMonth()]}`; }
 function getToken() { return localStorage.getItem('gh_token') || ''; }
 function saveToken() {
   const v = $('token-input').value.trim();
@@ -223,13 +231,13 @@ async function init() {
     document.documentElement.style.setProperty('--accent', P.dashboard.accent || '#4f8ef7');
     $('person-name').textContent = P.name;
     document.title = `Training — ${P.name}`;
-    currentType = P.week[String(new Date().getDay())] || 'REST';
 
     // workout log (non-fatal if missing)
     try {
       const log = await readRepoFile(P.files.workoutLog);
       logContent = log.text; logSha = log.sha;
     } catch (e) { logContent = ''; logSha = ''; }
+    selectDate(todayISO());
 
     // skill state (only if enabled)
     if (P.skills?.enabled && P.files.skillState) {
@@ -262,13 +270,14 @@ function showView(view) {
 }
 
 // ── readiness (subjective, unified for everyone) ─────────────
-function readinessKey() { return `ready_${personId}_${todayISO()}`; }
-function getReadiness() {
-  try { return JSON.parse(localStorage.getItem(readinessKey())) || {}; } catch { return {}; }
+function readinessKey(date) { return `ready_${personId}_${date}`; }
+function storedReadiness(date) {
+  try { return JSON.parse(localStorage.getItem(readinessKey(date))) || {}; } catch { return {}; }
 }
+function getReadiness() { return readiness; }
 function setReadiness(k, v) {
-  const r = getReadiness(); r[k] = Number(v);
-  localStorage.setItem(readinessKey(), JSON.stringify(r));
+  readiness[k] = Number(v);
+  try { localStorage.setItem(readinessKey(selectedDate), JSON.stringify(readiness)); } catch {}
   updateReadinessBadge();
 }
 function readinessStatus(r) {
@@ -296,11 +305,106 @@ function updateReadinessBadge() {
 function splitEntries(content) {
   return content.split(/\n(?=## \d{4}-\d{2}-\d{2})/).filter(x => /^## \d{4}/.test(x.trim()));
 }
-function parseLastLoads(sessionType) {
+
+// ── entry model: a logged entry ⇄ form fields ────────────────
+// Anything the form doesn't show (extra lines, unknown sections, exercises no longer in the plan)
+// is carried through untouched, so updating an entry never drops content.
+const splitRow = line => line.split('|').slice(1, -1).map(c => c.trim());
+const splitReps = r => /^\d+([\/,]\d+)*$/.test(r) ? r.split(/[\/,]/) : (r ? [r] : []);
+const stripMin = v => v.replace(/(\s*min)+$/i, '');
+function parseEntry(block) {
+  const lines = block.replace(/\s+$/, '').split('\n');
+  const h = lines[0].match(/^## (\d{4}-\d{2}-\d{2})\s*\|\s*(\w+)/) || [];
+  const e = { date: h[1], type: h[2], ready: {}, rpe: '', notes: '', headExtra: [], lifts: null, endurance: null, rawSections: [] };
+  let sec = null, cont = null;   // current ### section; field that continuation lines belong to
+  for (const line of lines.slice(1)) {
+    const field = line.match(/^- (\w+):\s?(.*)$/);
+    if (line.startsWith('### ')) {
+      const title = line.slice(4).trim();
+      if (/^(Key lifts|Strength)\b/.test(title)) sec = e.lifts = { kind: 'lifts', title, rows: [], extra: [] };
+      else if (/^(Endurance|Running)\b/.test(title)) sec = e.endurance = { kind: 'endurance', title, duration: '', detail: '', extra: [] };
+      else { sec = { kind: 'raw', lines: [line] }; e.rawSections.push(sec); }
+      cont = null; continue;
+    }
+    if (sec?.kind === 'raw') { sec.lines.push(line); continue; }
+    // a multi-line note: lines after "- notes:" until a blank line, another field, or a table
+    if (cont && line.trim() && !field && !line.startsWith('|')) { cont.obj[cont.key] += '\n' + line; continue; }
+    cont = null;
+    if (!line.trim()) continue;
+    if (!sec) {
+      const key = field?.[1], val = field?.[2] ?? '';
+      if (READY_FIELDS.some(f => f.key === key) && /^\d/.test(val)) e.ready[key] = parseInt(val, 10);
+      else if (key === 'rpe') e.rpe = val.replace(/\s*\/\s*10\s*$/, '');
+      else if (key === 'notes') { e.notes = val; cont = { obj: e, key: 'notes' }; }
+      else e.headExtra.push(line);
+    } else if (sec.kind === 'lifts') {
+      const cells = line.startsWith('|') ? splitRow(line) : [];
+      if (cells[0] === 'Exercise' || (cells.length && cells.every(c => /^[-:\s]*$/.test(c)))) continue;   // header / separator row
+      if (cells.length >= 3) sec.rows.push({ name: cells[0], reps: cells[1], load: cells[2], note: cells[3] || '' });
+      else sec.extra.push(line);
+    } else {
+      if (field?.[1] === 'duration') sec.duration = stripMin(field[2]);
+      else if (field?.[1] === 'notes') { sec.detail = field[2]; cont = { obj: sec, key: 'detail' }; }
+      else sec.extra.push(line);
+    }
+  }
+  return e;
+}
+function entryToMd(e) {
+  let md = `## ${e.date} | ${e.type}\n`;
+  READY_FIELDS.forEach(f => { if (e.ready[f.key]) md += `- ${f.key}: ${e.ready[f.key]}/5\n`; });
+  if (e.rpe) md += `- rpe: ${e.rpe}/10\n`;
+  if (e.notes) md += `- notes: ${e.notes}\n`;
+  e.headExtra.forEach(l => { md += `${l}\n`; });
+  const L = e.lifts, E = e.endurance;
+  if (L && (L.rows.length || L.extra.length)) {
+    md += `\n### ${L.title}\n| Exercise | Reps | Load | Notes |\n|---|---|---|---|\n`;
+    L.rows.forEach(r => { md += `| ${r.name} | ${r.reps} | ${r.load || '—'} | ${r.note ? r.note + ' ' : ''}|\n`; });
+    L.extra.forEach(l => { md += `${l}\n`; });
+  }
+  if (E && (E.duration || E.detail || E.extra.length)) {
+    md += `\n### ${E.title}\n`;
+    if (E.duration) md += `- duration: ${E.duration}min\n`;
+    if (E.detail) md += `- notes: ${E.detail}\n`;
+    E.extra.forEach(l => { md += `${l}\n`; });
+  }
+  e.rawSections.forEach(sec => { md += `\n${sec.lines.join('\n').replace(/\s+$/, '')}\n`; });
+  return md;
+}
+// Where the entry for `date` sits: [start, blockEnd) is the entry text, `end` is past its "---".
+function findEntryRange(content, date) {
+  const m = new RegExp(`^## ${date}\\b.*$`, 'm').exec(content);
+  if (!m) return null;
+  const from = m.index + m[0].length, rest = content.slice(from);
+  const sep = /\n---[ \t]*(?=\n|$)/.exec(rest), next = /\n## \d{4}-\d{2}-\d{2}/.exec(rest);
+  if (sep && (!next || sep.index < next.index))
+    return { start: m.index, blockEnd: from + sep.index, end: from + sep.index + sep[0].length, closed: true };
+  const stop = next ? from + next.index + 1 : content.length;   // separator missing: stop at the next entry
+  return { start: m.index, blockEnd: stop, end: stop, closed: false };
+}
+function findEntry(content, date) {
+  const r = findEntryRange(content, date);
+  return r ? parseEntry(content.slice(r.start, r.blockEnd)) : null;
+}
+// Logged date → replace that entry. New date → insert before the first later entry, keeping date order.
+function upsertEntry(content, date, md) {
+  content = content.replace(/\s*$/, '\n');
+  const r = findEntryRange(content, date);
+  if (r) {
+    const sep = r.closed ? '\n---' : (r.end < content.length ? '\n---\n\n' : '\n---\n');
+    return { content: content.slice(0, r.start) + md + sep + content.slice(r.end), action: 'Update' };
+  }
+  const re = /^## (\d{4}-\d{2}-\d{2})/gm; let m;
+  while ((m = re.exec(content))) if (m[1] > date) return { content: content.slice(0, m.index) + md + '\n---\n\n' + content.slice(m.index), action: 'Log' };
+  return { content: content + `\n${md}\n---\n`, action: 'Log' };
+}
+
+// "Previous" values: the latest entry of this session type before `beforeDate`
+function parseLastLoads(sessionType, beforeDate) {
   const loads = {}; let found = null;
   for (const entry of splitEntries(logContent)) {
     const h = entry.match(/^## (\d{4}-\d{2}-\d{2})\s*\|\s*(\w+)/);
-    if (h && h[2] === sessionType) found = entry;   // last (most recent at bottom)
+    if (h && h[2] === sessionType && h[1] < beforeDate) found = entry;   // entries are in date order
   }
   if (!found) return loads;
   const table = found.match(/### (Key lifts|Strength)[\s\S]*?(?=\n###|\n---|\n## |$)/);
@@ -332,13 +436,13 @@ function parseTarget(target) {
 // The Sunday review sets mesocycle.deload.weekOf (a Monday) when the coming week is a deload and
 // removes it once the deload has been logged. Absent = normal week. deloadRules is static prose.
 function addDaysISO(iso, n) { const d = new Date(iso + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
-function deloadInfo() {
+function deloadInfo(date = todayISO()) {
   const m = P.mesocycle; if (!m) return null;
   const weekOf = m.deload?.weekOf; if (!weekOf) return { state: 'none', m };
-  const start = weekOf, end = addDaysISO(weekOf, 6), today = todayISO();
+  const start = weekOf, end = addDaysISO(weekOf, 6), today = date;
   return { state: today < start ? 'upcoming' : (today > end ? 'ended' : 'active'), start, end, m };
 }
-function deloadActive() { return deloadInfo()?.state === 'active'; }
+function deloadActive(date = selectedDate) { return deloadInfo(date)?.state === 'active'; }
 // gym targets during a deload: one set fewer at the same loads ("3×8–12" → "2×8–12")
 function sessionSets(t) { return deloadActive() ? Math.max(1, t.sets - 1) : t.sets; }
 function displayTarget(target) {
@@ -355,7 +459,8 @@ function renderToday() {
     return `<div class="day ${d === day ? 'today' : ''}"><b>${DAY_NAMES[d]}</b>${esc(s ? (s.label.split('—')[0].trim()) : P.week[d])}</div>`;
   }).join('');
 
-  const typeOptions = P.logSessionTypes.map(t =>
+  const types = P.logSessionTypes.includes(currentType) ? P.logSessionTypes : [...P.logSessionTypes, currentType];
+  const typeOptions = types.map(t =>
     `<option value="${t}" ${t === currentType ? 'selected' : ''}>${t}</option>`).join('');
 
   const readyHtml = READY_FIELDS.map(f => {
@@ -381,13 +486,17 @@ function renderToday() {
   <div class="card"><h2>Week</h2><div class="week">${weekHtml}</div>${mesoHtml}</div>
 
   <div class="card">
-    <h2>Morning readiness (1–5, 5 = best)</h2>
+    <h2>Morning readiness (1–5, 5 = best)${selectedDate !== todayISO() ? ` · ${formatDay(selectedDate)}` : ''}</h2>
     <div class="ready-grid">${readyHtml}</div>
     <div id="ready-badge"></div>
   </div>
 
   <div class="card">
     <h2>Session</h2>
+    <div class="field"><label>Date</label>
+      <input type="date" id="entry-date" value="${selectedDate}" max="${todayISO()}" onchange="changeDate(this.value)">
+      <div class="status-msg" id="date-status"></div>
+    </div>
     <div class="field"><label>Session type</label>
       <select class="select-full" id="session-type" onchange="changeType(this.value)">${typeOptions}</select>
     </div>
@@ -395,23 +504,38 @@ function renderToday() {
   </div>
 
   <div class="card">
-    <h2>Save today's entry</h2>
-    <div class="row2">
-      <div class="field"><label>RPE (1–10)</label><input type="text" id="entry-rpe" placeholder="7"></div>
-      <div class="field"><label>Date</label><input type="text" id="entry-date" value="${todayISO()}"></div>
-    </div>
-    <div class="field"><label>Notes</label><textarea id="entry-notes" rows="2" placeholder="what felt hard, what moved well, any pain"></textarea></div>
-    <button class="btn" id="save-btn" onclick="saveEntry()" ${getToken() ? '' : 'disabled'}>Save to workout log</button>
+    <h2>Save entry</h2>
+    <div class="field"><label>RPE (1–10)</label><input type="text" id="entry-rpe" placeholder="7" value="${esc(dayEntry?.rpe || '')}"></div>
+    <div class="field"><label>Notes</label><textarea id="entry-notes" rows="2" placeholder="what felt hard, what moved well, any pain">${esc(dayEntry?.notes || '')}</textarea></div>
+    <button class="btn" id="save-btn" onclick="saveEntry()" ${getToken() ? '' : 'disabled'}>${dayEntry ? 'Update' : 'Add'} entry · ${formatDay(selectedDate)}</button>
     ${getToken() ? '' : '<div class="status-msg muted">Set a GitHub token (⚙︎) to enable saving.</div>'}
     <div class="status-msg" id="save-msg"></div>
   </div>`;
 }
 function afterRenderToday() { updateReadinessBadge(); renderSessionBody(); }
 function changeType(t) { currentType = t; renderSessionBody(); }
+function selectDate(date) {
+  selectedDate = date;
+  dayEntry = findEntry(logContent, date);
+  currentType = dayEntry?.type || P.week[String(weekdayOf(date))] || 'REST';
+  readiness = dayEntry ? { ...dayEntry.ready } : storedReadiness(date);
+}
+function changeDate(v) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v) || v > todayISO()) { $('entry-date').value = selectedDate; return; }
+  selectDate(v); showView('today');
+}
+function renderDateStatus() {
+  const el = $('date-status'); if (!el) return;
+  if (!dayEntry) { el.innerHTML = '<span class="muted">Not logged yet — saving adds a new entry.</span>'; return; }
+  el.innerHTML = dayEntry.type === currentType
+    ? '<span class="badge green">Logged</span> <span class="muted">Fields show the saved entry — saving updates it.</span>'
+    : `<span class="badge amber">Logged as ${esc(dayEntry.type)}</span> <span class="muted">Saving replaces it with ${esc(currentType)}.</span>`;
+}
 
 function renderSessionBody() {
   const s = P.sessions[currentType];
   const el = $('session-body'); if (!el) return;
+  renderDateStatus();
   if (!s) { el.innerHTML = `<div class="muted">No plan defined for ${esc(currentType)} — log it free-form below.</div>`; return; }
   let html = `<h3>${esc(s.label)}</h3>`;
   if (s.note) html += `<div class="note">${esc(s.note)}</div>`;
@@ -420,25 +544,36 @@ function renderSessionBody() {
   if (deload && s.kind === 'endurance') html += `<div class="deload">🔻 <b>Deload week</b> — ${esc(P.mesocycle.deloadRules || 'easy only, no quality work')}</div>`;
 
   if (s.kind === 'gym') {
-    lastLoads = parseLastLoads(currentType);
-    html += s.exercises.map((ex, i) => {
-      const last = getLoad(ex.name);
-      const t = parseTarget(ex.target);
-      const hitTop = !deload && last?.reps && t.top && last.reps.length >= t.sets && last.reps.every(r => r >= t.top);
-      const repInputs = Array.from({ length: sessionSets(t) }, (_, j) =>
-        `<input class="rep-input" id="rep-${i}-${j}" inputmode="numeric" placeholder="${esc(last?.reps?.[j] ?? (t.top || ''))}">`
+    lastLoads = parseLastLoads(currentType, selectedDate);
+    const logged = dayEntry?.lifts?.rows || [], used = new Set();
+    formRows = s.exercises.map((ex, j) => {
+      const k = logged.findIndex((r, i) => !used.has(i) && r.name.toLowerCase() === ex.name.toLowerCase());
+      if (k !== -1) used.add(k);
+      return { name: ex.name, target: ex.target, stub: ex.stub, logged: logged[k] || null, order: k !== -1 ? k : logged.length + j };
+    });
+    logged.forEach((r, i) => { if (!used.has(i)) formRows.push({ name: r.name, target: '', stub: '', logged: r, order: i }); });
+    formRows.sort((a, b) => a.order - b.order);   // logged rows keep their logged order; unlogged plan rows follow
+    html += formRows.map((row, i) => {
+      const last = getLoad(row.name);
+      const t = row.target ? parseTarget(row.target) : { sets: 1, top: null };
+      const reps = row.logged ? splitReps(row.logged.reps) : [];
+      row.n = Math.max(row.target ? sessionSets(t) : 1, reps.length);
+      const hitTop = !deload && row.target && last?.reps && t.top && last.reps.length >= t.sets && last.reps.every(r => r >= t.top);
+      const repInputs = Array.from({ length: row.n }, (_, j) =>
+        `<input class="rep-input" id="rep-${i}-${j}" inputmode="numeric" value="${esc(reps[j] ?? '')}" placeholder="${esc(last?.reps?.[j] ?? (t.top || ''))}">`
       ).join('');
+      const load = row.logged ? (row.logged.load === '—' ? '' : row.logged.load) : (last?.load || '');
       return `<div class="ex-row">
         <div class="ex-head">
-          <span class="exname">${esc(ex.name)}</span>
-          <span class="target">${esc(displayTarget(ex.target))}</span>
+          <span class="exname">${esc(row.name)}</span>
+          <span class="target">${row.target ? esc(displayTarget(row.target)) : 'logged · not in current plan'}</span>
           ${hitTop ? '<span class="hint-up">↑ add load</span>' : ''}
         </div>
         <div class="ex-inputs">
-          <input class="load-input" id="load-${i}" value="${esc(last?.load || '')}" placeholder="${esc(ex.stub || '')}">
+          <input class="load-input" id="load-${i}" value="${esc(load)}" placeholder="${esc(row.stub || '')}">
           <span class="ex-x">×</span>${repInputs}<span class="ex-reps-label">reps</span>
         </div>
-        ${last ? `<div class="ex-last">Last: ${esc(last.load)}${last.reps ? ' · ' + last.reps.join('/') : ''}</div>` : ''}
+        ${last ? `<div class="ex-last">Previous: ${esc(last.load)}${last.reps ? ' · ' + last.reps.join('/') : ''}</div>` : ''}
       </div>`;
     }).join('');
     if (s.addon) html += `<div class="note">➕ ${esc(s.addon)}</div>`;
@@ -459,8 +594,8 @@ function renderSessionBody() {
     if (s.prep) html += `<div class="note">🔧 Prep: ${esc(s.prep)}</div>`;
     if (s.fueling) html += `<div class="note">⛽ ${esc(s.fueling)}</div>`;
     html += `<div class="row2" style="margin-top:8px">
-      <div class="field"><label>Duration (min)</label><input type="text" id="end-duration"></div>
-      <div class="field"><label>Detail (power/pace/intervals)</label><input type="text" id="end-detail"></div>
+      <div class="field"><label>Duration (min)</label><input type="text" id="end-duration" value="${esc(dayEntry?.endurance?.duration || '')}"></div>
+      <div class="field"><label>Detail (power/pace/intervals)</label><input type="text" id="end-detail" value="${esc(dayEntry?.endurance?.detail || '')}"></div>
     </div>`;
   } else if (s.kind === 'mobility') {
     html += `<table><tr><th>Exercise</th><th class="num">Duration</th></tr>` +
@@ -470,37 +605,32 @@ function renderSessionBody() {
 }
 
 // ── save entry ───────────────────────────────────────────────
-function buildEntry() {
+function collectForm() {
   const s = P.sessions[currentType] || {};
-  const r = getReadiness();
-  const date = $('entry-date').value.trim() || todayISO();
-  let md = `## ${date} | ${currentType}\n`;
-  READY_FIELDS.forEach(f => { if (r[f.key]) md += `- ${f.key}: ${r[f.key]}/5\n`; });
-  const rpe = $('entry-rpe').value.trim();
-  if (rpe) md += `- rpe: ${rpe}/10\n`;
-  const notes = $('entry-notes').value.trim();
-  if (notes) md += `- notes: ${notes}\n`;
-
+  const keep = dayEntry && dayEntry.type === currentType;   // sections this form doesn't render survive only if the type is unchanged
+  const e = {
+    date: selectedDate, type: currentType, ready: { ...readiness },
+    rpe: $('entry-rpe').value.trim(), notes: $('entry-notes').value.trim(),
+    headExtra: dayEntry?.headExtra || [], rawSections: dayEntry?.rawSections || [],
+    lifts: keep ? dayEntry.lifts : null, endurance: keep ? dayEntry.endurance : null
+  };
   if (s.kind === 'gym') {
-    const rows = s.exercises.map((ex, i) => {
+    const rows = formRows.map((row, i) => {
       const input = $(`load-${i}`);
       const load = input?.value.trim();
-      const t = parseTarget(ex.target);
-      const reps = Array.from({ length: sessionSets(t) }, (_, j) => $(`rep-${i}-${j}`)?.value.trim()).filter(Boolean);
-      const touched = reps.length || (load && load !== input.defaultValue);
-      if (!touched) return null;   // untouched exercise → not logged
-      return `| ${ex.name} | ${reps.length ? reps.join('/') : displayTarget(ex.target).split('@')[0].trim()} | ${load || '—'} | |`;
+      const reps = Array.from({ length: row.n }, (_, j) => $(`rep-${i}-${j}`)?.value.trim()).filter(Boolean);
+      const touched = reps.length || (load && (row.logged || load !== input.defaultValue));
+      if (!touched) return null;   // untouched exercise → not logged; clearing a logged one removes it
+      const fallback = row.target ? displayTarget(row.target).split('@')[0].trim() : '—';
+      return { name: row.name, reps: reps.length ? reps.join('/') : fallback, load, note: row.logged?.note || '' };
     }).filter(Boolean);
-    if (rows.length) md += `\n### Key lifts\n| Exercise | Reps | Load | Notes |\n|---|---|---|---|\n${rows.join('\n')}\n`;
+    e.lifts = { kind: 'lifts', title: dayEntry?.lifts?.title || 'Key lifts', rows, extra: dayEntry?.lifts?.extra || [] };
   } else if (s.kind === 'endurance') {
-    const dur = $('end-duration')?.value.trim(), det = $('end-detail')?.value.trim();
-    if (dur || det) {
-      md += `\n### Endurance\n`;
-      if (dur) md += `- duration: ${dur}min\n`;
-      if (det) md += `- notes: ${det}\n`;
-    }
+    e.endurance = { kind: 'endurance', title: dayEntry?.endurance?.title || 'Endurance',
+      duration: stripMin($('end-duration')?.value.trim() || ''), detail: $('end-detail')?.value.trim() || '',
+      extra: dayEntry?.endurance?.extra || [] };
   }
-  return md;
+  return e;
 }
 async function saveEntry() {
   const msg = $('save-msg');
@@ -508,27 +638,18 @@ async function saveEntry() {
     $('save-btn').disabled = true;
     msg.textContent = 'Saving…';
     const fresh = await readRepoFile(P.files.workoutLog);   // re-read to get current sha
-    let content = fresh.text.replace(/\s*$/, '\n');
-    const entry = buildEntry();
-    const date = $('entry-date').value.trim() || todayISO();
-    const header = `## ${date} | ${currentType}`;
-    const idx = content.indexOf(`\n${header}\n`);            // real entries only (template header in comments has no real date)
-    let action = 'Log';
-    if (idx !== -1) {
-      // upsert: same date + session type already logged → replace that block instead of appending
-      const start = idx + 1;                                  // start of the header line
-      const endMarker = content.indexOf('\n---', start);      // entry terminator
-      const end = endMarker !== -1 ? endMarker + 4 : content.length;
-      content = content.slice(0, start) + entry + '\n---' + content.slice(end);
-      action = 'Update';
-    } else {
-      content += `\n${entry}\n---\n`;
+    if (!dayEntry && findEntryRange(fresh.text, selectedDate)) {
+      // logged from another device since this page loaded — show that entry rather than overwrite it
+      logContent = fresh.text; logSha = fresh.sha;
+      selectDate(selectedDate); showView('today');
+      $('save-msg').textContent = '✗ This day was just logged from another device — its entry is shown now; save again to update it.';
+      return;
     }
-    await commitFile(P.files.workoutLog, content, fresh.sha, `${action} ${currentType} — ${P.name} (dashboard)`);
+    const { content, action } = upsertEntry(fresh.text, selectedDate, entryToMd(collectForm()));
+    await commitFile(P.files.workoutLog, content, fresh.sha, `${action} ${currentType} ${selectedDate} — ${P.name} (dashboard)`);
     logContent = content;
-    $('entry-rpe').value = ''; $('entry-notes').value = '';
-    renderSessionBody();               // refresh "last load" values from the new entry
-    msg.textContent = '✓ Saved.';
+    selectDate(selectedDate); showView('today');   // reload the form from the saved entry
+    $('save-msg').textContent = '✓ Saved.';
   } catch (e) {
     msg.textContent = '✗ ' + e.message;
   } finally { $('save-btn').disabled = false; }
