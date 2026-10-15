@@ -872,3 +872,23 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: Cardio
 
 ---
+
+## 2026-10-15 | GYM_B
+- sleep: 4/5
+- soreness: 5/5
+- energy: 4/5
+- motivation: 5/5
+- rpe: 5/10
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 8/6/6 | 20kg | |
+| Dumbbell row | 12/9/7 | 10kg | |
+| Push-up — full + negatives | 6/4/4 | — | |
+| Knee push-up back-off | 10/7 | — | |
+| DB shoulder press (seated) | 9/8 | 6 kg | |
+| Tuck reverse crunch | 10/7 | — | |
+| Side plank | 30/30 | — | |
+
+---
