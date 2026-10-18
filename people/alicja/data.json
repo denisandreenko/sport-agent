@@ -10,7 +10,7 @@
     "Keto-compatible nutrition"
   ],
   "tracking": { "wearable": false },
-  "mesocycle": { "pattern": "5+1", "week": 3, "startedOn": "2026-09-28", "note": "Light-touch novice mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions incl. both gym days); skipped weeks freeze the counter. Week 6 = deload: gym -1 set per exercise at same loads, both runs easy Z2, keep full mobility/splits (deload does NOT reduce mobility work). After deload, reset to 1. Everything else stays simple linear progression - no wave loading for a novice. Fatigue markers can pull the deload earlier.", "deloadRules": "Gym: one set fewer per exercise at the same loads. Runs: easy Z2 only, no strides or sprints. Mobility and splits in full." },
+  "mesocycle": { "pattern": "5+1", "week": 4, "startedOn": "2026-09-28", "note": "Light-touch novice mesocycle, maintained by the Sunday weekly review. `week` counts COMPLETED weeks (>=3 logged sessions incl. both gym days); skipped weeks freeze the counter. Week 6 = deload: gym -1 set per exercise at same loads, both runs easy Z2, keep full mobility/splits (deload does NOT reduce mobility work). After deload, reset to 1. Everything else stays simple linear progression - no wave loading for a novice. Fatigue markers can pull the deload earlier.", "deloadRules": "Gym: one set fewer per exercise at the same loads. Runs: easy Z2 only, no strides or sprints. Mobility and splits in full." },
   "files": { "workoutLog": "people/alicja/workout_log.md" },
   "dashboard": {
     "accent": "#e05fa0",
@@ -40,7 +40,7 @@
         { "name": "Push-up — full + negatives", "target": "3×5", "stub": "BW", "cue": "Full push-ups until ~2 RIR, then negatives (3–5 s lower) to 5 total. Log full reps only; at 5/5/5 full, move to Full push-up 3×8 per the ladder in gym_training_plan.md." },
         { "name": "Knee push-up back-off", "target": "2×10–15", "stub": "BW", "cue": "Right after the push-up sets. The hypertrophy set — 1–2 RIR (harder than the usual 2–3), no failure risk on a mastered movement. 1 set on an amber day." },
         { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (O+R)", "cue": "Band or machine; reduce assistance over time. Progress per the pull-up ladder." },
-        { "name": "Hip thrust", "target": "3×10–15", "stub": "20", "cue": "Squeeze glutes at the top. Load only as far as all 3 sets stay inside the rep range." },
+        { "name": "Hip thrust", "target": "3×10–15", "stub": "22", "cue": "Squeeze glutes at the top. Load only as far as all 3 sets stay inside the rep range." },
         { "name": "Hanging side knee raises", "target": "2×8–12/side", "stub": "BW", "cue": "Hang from the bar, knees up and across to one side; no swing, control the lower." },
         { "name": "Plank", "target": "2×30–50 s", "stub": "BW", "cue": "Brace, flat back." }
       ],
