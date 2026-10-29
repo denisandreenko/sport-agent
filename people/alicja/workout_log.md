@@ -952,3 +952,24 @@ I did a bit different exercise instead of dumbbell row because I had different m
 | Plank | 40/40 | — | |
 
 ---
+
+## 2026-10-29 | GYM_B
+- sleep: 4/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 5/10
+- notes: Dumbbell row - I felt pain in my right biceps
+
+### Key lifts
+| Exercise | Reps | Load | Notes |
+|---|---|---|---|
+| Reverse lunge | 7/5/5 | 24kg | |
+| Dumbbell row | 6/4/2 | 12kg | |
+| Push-up — full + negatives | 9/8/6 | — | |
+| Knee push-up back-off | 10/7 | — | |
+| DB shoulder press (seated) | 6/4 | 8 kg | |
+| Tuck reverse crunch | 10/8 | — | |
+| Side plank | 30/30 | — | |
+
+---
