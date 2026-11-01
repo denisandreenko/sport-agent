@@ -7,9 +7,7 @@ ladders**, which exist nowhere else. Never restate a load here.
 Two full-body sessions on a fixed schedule, **Monday (A)** and **Thursday (B)**, three days apart for
 recovery. The goal is a strength and muscle base with clean technique, so the governing rule is
 **2–3 reps in reserve on every set — never to failure**, and technique before load. Increase load in
-small jumps (1–2 kg on dumbbells). The one exception is the knee push-up **back-off** set, which runs to
-1–2 RIR: a mastered bodyweight movement with no failure risk, and the hypertrophy volume the low-rep
-ladder sets don't provide on their own.
+small jumps (1–2 kg on dumbbells).
 
 ## Bodyweight progression ladders
 
@@ -24,10 +22,11 @@ Her current stage is whichever variation `data.json` names as the exercise — d
 | Incline push-up (hands on bench) | 3 × 10 |
 | Knee push-up | 3 × 10 |
 | Full push-ups + negatives to fill (slow lower) | 3 × 5 total; advance when all 5 are full |
-| Full push-up | 3 × 8 |
+| Full push-up | 3 × 10 |
+| Feet-elevated push-up (feet on a bench) | 3 × 10 |
 
-From the negative stage onward, follow the ladder sets with the knee push-up back-off (`data.json`):
-the ladder sets build the skill and strength, the back-off builds the muscle.
+Once full push-ups reach 6+ reps a set, they are hard enough to build muscle on their own, so no
+knee push-up back-off is needed after them.
 
 ### Pull-up
 
@@ -35,8 +34,14 @@ the ladder sets build the skill and strength, the back-off builds the muscle.
 |---|---|
 | Inverted row (bar at waist, feet down) | 3 × 10 |
 | Band/machine assisted pull-up | 3 × 8, reducing assistance over time |
-| Negative pull-up (slow lower from top) | 3 × 5 |
+| Negative pull-up (slow lower from top) | 3 × 5 at a 6 s lower |
 | Full pull-up | 1 → 3+ |
+
+The assisted and negative stages run **together**: assisted reps build volume through the full
+range, negatives build strength at full bodyweight — including the dead-hang bottom, where bands
+help most. That also makes pull-ups a twice-a-week movement. Assisted reps alone stalled for 7
+weeks (mid-Sep to late Oct 2026) on the same bands. For a negative, she **steps up** from a bench or
+box to the top position — never a jump, which arrives with momentum and jerks the shoulders and elbows.
 
 ### Core
 
