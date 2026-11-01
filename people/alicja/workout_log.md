@@ -999,3 +999,12 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - notes: 15 min run, 10 sek sprint and 20 easy
 
 ---
+
+## 2026-11-01 | MOBILITY_FULL
+- sleep: 5/5
+- soreness: 5/5
+- energy: 5/5
+- motivation: 5/5
+- rpe: 5/10
+
+---
