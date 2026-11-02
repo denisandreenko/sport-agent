@@ -9,6 +9,12 @@ recovery. The goal is a strength and muscle base with clean technique, so the go
 **2–3 reps in reserve on every set — never to failure**, and technique before load. Increase load in
 small jumps (1–2 kg on dumbbells).
 
+The **hip thrust** shares the rep range of the other loaded lifts. It started higher, which suited
+the lightly loaded glute bridge it began as; once it became a loaded hip thrust, long sets made
+2–3 RIR hard to judge — she sat on one load for five sessions, then added about a third more and
+did more reps (Nov 2026). Muscle growth is similar across rep ranges when sets end near failure, so
+the lower range costs nothing for growth and lets the load, and strength, climb.
+
 ## Bodyweight progression ladders
 
 Advance a stage only on hitting the **top of the rep range with clean form and 2+ reps in reserve**.

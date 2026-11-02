@@ -39,7 +39,7 @@
         { "name": "Goblet squat", "target": "3×8–12", "stub": "14", "cue": "Light DB/kettlebell held at chest; sit tall. Bodyweight squat is a valid substitution." },
         { "name": "Push-up", "target": "3×6–10", "stub": "BW", "cue": "Full push-ups, ~2 RIR. At 10/10/10, move to feet-elevated push-ups per the ladder in gym_training_plan.md." },
         { "name": "Assisted pull-up", "target": "3×5–8", "stub": "2 bands (O+R)", "cue": "At 8/8/8, move to the next lighter band. If that drops her below 5 reps, use it for set 1 only and keep the old bands for sets 2–3 until all three sets hold. Progress per the pull-up ladder." },
-        { "name": "Hip thrust", "target": "3×10–15", "stub": "22", "cue": "Squeeze glutes at the top. Load only as far as all 3 sets stay inside the rep range." },
+        { "name": "Hip thrust", "target": "3×8–12", "stub": "22", "cue": "Drive up fast, squeeze glutes 1 s at the top, lower in ~2 s. Stop each set at 12. Raise the load (2–2.5 kg) only after 12/12/12." },
         { "name": "Hanging side knee raises", "target": "2×8–12/side", "stub": "BW", "cue": "Hang from the bar, knees up and across to one side; no swing, control the lower." },
         { "name": "Plank", "target": "2×30–50 s", "stub": "BW", "cue": "Brace, flat back." }
       ],
