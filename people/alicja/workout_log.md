@@ -1027,3 +1027,12 @@ I did a bit different exercise instead of dumbbell row because I had different m
 | Plank | 40/40 | — | |
 
 ---
+
+## 2026-11-03 | RUN_EASY
+- rpe: 5/10
+
+### Endurance
+- duration: 40min
+- notes: Cardio
+
+---
