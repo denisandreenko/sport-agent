@@ -1062,6 +1062,7 @@ I did a bit different exercise instead of dumbbell row because I had different m
 - soreness: 3/5
 - energy: 3/5
 - motivation: 5/5
+- rpe: 6/10
 
 ### Endurance
 - duration: 30min
